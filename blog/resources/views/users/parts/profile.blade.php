@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/public">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -50,7 +51,9 @@
             <div class="col-12  col-lg-4 mt-2">
 
                 <div class="border py-2 px-3">
-                    <i class="fa-solid fa-gear float-end pf_setting"></i>
+                    <a href='{{url("/setting/1")}}'>
+                        <i class="fa-solid fa-gear float-end pf_setting text-dark"></i>
+                    </a>
 
                     <p class="text-center mt-3" style="word-wrap: break-word">No pain, No gain</p>
 
@@ -87,7 +90,7 @@
             </div>
 
             <div class="col-12 col-lg-8  pf_post_section mt-2">
-                <a href="" class="btn btn-primary">Create Post</a>
+                <a href='{{url("/createPost")}}' class="btn btn-primary">Create Post</a>
 
                 {{-- blog section --}}
                 @for ($i = 1; $i <= 3; $i++)
@@ -114,7 +117,7 @@
                                         <a href="#" class="dropdown-item text-center">Comments Open</a>
                                         <a href="#" class="dropdown-item text-center">Print Open</a>
                                         <a href="#" class="dropdown-item text-center">Reupload</a>
-                                        <a href="#" class="dropdown-item text-center">
+                                        <a href='{{url("/profile/edit/1")}}' class="dropdown-item text-center">
                                             Edit</a>
                                         <a href="#" class="dropdown-item text-center">
                                             <span class="text-danger">Delete</span>

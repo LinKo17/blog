@@ -2,8 +2,8 @@
 
     <ul class="list-group">
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="dashboard">
+            <a href='{{url("/dashboard")}}' class="nav-link">
                 <span class="logo">
                     <i class="fa-solid fa-home"></i>
                 </span>
@@ -11,8 +11,8 @@
             </a>
         </li>
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start"  id="category">
+            <a href='{{url("/categoryside")}}' class="nav-link" >
                 <span class="logo">
                     <i class="fa-solid fa-layer-group"></i>
                 </span>
@@ -20,8 +20,8 @@
             </a>
         </li>
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="users">
+            <a href='{{url("/userside")}}' class="nav-link">
                 <span class="logo">
                     <i class="fa-solid fa-users"></i>
                 </span>
@@ -30,18 +30,24 @@
         </li>
 
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start dropdown" id="posts">
+            <a href="" class="nav-link nav-menu" data-bs-toggle="dropdown">
                 <span class="logo">
                     <i class="fa-solid fa-p"></i>
                 </span>
-                <span class="logo_title d-none d-lg-inline">Post</span>
+                <span class="logo_title d-none d-lg-inline">Posts</span>
             </a>
+            <ul class="dropdown-menu text-center">
+                <li class="list-group-itme">
+                    <a href='{{url("/createpostside")}}' class="nav-link">posts Create</a>
+                    <a href='{{url("/showpostside")}}' class="nav-link">Posts Show</a>
+                </li>
+            </ul>
         </li>
 
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="comments">
+            <a href="/commentside" class="nav-link">
                 <span class="logo">
                     <i class="fa-solid fa-comment"></i>
                 </span>
@@ -49,8 +55,8 @@
             </a>
         </li>
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="approve">
+            <a href='{{url("/approveside")}}' class="nav-link">
                 <span class="logo">
                     <i class="fa-regular fa-circle-check"></i>
                 </span>
@@ -58,8 +64,8 @@
             </a>
         </li>
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="reports">
+            <a href='{{url("/reportside")}}' class="nav-link">
                 <span class="logo">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </span>
@@ -69,8 +75,8 @@
 
 
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link ">
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="adverti">
+            <a href='/advertiside' class="nav-link ">
                 <span class="logo">
                     <i class="fa-solid fa-rectangle-ad"></i>
                 </span>
@@ -78,8 +84,8 @@
             </a>
         </li>
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="annou">
+            <a href="/annouside" class="nav-link">
                 <span class="logo">
                     <i class="fa-solid fa-bullhorn"></i>
                 </span>
@@ -87,15 +93,17 @@
             </a>
         </li>
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start">
-            <a href="" class="nav-link">
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="setting">
+            <a href='{{url("/settingside")}}' class="nav-link">
                 <span class="logo">
                     <i class="fa-solid fa-gear"></i>
                 </span>
                 <span class="logo_title d-none d-lg-inline">Setting</span>
             </a>
         </li>
-    </ul>
 
+    </ul>
 </div>
+
+
 

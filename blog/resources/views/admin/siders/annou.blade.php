@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Announcement</title>
     {{-- bs css link --}}
     <link rel="stylesheet" href="bs/css/bootstrap.min.css">
 
@@ -40,7 +40,7 @@
             <div class="col-10">
 
                 {{-- main section --}}
-                    @include("admin.parts.main")
+                    @include("admin.parts.annou")
                 {{-- main section --}}
 
             </div>
@@ -53,9 +53,9 @@
 
     {{-- js link --}}
     <script src="bs/js/dashboard.js"></script>
+    <script>
+        document.getElementById("annou").style.backgroundColor = "#000000"
+    </script>
 </body>
 
 </html>
-<script>
-    document.getElementById("dashboard").style.backgroundColor = "#000000"
-</script>

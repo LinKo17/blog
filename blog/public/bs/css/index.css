@@ -8,13 +8,8 @@ body{
 .nav-style{
     margin:0px 10px;
 }
-.nav-style a .home-style{
-    color:#0066cc;
-}
 
-.nav-style .a-style:hover{
-    color:#0066cc;
-}
+
 
 .logo_style{
     font-size:30px;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog</title>
+    <title>About</title>
     {{-- bs css link --}}
     <link rel="stylesheet" href="bs/css/bootstrap.min.css">
 
@@ -25,18 +25,12 @@
         @include("users.parts.nav")
     {{-- navbar section end --}}
 
-    {{-- Advertisement --}}
-        @include("users.parts.adver")
-    {{-- Advertisement end --}}
 
     {{-- about us section --}}
         @include("users.parts.about")
     {{-- about us section end --}}
 
 
-    {{-- blog section --}}
-        @include("users.parts.blog")
-    {{-- blog section end --}}
 
     {{-- footer section --}}
         @include("users.parts.footer")
@@ -51,10 +45,10 @@
 
     {{-- js link --}}
     <script src="bs/js/index.js"></script>
-
-    <script>
-        document.getElementById("home").style.color = "#0066cc"
-    </script>
 </body>
+
+<script>
+    document.getElementById("about").style.color = "#0066cc"
+</script>
 
 </html>

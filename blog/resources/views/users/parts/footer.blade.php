@@ -21,15 +21,15 @@
                 <h4 class="footer_title_style">Menu</h4>
 
                 <div class="footer_link_style">
-                    <a href="">Home</a>
+                    <a href='{{url("/index")}}'>Home</a>
                 </div>
 
                 <div class="footer_link_style">
-                    <a href="">Category</a>
+                    <a href='{{url("/categoriesnav")}}'>Category</a>
                 </div>
 
                 <div class="footer_link_style">
-                    <a href="">About</a>
+                    <a href='{{url("/aboutnav")}}'>About</a>
                 </div>
 
                 <div class="footer_link_style">

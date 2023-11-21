@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/public">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -32,7 +33,7 @@
         <div class="card">
 
             <div class="card-header fs-4 text-light bg-primary">
-                Create Posts
+                Edit Posts
             </div>
 
             <form action="">

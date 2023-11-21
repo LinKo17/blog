@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg  nav_style">
     <div class="container">
-        <a class="navbar-brand" href="#"><span class="logo_style">Blog</span></a>
+        <a class="navbar-brand" href='{{url("/")}}'><span class="logo_style">Blog</span></a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,19 +16,23 @@
             <ul class="navbar-nav me-auto  mb-lg-0">
 
                 <li class="nav-item nav-style">
-                    <a class="nav-link a-style" href="#"><span class="home-style">Home</span></a>
+                    <a class="nav-link a-style" href='{{url("/index")}}' id="home"><span class="home-style">Home</span></a>
                 </li>
 
                 <li class="nav-item nav-style">
-                    <a class="nav-link a-style" href="#"><span class="span-style">Category</span></a>
+                    <a class="nav-link a-style" href='{{url("/categoriesnav")}}' id="category"><span class="span-style">Category</span></a>
                 </li>
 
                 <li class="nav-item nav-style">
-                    <a class="nav-link a-style" href=""><span class="span-style">About</span></a>
+                    <a class="nav-link a-style" href="{{url("/aboutnav")}}" id="about"><span class="span-style">About</span></a>
                 </li>
 
                 <li class="nav-item nav-style">
                     <a class="nav-link a-style" href=""><span class="span-style">User Search</span></a>
+                </li>
+
+                <li class="nav-item nav-style">
+                    <a class="nav-link text-light btn btn-danger" href='{{url("/dashboard")}}'>Dashboard</a>
                 </li>
 
                 {{-- login and register system --}}
@@ -44,7 +48,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a href="" class="dropdown-item text-center">Profile</a>
+                                    <a href='{{url("/profile/1")}}' class="dropdown-item text-center">Profile</a>
                                     <a class="dropdown-item text-center" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                                 document.getElementById('logout-form').submit();">
@@ -68,7 +72,9 @@
                         @endauth
                     @endif
                 </li>
-        {{-- login and register system --}}
+                {{-- login and register system --}}
+
+
         </ul>
 
         {{-- <form class="d-flex" role="search">
