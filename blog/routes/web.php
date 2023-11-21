@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +17,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// users
+Route::get("/index",[RoleController::class,"index"]);
+
+Route::get("/profile",[UserController::class,"profile"]);
+
+
+
+
+
+// admin
+Route::get("/dashboard",[RoleController::class,"dashboard"]);
+
+//test
+Route::get('/test', function () {
+    return view('users.parts.setting');
 });

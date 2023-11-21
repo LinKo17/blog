@@ -1,0 +1,271 @@
+body{
+    font-family: Roboto;
+    font-size:20px;
+    background-color: #efefef;
+}
+
+/* navigation section */
+.nav-style{
+    margin:0px 10px;
+}
+.nav-style a .home-style{
+    color:#0066cc;
+}
+
+.nav-style .a-style:hover{
+    color:#0066cc;
+    font-size:30px;
+}
+
+.logo_style{
+    font-size:30px;
+    color:#03045e;
+}
+.nav_style{
+    background-color: #ffffff;
+}
+/* navigation section end */
+
+/* advertisment section */
+
+.wrap{
+    position: relative;
+}
+.wrap .box{
+    width:100%;
+    height:572px;
+
+}
+
+#box1{
+    background-color: red;
+}
+
+#box2{
+    background-color: yellow;
+    display: none;
+}
+
+#box3{
+    background-color: green;
+    display: none;
+}
+
+#box4{
+    background-color: blue;
+    display: none;
+}
+
+#box5{
+    background-color: purple;
+    display: none;
+}
+.action{
+    background-color:white;
+    border:none;
+    font-size:50px;
+    position: absolute;
+    top:42%;
+    cursor: pointer;
+}
+#prev{
+    left:20px;
+}
+#next{
+    right: 20px;
+}
+.img_adver_style{
+    width:100%;
+    height: 100%;
+}
+/* advertisment section end */
+
+/* about us section */
+.about_box{
+    width:100%;
+    height: 252px;
+    background-color: #002C3E;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 15px 5px;
+    text-align: center;
+}
+.about_line{
+    width:100px;
+    height: 3px;
+    background-color: #F7444E;
+    margin-bottom: 20px;
+}
+.about_box div{
+    font-size:30px;
+    color:white;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top:10px;
+}
+.about_box p{
+    font-size:20px;
+    color:white;
+}
+.about_box i{
+    color:white;
+    font-size:35px;
+    margin-top: 30px;
+}
+/* about us section end */
+
+/* blog section */
+#blog_profile{
+    width:40px;
+    height: 40px;
+    border-radius: 40px;
+}
+#blog_name{
+    font-size:21px;
+    position: absolute;
+    top:5px;
+    left:63px;
+}
+#blog_time{
+    font-size:14px;
+    position: absolute;
+    top:30px;
+    left:63px;
+}
+#blog_style{
+    position: relative;
+    background-color: #efefef;
+    border-radius: 10px;
+}
+#blog_style i{
+    cursor: pointer;
+}
+#image_container{
+    width:100%;
+    margin-top:10px;
+}
+#image_container img{
+    width:100%;
+}
+#blog_title{
+    font-size:28px;
+}
+#blog_desc{
+    font-size:20px;
+}
+#blog{
+    background-color: #ffffff;
+}
+/* blog section end */
+
+/* footer section */
+#footer-style{
+    background-color: #000000;
+    width:100%;
+    height: 340px;
+    padding-top: 20px;
+
+}
+.footer_title_style{
+    color:#ffd60a;
+    font-size:22px;
+    font-weight: 700;
+}
+.footer_des_style{
+    color: #e5e5e5;
+    font-size:20px;
+    cursor: default;
+}
+.footer_des_style:hover{
+    text-decoration: underline;
+    opacity: 0.8;
+}
+.footer_link_style{
+    margin:13px 0px;
+}
+.footer_link_style a{
+    display: inline-block;
+    color:white;
+    font-size:20px;
+    text-decoration: none;
+}
+.footer_link_style a:hover{
+    text-decoration: underline;
+}
+.footer_social_link{
+    margin:20px;
+}
+.footer_social_link  span a {
+    width:150px;
+    height: 150px;
+    border-radius: 150px;
+    padding:10px;
+    background-color: white;
+}
+.footer_social_link span a  i{
+    font-size: 25px;
+}
+.footer_social_link span:hover{
+    opacity: 0.8;
+}
+
+/* footer section end */
+
+/* end section */
+.end_style{
+    width:100%;
+    height: 50px;
+    background-color: #ffffff;
+    padding:10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:18px;
+}
+
+/* end section end*/
+
+/* profile section */
+.pf_img{
+    width:250px;
+    height: 250px;
+    border:1px solid red;
+    border-radius: 250px;
+}
+.pf_img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 250px;
+}
+.pf_name h1{
+    font-size:30px;
+}
+.pf_post_section a{
+    width:100%;
+}
+.pf_setting{
+    cursor: pointer;
+}
+/* profile section end */
+
+/* create post section */
+.user_create_style{
+    width:650px;
+}
+.comments_email_style{
+    color:white;
+    background-color: black;
+    padding:7px 6px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.profile_email_hide{
+    background-color:#ffffff;
+    padding:20px;
+    border:1px solid gray;
+    border-radius: 20px;
+}
+@media(max-width:580px){
+    .user_create_style{
+        width:auto;
+    }
+}
+
+/* create post section */

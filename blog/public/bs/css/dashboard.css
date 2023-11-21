@@ -1,0 +1,248 @@
+body{
+    font-family: Roboto;
+    font-size:20px;
+    background-color: #000000;
+
+}
+
+/* navbar section */
+.navbar_style{
+    background-color: #191C24;
+    padding: 0px 30px;
+}
+.logo_style{
+    font-size:30px;
+}
+/* navbar section end*/
+
+
+/* sider section */
+.sider_style{
+    background-color:#191C24 ;
+    height: 600px;
+}
+.list_group_item_style{
+    background-color: #191C24;
+}
+
+.list_group_item_style a .logo_title{
+    color:#FFFFFF;
+    margin-left: 5px;
+}
+
+.list_group_item_style a .logo i{
+    font-size:15px;
+    color: #FFFFFF;
+}
+
+.list_group_item_style a .logo{
+    padding:7px;
+    border-radius: 50px;
+    background-color: #21242E;
+}
+@media(max-width:400px){
+    .list_group_item_style a .logo{
+        padding:4px;
+        border-radius: 50px;
+        background-color: #21242E;
+    }
+}
+/* sider section end */
+
+/* main section */
+.main_box_style{
+    width:100%;
+    background-color:#191C24;
+    height: 100px;
+    border-radius: 5px;
+    padding:15px 10px;
+}
+.main_box_style h1{
+    color:white;
+    font-size:35px;
+    font-weight: 600;
+}
+.main_box_style p{
+    color:white;
+    font-size: 20px;
+    margin-top:-10px;
+}
+/* main section end */
+
+/* category section */
+.category_create_style{
+    width:430px;
+}
+
+.category_container{
+    width:430px;
+}
+
+.category_container .row{
+    border:1px solid blue;
+    padding:10px;
+    border-radius: 7px;
+    margin:10px 0px;
+}
+.text_category{
+    color:white;
+}
+
+.logo_category i{
+    cursor: pointer;
+}
+@media(max-width:700px){
+    .category_create_style{
+        width:370px;
+    }
+    .category_container{
+        width:370px;
+    }
+}
+@media(max-width:468px){
+    .category_create_style{
+        width:300px;
+    }
+    .category_container{
+        width:300px;
+    }
+}
+/* category section end */
+
+/* advertisement section */
+.adver_container{
+    width:473px;
+}
+.adver_container .adver_title{
+    background-color: #FFFFFF;
+}
+.adver_image img{
+    width:100%;
+    height:300px;
+}
+@media(max-width:643px){
+    .adver_container{
+        width:300px;
+    }
+}
+
+@media(max-width:420px){
+    .adver_container{
+        width:270px;
+    }
+    .adver_image img{
+        width:100%;
+        height:270px;
+    }
+}
+/* advertisement section end */
+
+/* post create  */
+.create_post_title{
+    color:white;
+    /* font-size:23px; */
+}
+.btn_create_post_style{
+    width:100px;
+}
+
+/* post create end */
+
+/* blogs section */
+#blog_profile{
+    width:40px;
+    height: 40px;
+    border-radius: 40px;
+}
+#blog_name{
+    font-size:21px;
+    position: absolute;
+    top:5px;
+    left:63px;
+}
+#blog_time{
+    font-size:14px;
+    position: absolute;
+    top:30px;
+    left:63px;
+}
+#blog_style{
+    position: relative;
+    background-color: #efefef;
+    border-radius: 10px;
+}
+#blog_style i{
+    cursor: pointer;
+}
+#image_container{
+    width:100%;
+    margin-top:10px;
+}
+#image_container img{
+    width:100%;
+}
+#blog_title{
+    font-size:28px;
+}
+#blog_desc{
+    font-size:20px;
+}
+/* blog section end */
+
+/* usermanagement section */
+.table_userm_style{
+    background-color: #efefef;
+}
+@media(max-width:690px){
+    .user_id_style,.user_name_style{
+        display: none;
+    }
+}
+/* usermanagement section */
+
+/* reports section */
+
+.report_bar_style {
+    margin:15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.report_bar_style .report_title{
+    color:white;
+    font-size:30px;
+}
+
+.report_bar_style .report_number{
+    font-size:30px;
+}
+/* reports section end */
+
+/* approve section */
+/* approve section end */
+
+/* annou section */
+#Announcement{
+    font-size:25px;
+}
+/* annou section end */
+
+/* setting section */
+
+/* setting section end */
+
+/* comments section */
+.comments_contaiener{
+    width:450px;
+}
+.comments_row_style{
+    border:1px solid gray;
+    padding:10px 5px;
+    border-radius: 10px;
+}
+.comments_email_style{
+    color:black;
+    background-color: white;
+    padding:4px 6px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+/* comments section end*/
