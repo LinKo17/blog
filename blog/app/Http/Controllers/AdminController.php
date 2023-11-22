@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;
 use App\Models\Advertisement;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -80,6 +81,43 @@ class AdminController extends Controller
         $adminSetting = AdminSetting::find(1);
         $adminSetting->$key = request()->value_data;
         $adminSetting->save();
+        return back();
+    }
+
+    //profile section
+    public function userDel($id){
+        $user = User::find($id);
+        $user->delete();
+        return Back();
+
+    }
+
+    public function userRole($id){
+        $user = User::find($id);
+        $user->user_roll = "user";
+        $user->save();
+        return back();
+    }
+
+    public function adminRole($id){
+        $user = User::find($id);
+        $user->user_roll = "admin";
+        $user->save();
+        return back();
+    }
+
+
+    public function userBan($id){
+        $user = User::find($id);
+        $user->ban = 1;
+        $user->save();
+        return back();
+    }
+
+    public function userunBan($id){
+        $user = User::find($id);
+        $user->ban = 0;
+        $user->save();
         return back();
     }
 }

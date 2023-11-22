@@ -11,7 +11,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <a href='{{url("/profile/1")}}' class="dropdown-item text-center">Profile</a>
+                    <a href='{{url("/profile")}}' class="dropdown-item text-center">Profile</a>
                     <a class="dropdown-item text-center" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">

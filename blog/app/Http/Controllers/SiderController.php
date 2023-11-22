@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Advertisement;
 use App\Models\AdminSetting;
+use App\Models\User;
 
 class SiderController extends Controller
 {
@@ -19,7 +20,10 @@ class SiderController extends Controller
     }
 
     public function userside(){
-        return view("admin.siders.user");
+        $usersData = User::latest()->paginate(10);
+        return view("admin.siders.user",[
+            "usersData" => $usersData
+        ]);
     }
 
     public function createside(){
@@ -59,4 +63,5 @@ class SiderController extends Controller
             "admin_setting" => $admin_setting
         ]);
     }
+
 }

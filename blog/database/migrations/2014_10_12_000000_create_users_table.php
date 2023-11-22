@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string("user_roll")->default(0);
+            $table->string("user_roll")->default("user");
 
             $table->string("profile_pic")->default("originalprofile.jpg");
             $table->string("bio")->nullable();
@@ -25,8 +25,10 @@ return new class extends Migration
             $table->string("live")->nullable();
             $table->string("post_id")->default(0);
             $table->string("comment_id")->default(0);
+            $table->string("report_id")->default(0);
 
             $table->integer("email_action")->default(1);
+            $table->integer("ban")->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

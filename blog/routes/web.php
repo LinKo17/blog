@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;//profile
 use App\Http\Controllers\NavbarController;//user navbar
 use App\Http\Controllers\AdminController;//admin controller
 use App\Http\Controllers\SiderController;//admin sider controller
+use App\Models\AdminSetting;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,5 +85,15 @@ Route::get("/categories/delete/{id}",[AdminController::class,"categoryDelete"]);
 Route::post("/advertiside",[AdminController::class,"adverAdd"]);
 Route::get("/advertisements/delete/{id}",[AdminController::class,"adverDelete"]);
 
-//admin setting
+//admin setting section
 Route::post("/settingside",[AdminController::class,"settingmanagement"]);
+
+
+//profile section
+Route::get("/user/delete/{id}",[AdminController::class,"userDel"]);
+
+Route::get("/userRole/{id}",[AdminController::class,"userRole"]);
+Route::get("/adminRole/{id}",[AdminController::class,"adminRole"]);
+Route::get("/user/ban/{id}",[AdminController::class,"userBan"]);
+Route::get("/user/unban/{id}",[AdminController::class,"userunBan"]);
+
