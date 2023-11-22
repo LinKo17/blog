@@ -32,11 +32,11 @@
     <div class="container mt-5">
 
         <div class="container pf_img g-0">
-            <img src="a.jpg" alt="">
+            <img src="/profile_pics/{{ $user_data->profile_pic }}" alt="">
         </div>
 
         <div class="container text-center mt-3 pf_name">
-            <h1>Blah</h1>
+            <h1>{{ $user_data->name }}</h1>
         </div>
 
 
@@ -46,43 +46,60 @@
 
     {{-- profile body section --}}
     <div class="container">
-
+        {{ $user_data }}
         <div class="row">
             <div class="col-12  col-lg-4 mt-2">
 
                 <div class="border py-2 px-3">
-                    <a href='{{url("/setting/1")}}'>
-                        <i class="fa-solid fa-gear float-end pf_setting text-dark"></i>
-                    </a>
-
-                    <p class="text-center mt-3" style="word-wrap: break-word">No pain, No gain</p>
-
-
-                    <div class="row ">
-                        <div class="col-5">Date of Birth</div>
-                        <div class="col-7" style="word-wrap: break-word">: 2004</div>
+                    <div class="mb-5">
+                        <a href='{{ url('/setting') }}'>
+                            <i class="fa-solid fa-gear float-end pf_setting text-dark"></i>
+                        </a>
                     </div>
 
-                    <div class="row my-1">
-                        <div class="col-5">Education</div>
-                        <div class="col-7" style="word-wrap: break-word">: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam,
-                            aliquid</div>
-                    </div>
+                    @if ($user_data->bio)
+                        <p class="text-center mt-3" style="word-wrap:break-word"> {{ $user_data->bio }}
+                        </p>
+                    @endif
 
-                    <div class="row my-1">
-                        <div class="col-5">work</div>
-                        <div class="col-7" style="word-wrap: break-word">: Enginner</div>
-                    </div>
 
-                    <div class="row my-1">
-                        <div class="col-5">live</div>
-                        <div class="col-7" style="word-wrap: break-word">: Yangon</div>
-                    </div>
+                    @if ($user_data->date_of_birth)
+                        <div class="row ">
+                            <div class="col-5">Birth Date</div>
+                            <div class="col-7" style="word-wrap: break-word">:
+                                {{ $user_data->date_of_birth }}</div>
+                        </div>
+                    @endif
 
-                    <div class="row my-1">
-                        <div class="col-5">Email</div>
-                        <div class="col-7">: Blah@gmail.com</div>
-                    </div>
+                    @if ($user_data->education)
+                        <div class="row my-1">
+                            <div class="col-5">Education</div>
+                            <div class="col-7" style="word-wrap: break-word">: {{ $user_data->education }}</div>
+
+                        </div>
+                    @endif
+
+                    @if ($user_data->work)
+                        <div class="row my-1">
+                            <div class="col-5">work</div>
+                            <div class="col-7" style="word-wrap: break-word">: {{ $user_data->work }}</div>
+                        </div>
+                    @endif
+
+                    @if ($user_data->live)
+                        <div class="row my-1">
+                            <div class="col-5">live</div>
+                            <div class="col-7" style="word-wrap: break-word">: {{ $user_data->live }}
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($user_data->email_action == 1)
+                        <div class="row my-1">
+                            <div class="col-5">Email</div>
+                            <div class="col-7">: {{ $user_data->email }}</div>
+                        </div>
+                    @endif
                 </div>
 
 
@@ -90,7 +107,7 @@
             </div>
 
             <div class="col-12 col-lg-8  pf_post_section mt-2">
-                <a href='{{url("/createPost")}}' class="btn btn-primary">Create Post</a>
+                <a href='{{ url('/createPost') }}' class="btn btn-primary">Create Post</a>
 
                 {{-- blog section --}}
                 @for ($i = 1; $i <= 3; $i++)
@@ -117,7 +134,7 @@
                                         <a href="#" class="dropdown-item text-center">Comments Open</a>
                                         <a href="#" class="dropdown-item text-center">Print Open</a>
                                         <a href="#" class="dropdown-item text-center">Reupload</a>
-                                        <a href='{{url("/profile/edit/1")}}' class="dropdown-item text-center">
+                                        <a href='{{ url('/profile/edit/1') }}' class="dropdown-item text-center">
                                             Edit</a>
                                         <a href="#" class="dropdown-item text-center">
                                             <span class="text-danger">Delete</span>

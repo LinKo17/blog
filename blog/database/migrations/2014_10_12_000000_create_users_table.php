@@ -15,6 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string("user_roll")->default(0);
+
+            $table->string("profile_pic")->default("originalprofile.jpg");
+            $table->string("bio")->nullable();
+            $table->string("date_of_birth")->nullable();
+            $table->string("education")->nullable();
+            $table->string("work")->nullable();
+            $table->string("live")->nullable();
+            $table->string("post_id")->default(0);
+            $table->string("comment_id")->default(0);
+
+            $table->integer("email_action")->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

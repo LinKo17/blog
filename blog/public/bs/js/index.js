@@ -1,7 +1,7 @@
 // adver section js
 document.getElementById("prev").onclick = prev
 document.getElementById("next").onclick = next
-setInterval(next,1000);
+setInterval(next,10000);
 let number = 1
 
 function prev(){

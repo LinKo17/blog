@@ -53,9 +53,9 @@
 
     {{-- js link --}}
     <script src="bs/js/dashboard.js"></script>
-    <script>
-        document.getElementById("category").style.backgroundColor = "#000000"
-    </script>
 </body>
+<script>
+    document.getElementById("category").style.backgroundColor = "#000000"
+</script>
 
 </html>

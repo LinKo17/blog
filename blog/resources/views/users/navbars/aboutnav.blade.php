@@ -44,7 +44,7 @@
 
 
     {{-- js link --}}
-    <script src="bs/js/index.js"></script>
+    {{-- <script src="bs/js/index.js"></script> --}}
 </body>
 
 <script>

@@ -22,9 +22,7 @@
 
 <body>
 
-    {{-- navbar section --}}
-    @include('users.parts.nav')
-    {{-- navbar section end --}}
+
 
 
     {{-- create post section --}}
