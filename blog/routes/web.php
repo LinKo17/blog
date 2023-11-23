@@ -34,17 +34,11 @@ Route::get("/",[RoleController::class,"index"]);
 Route::get("/categoriesnav",[NavbarController::class,"categoriesnav"]);
 Route::get("/aboutnav",[NavbarController::class,"aboutnav"]);
 
-
-
-
-
-
-
-
 //profile
 Route::get("/profile",[UserController::class,"profile"]);
 Route::get("/setting",[UserController::class,"setting"]);
 Route::get("/createPost",[UserController::class,"createPost"]);
+Route::post("/createPost",[UserController::class,"addPost"]);
 Route::get("/profile/edit/{id}",[UserController::class,"editPost"]);
 
 // user setting section

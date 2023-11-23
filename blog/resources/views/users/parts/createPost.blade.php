@@ -21,7 +21,9 @@
 
 <body>
 
-
+    {{-- navbar section --}}
+    @include('users.parts.nav')
+    {{-- navbar section end --}}
 
 
     {{-- create post section --}}
@@ -33,7 +35,8 @@
                 Create Posts
             </div>
 
-            <form action="">
+            <form method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="card-body">
 
                     <div class="row my-3">
@@ -43,7 +46,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="title">
                         </div>
 
                     </div>
@@ -55,10 +58,11 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="file" class="form-control">
+                            <input type="file" class="form-control" name="images[]" multiple >
                         </div>
 
                     </div>
+
                     <div class="row my-3">
 
                         <div class="col-12 col-md-3 create_post_title">
@@ -66,10 +70,10 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">Type 1</option>
-                                <option value="">Type 2</option>
-                                <option value="">Type 3</option>
+                            <select name="category_id" class="form-control">
+                                @foreach ($category_datas as $category)
+                                    <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -82,7 +86,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <textarea cols="30" class="form-control"></textarea>
+                            <textarea cols="30" class="form-control" name="description"></textarea>
                         </div>
 
                     </div>
@@ -90,9 +94,9 @@
 
                 <div class="card-footer">
                     <div class="text-center">
-                        <button class="btn_create_post_style btn btn-outline-danger">Reset</button>
+                        <button type="reset" class="btn_create_post_style btn btn-outline-danger">Reset</button>
 
-                        <button class="btn_create_post_style btn btn-outline-primary">Create</button>
+                        <button type="submit" class="btn_create_post_style btn btn-outline-primary">Create</button>
 
                     </div>
                 </div>
@@ -109,7 +113,6 @@
 
 
     {{-- js link --}}
-    <script src="bs/js/index.js"></script>
 </body>
 
 </html>

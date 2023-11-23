@@ -80,7 +80,7 @@
 
                     <div class="row my-1">
                         <div class="col-3">Comments</div>
-                        <div class="col-9">: {{ $userData->comment_id }}</div>
+                        <div class="col-9">:</div>
                     </div>
 
                     <div class="row my-1">
