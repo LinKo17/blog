@@ -136,7 +136,7 @@
         </div>
 
         <div class="my-4 profile_email_hide">
-            <span class="comments_email_style">Kyaw@gmail.com</span>
+            <span class="comments_email_style">{{$user_setting_data->email}}</span>
 
             @if ($user_setting_data->email_action == 1)
                 <a href="setting/emailClose/{{ $user_setting_data->id }}"

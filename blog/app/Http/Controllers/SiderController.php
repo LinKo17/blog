@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Advertisement;
 use App\Models\AdminSetting;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\RReason;
 
 class SiderController extends Controller
 {
@@ -39,7 +41,12 @@ class SiderController extends Controller
     }
 
     public function approveside(){
-        return view("admin.siders.approve");
+        $approve_request = Post::where("post_action","waiting")->get();
+        $reasons = RReason::all();
+        return view("admin.siders.approve",[
+            "approve_requests" => $approve_request,
+            "reasons" => $reasons
+        ]);
     }
 
     public function reportside(){

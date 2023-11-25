@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Advertisement;
 use App\Models\User;
+use App\Models\Post;
 
 class AdminController extends Controller
 {
@@ -84,7 +85,7 @@ class AdminController extends Controller
         return back();
     }
 
-    //profile section
+    //user controller section
     public function userDel($id){
         $user = User::find($id);
         $user->delete();
@@ -118,6 +119,29 @@ class AdminController extends Controller
         $user = User::find($id);
         $user->ban = 0;
         $user->save();
+        return back();
+    }
+
+    //approve section
+    public function approve($id){
+        $approve = Post::find($id);
+        $approve->post_action = "approve";
+        $approve->created_at  = time();
+        $approve->save();
+        return back();
+    }
+
+    public function reject($id){
+        $validator = validator(request()->all(),[
+            "reject_type" => "required"
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+        $post = Post::find($id);
+        $post->post_action = "reject";
+        $post->rreason_id = request()->reject_type;
+        $post->save();
         return back();
     }
 }

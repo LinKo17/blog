@@ -12,14 +12,17 @@ use PhpParser\Node\Expr\AssignOp\Pow;
 
 class UserController extends Controller
 {
+    //profile section
     public function profile()
     {
 
         $user_data = User::find(auth()->user()->id);
         $category_data = Category::all();
+        $post_data = Post::where("user_id", auth()->user()->id)->get()->reverse();
         return view("users.parts.profile", [
             "category_datas" => $category_data,
-            "user_data" => $user_data
+            "user_data" => $user_data,
+            "posts_data" => $post_data
         ]);
     }
 
@@ -39,16 +42,22 @@ class UserController extends Controller
         ]);
     }
 
-    public function editPost($id)
+    public function editPostForm($id)
     {
-        return view("users.parts.editPost");
+
+        $category_data = Category::all();
+        $post_data     = Post::find($id);
+        return view("users.parts.editPost", [
+            "categories_data" => $category_data,
+            "post_data" => $post_data
+        ]);
     }
 
     public function addPost()
     {
         $validator = validator(request()->all(), [
             "title" => "required",
-            "images.*" => ["image","mimes:jpg,png,jpeg,svg"],
+            "images.*" => ["image", "mimes:jpg,png,jpeg,svg"],
 
             "category_id" => "required",
             "description" => "required",
@@ -76,47 +85,7 @@ class UserController extends Controller
         $post->user_id = auth()->user()->id;
         $post->save();
         return redirect("/profile");
-
     }
-
-    // public function addPost(){
-    //     $validator = validator(request()->all(),[
-    //         "title" => "required",
-    //         "images" => "required",
-    //         "category_id" => "required",
-    //         "description" => "required",
-    //     ]);
-
-    //     if($validator->fails()){
-    //         return back()->withErrors($validator);
-    //     }
-
-    //     $post = new Post();
-    //     $post->title = request()->title;
-
-    //     $images = [];
-    //     foreach(request()->images as $image){
-    //         $imageName = time() . "." . $image->getClientOriginalExtension();
-    //         $image->move("posts", $imageName);
-    //         $images[] = $imageName; // Append each image name to the array
-    //     }
-
-    //     $post->images = implode("|", $images);
-    //     $post->category_id  = request()->category_id;
-    //     $post->description = request()->description;
-    //     $post->user_id = auth()->user()->id;
-    //     $post->save();
-
-    //     return back();
-    // }
-
-
-
-
-
-
-
-
 
 
     // setting CRUD section
@@ -227,6 +196,76 @@ class UserController extends Controller
         $user_email = User::find($id);
         $user_email->email_action = 1;
         $user_email->save();
+        return back();
+    }
+
+    //profile post three dot
+    public function postDel($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+        return back();
+    }
+
+    public function editPost($id)
+    {
+        $edit_post = Post::find($id);
+
+        $validator = validator(request()->all(), [
+            "title" => "required",
+            "images.*" => ["image", "mimes:jpg,png,jpeg,svg"],
+
+            "category_id" => "required",
+            "description" => "required",
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $edit_post->title = request()->title;
+
+        if (request()->images) {
+            $images = [];
+            foreach (request()->images as $image) {
+                $imageName = time() . "." . $image->getClientOriginalExtension();
+                $image->move("posts", $imageName);
+                $images[] = $imageName;
+            }
+            $edit_post->images = implode("|", $images);
+        }
+            $edit_post->category_id = request()->category_id;
+            $edit_post->description = request()->description;
+            $edit_post->user_id = auth()->user()->id;
+            $edit_post->post_action = "waiting";
+            $edit_post->save();
+            return redirect("/profile");
+    }
+
+    public function commentOff($id){
+       $comment = Post::find($id);
+       $comment->comments_action = "off";
+       $comment->save();
+       return back();
+    }
+
+    public function commentOn($id){
+        $comment = Post::find($id);
+        $comment->comments_action = "on";
+        $comment->save();
+        return back();
+    }
+
+    public function printOff($id){
+       $comment = Post::find($id);
+       $comment->print_action = "off";
+       $comment->save();
+       return back();
+    }
+
+    public function printOn($id){
+        $comment = Post::find($id);
+        $comment->print_action = "on";
+        $comment->save();
         return back();
     }
 }

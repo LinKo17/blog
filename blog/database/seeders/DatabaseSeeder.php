@@ -26,5 +26,21 @@ class DatabaseSeeder extends Seeder
             'email_1' => 'microblog@gmail.com',
             'email_2' => 'megablog@gmail.com',
         ]);
+
+        $resons = ["Spam or Advertisement","Hate Speech or Offensive Language","Violent or Threatening Content","False Information","Privacy Violation","Copyright Infringement","Low-Quality Content","Political or Religious Agendas","Trolling or Disruptive Behavior","Others"];
+
+        for($i=0; $i<count($resons); $i++){
+            \App\Models\RReason::create([
+                'reason' => $resons[$i],
+            ]);
+        }
+
+        $categories = ["Travel","Software Development","Football","IT","Personal","Knowledge","Nature","News",];
+
+        for($i=0; $i<count($categories); $i++){
+            \App\Models\Category::create([
+                'category' => $categories[$i],
+            ]);
+        }
     }
 }

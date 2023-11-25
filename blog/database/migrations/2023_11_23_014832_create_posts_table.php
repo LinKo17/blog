@@ -18,7 +18,10 @@ return new class extends Migration
             $table->integer("category_id");
             $table->text("description");
             $table->integer("user_id");
-            $table->integer("comment_id")->nullable();
+            $table->string("post_action")->default("waiting");
+            $table->string("comments_action")->default("on");
+            $table->string("print_action")->default("on");
+            $table->string("rreason_id")->nullable();
             $table->timestamps();
         });
     }

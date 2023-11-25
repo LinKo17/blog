@@ -34,7 +34,8 @@
                 Edit Posts
             </div>
 
-            <form action="">
+            <form action="" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="card-body">
 
                     <div class="row my-3">
@@ -44,7 +45,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" value="{{$post_data->title}}" name="title">
                         </div>
 
                     </div>
@@ -56,7 +57,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="file" class="form-control">
+                            <input type="file" class="form-control" multiple name="images[]">
                         </div>
 
                     </div>
@@ -67,10 +68,10 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">Type 1</option>
-                                <option value="">Type 2</option>
-                                <option value="">Type 3</option>
+                            <select name="category_id"  class="form-control">
+                                @foreach($categories_data as $category_data)
+                                <option value="{{$category_data->id}}" {{$category_data->id == $post_data->category_id ? "selected" : ""}}>{{$category_data->category}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -83,7 +84,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <textarea cols="30" class="form-control"></textarea>
+                            <textarea cols="30" class="form-control" name="description">{{$post_data->description}}</textarea>
                         </div>
 
                     </div>
