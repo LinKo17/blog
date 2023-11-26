@@ -1,3 +1,9 @@
+@php
+if(!$post_detail){
+    return back();
+}
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -154,7 +154,7 @@
 
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            <span class="text-danger">Reject Reason</span>
+                            <span class="text-danger">Approve Section</span>
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

@@ -136,15 +136,38 @@
         </div>
 
         <div class="my-4 profile_email_hide">
-            <span class="comments_email_style">{{$user_setting_data->email}}</span>
+            <span class="comments_email_style">{{ $user_setting_data->email }}</span>
 
             @if ($user_setting_data->email_action == 1)
-                <a href="setting/emailClose/{{ $user_setting_data->id }}"
-                    class="btn btn-outline-info float-end">Close</a>
+                <a href="setting/emailClose/{{ $user_setting_data->id }}" class="btn btn-success float-end">On</a>
             @else
-                <a href="setting/emailOpen/{{ $user_setting_data->id }}"
-                    class="btn btn-outline-success float-end">Open</a>
+                <a href="setting/emailOpen/{{ $user_setting_data->id }}" class="btn btn-danger float-end">Off</a>
             @endif
+
+        </div>
+
+        <div class="hide_post_list">
+            <span>Hide List Post</span>
+
+            @foreach ($users_hide_data as $user_hide)
+
+                <div class="hide_style_post border rounded-3 my-2 p-3">
+
+                    <a href="{{ url("/blog/detail/$user_hide->post_id") }}">view post</a>
+
+                    <span class="text-muted">{{ $user_hide->created_at->diffForHumans() }}</span>
+
+                    <div class="float-end">
+                        @if ($user_hide->action == 'hide')
+                            <a href='{{url("postShow/$user_hide->id")}}' class="btn btn-dark">hide</a>
+                        @else
+                            <a href='{{url("postHide/$user_hide->id")}}' class="btn btn-primary">show</a>
+                        @endif
+                            <a href="{{url("postDelete/$user_hide->id")}}" class="btn btn-danger">Delete</a>
+
+                    </div>
+                </div>
+            @endforeach
 
         </div>
 

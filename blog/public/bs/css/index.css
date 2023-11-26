@@ -82,6 +82,11 @@ body{
     width:100%;
     height: 100%;
 }
+#nav_profile{
+    width:50px;
+    height: 50px;
+    border-radius: 100px;
+}
 /* advertisment section end */
 
 /* about us section */

@@ -27,7 +27,8 @@
                     <ul class="dropdown-menu">
                         @foreach ($category_datas as $category)
                             <li class="list-group-item category_list_navbar_style">
-                                <a href="/categoriesnav/{{$category->id}}" class="nav-link text-center active">{{$category->category}}</a>
+                                <a href="/categoriesnav/{{ $category->id }}"
+                                    class="nav-link text-center active">{{ $category->category }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -60,6 +61,7 @@
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a href='{{ url('/profile') }}' class="dropdown-item text-center">Profile</a>
+
                             <a class="dropdown-item text-center" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                                 document.getElementById('logout-form').submit();">

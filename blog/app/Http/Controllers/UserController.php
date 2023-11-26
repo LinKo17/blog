@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
+use App\Models\Hide;
 use App\Models\User;
 use App\Models\Post;
 use PhpParser\Node\Expr\AssignOp\Pow;
@@ -29,8 +30,10 @@ class UserController extends Controller
     public function setting()
     {
         $user_setting_data = User::find(request()->user()->id);
+        $users_hide_data = Hide::where("user_id",request()->user()->id)->latest()->get();
         return view("users.parts.setting", [
-            "user_setting_data" => $user_setting_data
+            "user_setting_data" => $user_setting_data,
+            "users_hide_data"    => $users_hide_data
         ]);
     }
 
@@ -280,5 +283,35 @@ class UserController extends Controller
         return view("users.parts.blogDetail", [
             "post_detail" => $post_detail
         ]);
+    }
+
+    //profile index three dot
+    public function postAction($id){
+        $hide_data = new Hide();
+        $hide_data->post_id = $id;
+        $hide_data->user_id = auth()->user()->id;
+        $hide_data->action  = "hide";
+        $hide_data->save();
+        return back();
+    }
+
+    public function postShow($id){
+        $show = Hide::find($id);
+        $show->action = "show";
+        $show->save();
+        return back();
+    }
+
+    public function postHide($id){
+        $show = Hide::find($id);
+        $show->action = "hide";
+        $show->save();
+        return back();
+    }
+
+    public function postDelete($id){
+        $delete = Hide::find($id);
+        $delete->delete();
+        return back();
     }
 }

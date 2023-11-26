@@ -20,4 +20,8 @@ class Post extends Model
     public function rreason(){
         return $this->belongsTo("App\Models\RReason");
     }
+
+    public function hide(){
+        return $this->hasMany("App\Models\Hide");
+    }
 }

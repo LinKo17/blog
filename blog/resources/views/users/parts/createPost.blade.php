@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="file" class="form-control" name="images[]" multiple  required>
+                            <input type="file" class="form-control" name="images[]" multiple>
                         </div>
 
                     </div>
