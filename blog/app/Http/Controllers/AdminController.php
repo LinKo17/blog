@@ -144,4 +144,13 @@ class AdminController extends Controller
         $post->save();
         return back();
     }
+
+    public function approveEverythings($counts){
+        $approve_request = Post::where("post_action","waiting")->get();
+        foreach($approve_request as $approve){
+            $approve->post_action = "approve";
+            $approve->save();
+        }
+        return back();
+    }
 }

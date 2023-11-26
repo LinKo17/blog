@@ -126,19 +126,19 @@ body{
 #blog_name{
     font-size:21px;
     position: absolute;
-    top:5px;
+    top:14px;
     left:63px;
 }
 #blog_time{
     font-size:14px;
     position: absolute;
-    top:30px;
+    top:33px;
     left:63px;
 }
 #blog_category{
     position: absolute;
-    top:5px;
-    left:105px;
+    top:53px;
+    left:63px;
 }
 #blog_style{
     position: relative;
@@ -181,6 +181,35 @@ body{
 }
 #blog{
     background-color: #ffffff;
+}
+.blog_name_middle{
+    display: none;
+}
+.blog_name_min{
+    display:none;
+}
+.index_post_header_style{
+    margin-bottom:35px;
+}
+@media(max-width:777px){
+    .blog_name_max{
+        display: none;
+    }
+    .blog_name_middle{
+        display: inline-block;
+    }
+}
+
+@media(max-width:497px){
+    .blog_name_max{
+        display: none;
+    }
+    .blog_name_middle{
+        display: none;
+    }
+    .blog_name_min{
+        display:inline-block;
+    }
 }
 /* blog section end */
 
@@ -296,3 +325,88 @@ body{
 }
 
 /* create post section */
+
+/* detail section */
+.detail_body{
+    background-color: #ffffff;
+}
+.detail_style{
+    background-color: #efefef;
+}
+.blog_detail_images_box{
+    width:400px;
+    height: 400px;
+    margin:4px;
+}
+.blog_detail_images{
+    width:100%;
+    height: 100%;
+}
+@media(max-width:1253px){
+    .blog_detail_images_box{
+        width:259px;
+        height: 259px;
+    }
+}
+@media(max-width:991px){
+    .blog_detail_images_box{
+        width:400px;
+        height: 400px;
+    }
+}
+@media(max-width:851px){
+    .blog_detail_images_box{
+        width:356px;
+        height: 356px;
+    }
+}
+@media(max-width:757px){
+    .blog_detail_images_box{
+        width:400px;
+        height: 400px;
+        margin:auto
+    }
+}
+@media(max-width:435px){
+    .blog_detail_images_box{
+        width:320px;
+        height: 320px;
+    }
+}
+.post_print{
+    user-select: none;
+    cursor: pointer;
+}
+.blog_detail{
+    position: relative;
+    background-color: #efefef;
+}
+#blog_detail_profile{
+    width:100px;
+    height: 100px;
+    border-radius: 100px;
+}
+#blog_detail_name{
+    position: absolute;
+    font-size:25px;
+    top:30px;
+    left:130px;
+}
+#blog_detail_time{
+    position: absolute;
+    font-size:18px;
+    top:60px;
+    left:130px;
+}
+#blog_detail_category{
+    position: absolute;
+    font-size:18px;
+    top:30px;
+    left:130px;
+}
+#blog_detail_print{
+    position: absolute;
+    top:75px;
+    left:110px;
+}
+/* detail section */

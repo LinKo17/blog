@@ -1,9 +1,13 @@
 <div>
     <div class="container">
 
+        <?php
+        $approves = count($approve_requests);
+        ?>
         <div class="report_bar_style text-center">
             <span class="report_title">Approve Request</span>
-            <span class="report_number badge bg-primary">{{ count($approve_requests) }}</span>
+            <a href="" data-bs-toggle="modal" data-bs-target="#confirm"
+                class="report_number badge bg-primary">{{ count($approve_requests) }}</a>
         </div>
 
         {{-- blog section --}}
@@ -20,7 +24,13 @@
 
                                 <img src="profile_pics/{{ $approve->user->profile_pic }}" id="blog_profile">
 
-                                <h1 id="blog_name">{{ $approve->user->name }}</h1>
+                                <h1 id="blog_name">
+                                    @if (strlen($approve->user->name) > 15)
+                                        {{ substr($approve->user->name, 0, 15) }}...
+                                    @else
+                                        {{ substr($approve->user->name, 0, 15) }}
+                                    @endif
+                                </h1>
 
                                 <p class="text-muted" id="blog_time">{{ $approve->created_at->diffForHumans() }}</p>
 
@@ -38,7 +48,8 @@
                                     </a>
 
                                     <a href="#" class="dropdown-item text-center" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal{{$approve->id}}"><span class="text-danger">Reject</span></a>
+                                        data-bs-target="#exampleModal{{ $approve->id }}"><span
+                                            class="text-danger">Reject</span></a>
 
                                     <a href="#" class="dropdown-item text-center">
                                         Email
@@ -64,12 +75,20 @@
                             </div>
                         @endif
 
-                        <h1 id="blog_title" class="mt-1">{{ substr($approve->title, 0, 70) }}</h1>
+                        <h1 id="blog_title" class="mt-1" style="word-wrap:break-word">
+
+                            @if (strlen($approve->title) > 70)
+                                {{ substr($approve->title, 0, 70) }}...
+                            @else
+                                {{ substr($approve->title, 0, 70) }}
+                            @endif
 
                         </h1>
 
-                        <p id="blog_desc">{{ substr($approve->description, 0, 120) }}
-                            <a href="">see more</a>
+                        </h1>
+
+                        <p id="blog_desc" style="word-wrap:break-word">{{ substr($approve->description, 0, 120) }}
+                            <a href="{{url("/blog/detail/$approve->id")}}">see more</a>
                         </p>
                         {{-- blog main section end --}}
                     </div>
@@ -82,8 +101,8 @@
 
         {{-- reject list --}}
         @foreach ($approve_requests as $approve)
-            <div class="modal fade" id="exampleModal{{$approve->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModal{{ $approve->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
@@ -95,7 +114,8 @@
                                 aria-label="Close"></button>
                         </div>
 
-                        <form name="editForm" id="myEditForm" method="post" action="{{url("/reject/$approve->id")}}">
+                        <form name="editForm" id="myEditForm" method="post"
+                            action="{{ url("/reject/$approve->id") }}">
                             @csrf
                             <div class="modal-body">
 
@@ -104,10 +124,10 @@
 
                                     <select name="reject_type" id="reject_type" class="form-control">
 
-                                        @foreach($reasons as $reason)
-                                        <option value="{{$reason->id}}">
-                                            <span class="text-danger">{{$reason->reason}}</span>
-                                        </option>
+                                        @foreach ($reasons as $reason)
+                                            <option value="{{ $reason->id }}">
+                                                <span class="text-danger">{{ $reason->reason }}</span>
+                                            </option>
                                         @endforeach
 
                                     </select>
@@ -125,7 +145,33 @@
                 </div>
             </div>
         @endforeach
-
         {{-- reject list end --}}
+
+        {{-- confirm to approve all --}}
+        <div class="modal fade" id="confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            <span class="text-danger">Reject Reason</span>
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+
+                    <div class="modal-body">
+                        You are trying to approve every post.Are you sure?
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href='{{ url("/approves/$approves") }}' type="submit" class="btn btn-primary">Confirm</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{-- confirm to approve all end --}}
     </div>
 </div>

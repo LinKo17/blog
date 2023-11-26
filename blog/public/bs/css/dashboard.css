@@ -220,6 +220,8 @@ body{
 
 .report_bar_style .report_number{
     font-size:30px;
+    text-decoration: none;
+    color:white;
 }
 /* reports section end */
 

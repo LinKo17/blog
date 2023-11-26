@@ -52,7 +52,6 @@
 
 
     {{-- js link --}}
-    <script src="bs/js/dashboard.js"></script>
 
     <script>
         document.getElementById("users").style.backgroundColor = "#000000"

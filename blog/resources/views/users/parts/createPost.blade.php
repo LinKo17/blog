@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="text" class="form-control" name="title">
+                            <input type="text" class="form-control" name="title" required>
                         </div>
 
                     </div>
@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="file" class="form-control" name="images[]" multiple >
+                            <input type="file" class="form-control" name="images[]" multiple  required>
                         </div>
 
                     </div>
@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <select name="category_id" class="form-control">
+                            <select name="category_id" class="form-control" required>
                                 @foreach ($category_datas as $category)
                                     <option value="{{ $category->id }}">{{ $category->category }}</option>
                                 @endforeach
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <textarea cols="30" class="form-control" name="description"></textarea>
+                            <textarea cols="30" class="form-control" name="description" required></textarea>
                         </div>
 
                     </div>

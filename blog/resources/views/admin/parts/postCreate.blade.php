@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="col-12 col-md-10">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" required>
                     </div>
 
                 </div>
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="col-12 col-md-10">
-                        <select name="" id="" class="form-control">
+                        <select name="" id="" class="form-control" required>
                             <option value="">Type 1</option>
                             <option value="">Type 2</option>
                             <option value="">Type 3</option>
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="col-12 col-md-10">
-                        <select name="" id="" class="form-control">
+                        <select name="" id="" class="form-control" required>
                             <option value="">Admin</option>
                             <option value="">Normal</option>
                         </select>
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="col-12 col-md-10">
-                        <textarea cols="30" class="form-control"></textarea>
+                        <textarea cols="30" class="form-control" required></textarea>
                     </div>
 
                 </div>

@@ -27,7 +27,7 @@
                     <ul class="dropdown-menu">
                         @foreach ($category_datas as $category)
                             <li class="list-group-item category_list_navbar_style">
-                                <a href="/categoriesnav" class="nav-link text-center active">{{$category->category}}</a>
+                                <a href="/categoriesnav/{{$category->id}}" class="nav-link text-center active">{{$category->category}}</a>
                             </li>
                         @endforeach
                     </ul>

@@ -33,7 +33,7 @@ Route::get("/index",[RoleController::class,"index"]);
 Route::get("/",[RoleController::class,"index"]);
 
 //users navbar route
-Route::get("/categoriesnav",[NavbarController::class,"categoriesnav"]);
+Route::get("/categoriesnav/{id}",[NavbarController::class,"categoriesnav"]);
 Route::get("/aboutnav",[NavbarController::class,"aboutnav"]);
 
 //profile
@@ -63,6 +63,12 @@ Route::get("/profile/commentOn/{id}",[UserController::class,"commentOn"]);
 
 Route::get("/profile/printOff/{id}",[UserController::class,"printOff"]);
 Route::get("/profile/printOn/{id}",[UserController::class,"printOn"]);
+
+//blog detail info
+Route::get("/blog/detail/{id}",[UserController::class,"blogDetail"]);
+
+
+
 
 
 // ---- admin
@@ -98,20 +104,7 @@ Route::post("/settingside",[AdminController::class,"settingmanagement"]);
 //admin approve section
 Route::get("/approve/{id}",[AdminController::class,"approve"]);
 Route::post("/reject/{id}",[AdminController::class,"reject"]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get("/approves/{counts}",[AdminController::class,"approveEverythings"]);
 
 //user controll section
 Route::get("/user/delete/{id}",[AdminController::class,"userDel"]);
@@ -120,4 +113,11 @@ Route::get("/userRole/{id}",[AdminController::class,"userRole"]);//
 Route::get("/adminRole/{id}",[AdminController::class,"adminRole"]);//
 Route::get("/user/ban/{id}",[AdminController::class,"userBan"]);
 Route::get("/user/unban/{id}",[AdminController::class,"userunBan"]);
+
+
+
+
+
+
+
 

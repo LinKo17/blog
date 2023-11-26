@@ -97,7 +97,9 @@
                     @if ($user_data->email_action == 1)
                         <div class="row my-1">
                             <div class="col-5">Email</div>
-                            <div class="col-7">: {{ $user_data->email }}</div>
+                            <div class="col-7" style="word-wrap:break-word">
+                                : {{ $user_data->email }}
+                            </div>
                         </div>
                     @endif
                 </div>
@@ -130,12 +132,11 @@
                             Your's post do not fix out community guide line!!!
 
                             <div class="float-end">
-                                <a href="{{ url("posts/delete/$post_data->id") }}"
-                                    class="btn btn-light">Delete</a>
+                                <a href="{{ url("posts/delete/$post_data->id") }}" class="btn btn-light">Delete</a>
                             </div>
                             <div class="float-end mx-2">
                                 <button class="btn btn-secondary" data-bs-toggle="modal"
-                                data-bs-target="#detail{{ $post_data->id }}">Detail</button>
+                                    data-bs-target="#detail{{ $post_data->id }}">Detail</button>
                             </div>
 
                         </div>
@@ -151,14 +152,38 @@
                                 {{-- for main border --}}
 
                                 {{-- blog header section --}}
-                                <div class="row mb-2">
+                                <div class="row mb-4">
 
                                     <div class="col-10 ">
 
                                         <img src="profile_pics/{{ $post_data->user->profile_pic }}" alt=""
                                             id="blog_profile">
 
-                                        <h1 id="blog_name">{{ $post_data->user->name }}</h1>
+                                        {{-- ------blog name ------ --}}
+                                        <h1 id="blog_name" class="blog_name_max">
+                                            @if (strlen($post_data->user->name) > 39)
+                                            {{ substr($post_data->user->name, 0, 37) }}...
+                                            @else
+                                            {{ substr($post_data->user->name, 0, 40) }}
+                                            @endif
+                                        </h1>
+
+                                        <h1 id="blog_name" class="blog_name_middle">
+                                            @if (strlen($post_data->user->name) > 29)
+                                            {{ substr($post_data->user->name, 0, 27) }}...
+                                            @else
+                                            {{ substr($post_data->user->name, 0, 30) }}
+                                            @endif
+                                        </h1>
+
+                                        <h1 id="blog_name" class="blog_name_min">
+                                            @if (strlen($post_data->user->name) > 17)
+                                            {{ substr($post_data->user->name, 0, 17) }}...
+                                            @else
+                                            {{ substr($post_data->user->name, 0, 20) }}
+                                            @endif
+                                        </h1>
+                                        {{-- ------blog name ------ --}}
 
                                         <p class="text-muted" id="blog_time">
                                             {{ $post_data->created_at->diffForHumans() }}
@@ -173,18 +198,22 @@
 
                                             @if ($post_data->comments_action == 'on')
                                                 <a href='{{ url("/profile/commentOff/$post_data->id") }}'
-                                                    class="dropdown-item text-center">Comments <span class="badge bg-success">On</span></a>
+                                                    class="dropdown-item text-center">Comments <span
+                                                        class="badge bg-success">On</span></a>
                                             @else
                                                 <a href='{{ url("/profile/commentOn/$post_data->id") }}'
-                                                    class="dropdown-item text-center">Comments <span class="badge bg-danger">Off</span></a>
+                                                    class="dropdown-item text-center">Comments <span
+                                                        class="badge bg-danger">Off</span></a>
                                             @endif
 
                                             @if ($post_data->print_action == 'on')
                                                 <a href='{{ url("/profile/printOff/$post_data->id") }}'
-                                                    class="dropdown-item text-center">Print <span class="badge bg-success">On</span></a>
+                                                    class="dropdown-item text-center">Print <span
+                                                        class="badge bg-success">On</span></a>
                                             @else
                                                 <a href='{{ url("/profile/printOn/$post_data->id") }}'
-                                                    class="dropdown-item text-center">Print <span class="badge bg-danger">Off</span></a>
+                                                    class="dropdown-item text-center">Print <span
+                                                        class="badge bg-danger">Off</span></a>
                                             @endif
 
                                             <a href="#" class="dropdown-item text-center">Reupload</a>
@@ -216,16 +245,17 @@
                                     </div>
                                 @endif
 
-                                <h1 id="blog_title">{{ substr($post_data->title, 0, 70) }}</h1>
+                                <h1 id="blog_title" style="word-wrap: break-word">{{ substr($post_data->title, 0, 70) }}</h1>
 
-                                <p id="blog_desc">{{ substr($post_data->description, 0, 120) }}
-                                    <a href="">see more</a>
+                                <p id="blog_desc"  style="word-wrap: break-word">{{ substr($post_data->description, 0, 120) }}
+                                    <a href="{{url("/blog/detail/$post_data->id")}}">see more</a>
                                 </p>
                                 {{-- blog main section end --}}
                             </div>
                         </div>
                     @endif
                 @endforeach
+
                 {{-- blog section end --}}
 
             </div>
@@ -266,8 +296,8 @@
             </div>
         </div>
 
-        <div class="modal fade" id="detail{{ $post_data->id }}" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="detail{{ $post_data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -277,7 +307,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            {{$post_data->rreason->reason  ?? ""}}
+                            {{ $post_data->rreason->reason ?? '' }}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -288,7 +318,6 @@
                 </div>
             </div>
         </div>
-
     @endforeach
     {{-- delete form section end --}}
 

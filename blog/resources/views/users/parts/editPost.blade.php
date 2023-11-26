@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="text" class="form-control" value="{{$post_data->title}}" name="title">
+                            <input type="text" class="form-control" value="{{$post_data->title}}" name="title" required>
                         </div>
 
                     </div>
@@ -57,10 +57,11 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="file" class="form-control" multiple name="images[]">
+                            <input type="file" class="form-control" multiple name="images[]" required>
                         </div>
 
                     </div>
+
                     <div class="row my-3">
 
                         <div class="col-12 col-md-3 create_post_title">
@@ -84,7 +85,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <textarea cols="30" class="form-control" name="description">{{$post_data->description}}</textarea>
+                            <textarea cols="30" class="form-control" name="description" required>{{$post_data->description}}</textarea>
                         </div>
 
                     </div>

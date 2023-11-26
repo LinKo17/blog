@@ -57,7 +57,7 @@ class UserController extends Controller
     {
         $validator = validator(request()->all(), [
             "title" => "required",
-            "images.*" => ["image", "mimes:jpg,png,jpeg,svg"],
+            "images.*" => ["image", "mimes:jpg,png,jpeg,svg,gif"],
 
             "category_id" => "required",
             "description" => "required",
@@ -73,7 +73,7 @@ class UserController extends Controller
         if (request()->images) {
             $images = [];
             foreach (request()->images as $image) {
-                $imageName = time() . "." . $image->getClientOriginalExtension();
+                $imageName = uniqid() . "." . $image->getClientOriginalExtension();
                 $image->move("posts", $imageName);
                 $images[] = $imageName;
             }
@@ -213,7 +213,7 @@ class UserController extends Controller
 
         $validator = validator(request()->all(), [
             "title" => "required",
-            "images.*" => ["image", "mimes:jpg,png,jpeg,svg"],
+            "images.*" => ["image", "mimes:jpg,png,jpeg,svg,gif"],
 
             "category_id" => "required",
             "description" => "required",
@@ -227,45 +227,58 @@ class UserController extends Controller
         if (request()->images) {
             $images = [];
             foreach (request()->images as $image) {
-                $imageName = time() . "." . $image->getClientOriginalExtension();
+                $imageName = uniqid() . "." .  $image->getClientOriginalExtension();
                 $image->move("posts", $imageName);
                 $images[] = $imageName;
             }
             $edit_post->images = implode("|", $images);
         }
-            $edit_post->category_id = request()->category_id;
-            $edit_post->description = request()->description;
-            $edit_post->user_id = auth()->user()->id;
-            $edit_post->post_action = "waiting";
-            $edit_post->save();
-            return redirect("/profile");
+        $edit_post->category_id = request()->category_id;
+        $edit_post->description = request()->description;
+        $edit_post->user_id = auth()->user()->id;
+        $edit_post->post_action = "waiting";
+        $edit_post->save();
+        return redirect("/profile");
     }
 
-    public function commentOff($id){
-       $comment = Post::find($id);
-       $comment->comments_action = "off";
-       $comment->save();
-       return back();
+    public function commentOff($id)
+    {
+        $comment = Post::find($id);
+        $comment->comments_action = "off";
+        $comment->save();
+        return back();
     }
 
-    public function commentOn($id){
+    public function commentOn($id)
+    {
         $comment = Post::find($id);
         $comment->comments_action = "on";
         $comment->save();
         return back();
     }
 
-    public function printOff($id){
-       $comment = Post::find($id);
-       $comment->print_action = "off";
-       $comment->save();
-       return back();
+    public function printOff($id)
+    {
+        $comment = Post::find($id);
+        $comment->print_action = "off";
+        $comment->save();
+        return back();
     }
 
-    public function printOn($id){
+    public function printOn($id)
+    {
         $comment = Post::find($id);
         $comment->print_action = "on";
         $comment->save();
         return back();
+    }
+
+    //blog detail
+    public function blogDetail($id)
+    {
+        $post_detail = Post::find($id);
+        return view("users.parts.blogDetail", [
+            "post_detail" => $post_detail
+        ]);
     }
 }
