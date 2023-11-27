@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Hide;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Report;
 use PhpParser\Node\Expr\AssignOp\Pow;
 
 class UserController extends Controller
@@ -312,6 +313,23 @@ class UserController extends Controller
     public function postDelete($id){
         $delete = Hide::find($id);
         $delete->delete();
+        return back();
+    }
+
+    public function reports($id){
+        $report = new Report();
+        $report->user_id = auth()->user()->id;
+        $report->post_id = $id;
+        $report->report_type = request()->report_type;
+        if(request()->report_reason){
+            $report->report_reason  = request()->report_reason;
+        }
+        $report->save();
+
+        $post = Post::find($id);
+        $post->report = "report";
+        $post->save();
+
         return back();
     }
 }

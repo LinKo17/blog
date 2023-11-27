@@ -54,7 +54,7 @@
 
                 <div class="footer_social_link">
                     <span>
-                        <a href="">
+                        <a href="{{$ad_setting->facebook}}">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
                     </span>
@@ -62,7 +62,7 @@
 
                 <div class="footer_social_link">
                     <span>
-                        <a href="">
+                        <a href="{{$ad_setting->twitter}}">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </span>
@@ -70,7 +70,7 @@
 
                 <div class="footer_social_link">
                     <span>
-                        <a href="">
+                        <a href="{{$ad_setting->instagram}}">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     </span>

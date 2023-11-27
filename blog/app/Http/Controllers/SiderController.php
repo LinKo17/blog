@@ -50,7 +50,10 @@ class SiderController extends Controller
     }
 
     public function reportside(){
-        return view("admin.siders.report");
+        $post_data = Post::where("report","report")->get();
+        return view("admin.siders.report",[
+            "posts_data" => $post_data
+        ]);
     }
 
     public function advertiside(){
@@ -61,7 +64,10 @@ class SiderController extends Controller
     }
 
     public function annouside(){
-        return view("admin.siders.annou");
+        $annou_data = AdminSetting::all();
+        return view("admin.siders.annou",[
+            "annou_data" => $annou_data
+        ]);
     }
 
     public function settingside(){

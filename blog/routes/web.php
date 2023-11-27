@@ -73,6 +73,7 @@ Route::get("/postShow/{id}",[UserController::class,"postShow"]);
 Route::get("/postHide/{id}",[UserController::class,"postHide"]);
 Route::get("/postDelete/{id}",[UserController::class,"postDelete"]);
 
+Route::post("/report/{id}",[UserController::class,"reports"]);
 
 
 
@@ -119,7 +120,10 @@ Route::get("/adminRole/{id}",[AdminController::class,"adminRole"]);//
 Route::get("/user/ban/{id}",[AdminController::class,"userBan"]);
 Route::get("/user/unban/{id}",[AdminController::class,"userunBan"]);
 
-
+//report management system
+Route::get("reports/cancel/{id}",[AdminController::class,"cancel"]);
+Route::get("reports/delete/{id}",[AdminController::class,"reportDelete"]);
+Route::get("reports/show/{id}",[AdminController::class,"reportShow"]);
 
 
 

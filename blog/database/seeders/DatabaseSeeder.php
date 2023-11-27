@@ -21,10 +21,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         \App\Models\AdminSetting::create([
-            'address' => 'ngar ll bl thi ma ll',
+            'address' => 'example address',
             'phone' => '+95 978343232',
-            'email_1' => 'microblog@gmail.com',
-            'email_2' => 'megablog@gmail.com',
+            'email_1' => 'examaple@gmail.com',
+            'email_2' => 'example@gmail.com',
+            'Announcement' => '',
+            'facebook' => '',
+            'twitter' => '',
+            'instagram' => ''
         ]);
 
         $resons = ["Spam or Advertisement","Hate Speech or Offensive Language","Violent or Threatening Content","False Information","Privacy Violation","Copyright Infringement","Low-Quality Content","Political or Religious Agendas","Trolling or Disruptive Behavior","Others"];

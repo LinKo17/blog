@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Advertisement;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Report;
 
 class AdminController extends Controller
 {
@@ -72,7 +73,6 @@ class AdminController extends Controller
     public function settingmanagement(){
         $validator = validator(request()->all(),[
             "key_data" => "required",
-            "value_data" => "required"
         ]);
 
         if($validator->fails()){
@@ -80,7 +80,7 @@ class AdminController extends Controller
         }
         $key =request()->key_data;
         $adminSetting = AdminSetting::find(1);
-        $adminSetting->$key = request()->value_data;
+        $adminSetting->$key = request()->value_data ?? "";
         $adminSetting->save();
         return back();
     }
@@ -152,5 +152,35 @@ class AdminController extends Controller
             $approve->save();
         }
         return back();
+    }
+
+    //report management section
+    public function cancel($id){
+        $post = Post::find($id);
+        $post->report = "none";
+        $post->save();
+
+        $reports = Report::where("post_id",$id)->get();
+        foreach($reports as $report){
+            $report->delete();
+        }
+        return back();
+    }
+
+    public function reportDelete($id){
+        $post = Post::find($id);
+        $post->delete();
+        $reports = Report::where("post_id",$id)->get();
+        foreach($reports as $report){
+            $report->delete();
+        }
+        return back();
+    }
+
+    public function reportShow($id){
+        $post = Post::find($id);
+        return view("admin.parts.reportShow",[
+            "postReports" => $post
+        ]);
     }
 }

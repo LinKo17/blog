@@ -25,6 +25,10 @@
         @include("users.parts.nav")
     {{-- navbar section end --}}
 
+    {{-- annou section --}}
+        @include("users.parts.annou")
+    {{-- annou section end --}}
+
     {{-- Advertisement --}}
         @include("users.parts.adver")
     {{-- Advertisement end --}}

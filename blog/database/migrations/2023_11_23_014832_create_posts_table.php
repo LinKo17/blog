@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("comments_action")->default("on");
             $table->string("print_action")->default("on");
             $table->string("rreason_id")->nullable();
+            $table->string("report")->default("none");
             $table->timestamps();
         });
     }

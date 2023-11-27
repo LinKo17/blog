@@ -109,13 +109,14 @@
 
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                <span class="text-danger">Report Reason{{ $post_data->id }}</span>
+                                <span class="text-danger">Report Reason</span>
                             </h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
 
-                        <form name="editForm" id="myEditForm">
+                        <form name="editForm" id="myEditForm" method="post" action="{{url("/report/$post_data->id")}}">
+                            @csrf
                             <div class="modal-body">
 
                                 <div class="my-2">
@@ -124,7 +125,7 @@
                                     <select name="report_type" id="report_type" class="form-control">
 
                                         @foreach ($reports_data as $report_data)
-                                            <option value="{{ $report_data->id }}">
+                                            <option value="{{ $report_data->reason }}">
                                                 <span class="text-danger">{{ $report_data->reason }}</span>
                                             </option>
                                         @endforeach

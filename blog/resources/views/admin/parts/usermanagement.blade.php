@@ -12,12 +12,24 @@
             <td class="user_id_style">{{ $userData->id }}</td>
             <td class="user_name_style">{{ $userData->name }}</td>
 
-            @if($userData->user_roll == "admin")
-                <td class="bg-primary">{{ $userData->email}}</td>
+            @if ($userData->user_roll == 'admin')
+                <td class="bg-primary">
+                    <span class="usermanagement_first_style">{{ substr($userData->email, 0, 40) }}</span>
+                    <span class="usermanagement_sec_style">{{ substr($userData->email, 0, 30) }}</span>
+                    <span class="usermanagement_third_style">{{ substr($userData->email, 0, 17) }}</span>
+                </td>
             @elseif($userData->ban == 0)
-                <td>{{ $userData->email }}</td>
+                <td>
+                    <span class="usermanagement_first_style">{{ substr($userData->email, 0, 40) }}</span>
+                    <span class="usermanagement_sec_style">{{ substr($userData->email, 0, 30) }}</span>
+                    <span class="usermanagement_third_style">{{ substr($userData->email, 0, 17) }}</span>
+                </td>
             @else
-                <td class="bg-warning">{{ $userData->email }}</td>
+                <td class="bg-warning">
+                    <span class="usermanagement_first_style">{{ substr($userData->email, 0, 40) }}</span>
+                    <span class="usermanagement_sec_style">{{ substr($userData->email, 0, 30) }}</span>
+                    <span class="usermanagement_third_style">{{ substr($userData->email, 0, 17) }}</span>
+                </td>
             @endif
 
             <td>
@@ -27,7 +39,7 @@
         </tr>
     @endforeach
 </table>
-{!! $usersData->withQueryString()->links('pagination::bootstrap-5')!!}
+{!! $usersData->withQueryString()->links('pagination::bootstrap-5') !!}
 {{-- model box section --}}
 
 

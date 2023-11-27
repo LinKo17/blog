@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string("education")->nullable();
             $table->string("work")->nullable();
             $table->string("live")->nullable();
-            $table->string("post_id")->default(0);
-            $table->string("report_id")->default(0);
+            // $table->string("post_id")->default(0);
+            // $table->string("report_id")->default(0);
 
             $table->integer("email_action")->default(1);
             $table->integer("ban")->default(0);
