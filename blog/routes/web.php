@@ -75,7 +75,8 @@ Route::get("/postDelete/{id}",[UserController::class,"postDelete"]);
 
 Route::post("/report/{id}",[UserController::class,"reports"]);
 
-
+//comment section
+Route::post("/blog/detail/{id}",[UserController::class,"comments"]);
 
 // ---- admin
 

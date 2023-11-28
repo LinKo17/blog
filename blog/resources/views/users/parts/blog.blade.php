@@ -18,7 +18,7 @@
                 @endphp
 
 
-                @if (!$hidePost)
+                @if (!$hidePost && $post_data->report != "delete")
                     <div class=" col-lg-4 col-md-6  col-12 p-2"> {{-- to seperate outer line --}}
 
                         <div class="border p-2" id="blog_style"> {{-- for main border --}}

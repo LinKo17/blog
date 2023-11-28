@@ -1,7 +1,7 @@
 @php
-if(!$post_detail){
-    return back();
-}
+    if (!$post_detail) {
+        return back();
+    }
 @endphp
 
 <!DOCTYPE html>
@@ -84,9 +84,92 @@ if(!$post_detail){
 
 
 
-    <div class="my-2 px-4 py-2">
-        <span class="fs-3">Comments</span>
+    <div class="my-2 px-4 pt-2">
+        <span class="fs-3">Comments ({{ count($comments_data) }})</span>
     </div>
+
+    <div class="px-4">
+        <form method="post">
+            @csrf
+            <textarea type="text" class="form-control" placeholder="Comments" name="comments"></textarea>
+            <button class="btn btn-primary mt-1">Add Comment</button>
+        </form>
+    </div>
+
+    <div class="mx-4 mt-3 border p-3 rounded-3">
+        @foreach ($comments_data as $comments)
+            <div class="main_comment  my-3 ">
+
+                <div class="pf_image_comment">
+                    <img src="profile_pics/{{ $comments->user->profile_pic }}" alt="" id="comments_pf_img">
+                </div>
+
+                <div class="pf_other">
+                    <div class="pf_name">{{ $comments->user->name }}</div>
+                    <div class="pf_comment">{{ $comments->content }}</div>
+                    <div class="pf_action">
+                        <span class="text-muted time">{{ $comments->created_at->diffForHumans() }}</span>
+                        <span class="reply">reply</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <form action="" class="comment_reply_form">
+                <input type="hidden" value="{{ $comments->id }}">
+                <textarea name="" class=""></textarea>
+                <br>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        @endforeach
+    </div>
+
+    {{-- <script>
+        let replies = document.querySelectorAll(".reply");
+        let forms = document.querySelectorAll(".comment_reply_form");
+        replies.forEach((reply, index) => {
+            console.log(reply)
+            reply.onclick = function() {
+                forms[index].style.display = "inline-block";
+            };
+        });
+
+        document.querySelector("body").onclick = ()=>{
+            forms.forEach((form)=>{
+                form.style.display ="none"
+            })
+        }
+    </script> --}}
+
+    <script>
+        let replies = document.querySelectorAll(".reply");
+        let forms = document.querySelectorAll(".comment_reply_form");
+
+        replies.forEach((reply, index) => {
+            reply.onclick = function(event) {
+                event.stopPropagation(); // Prevent the click event from reaching the body
+
+                forms.forEach((form) => {
+                    form.style.display = "none";
+                });
+
+                forms[index].style.display = "inline-block";
+
+                forms[index].onclick = function(event) {
+                    event.stopPropagation(); // Prevent the click event from reaching the body
+                };
+            };
+        });
+
+        document.body.onclick = () => {
+            forms.forEach((form, index) => {
+                form.style.display = "none";
+            });
+        };
+    </script>
+
+
 </body>
 
 </html>

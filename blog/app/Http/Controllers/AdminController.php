@@ -126,7 +126,7 @@ class AdminController extends Controller
     public function approve($id){
         $approve = Post::find($id);
         $approve->post_action = "approve";
-        $approve->created_at  = time();
+        $approve->created_at  = Now();
         $approve->save();
         return back();
     }
@@ -169,7 +169,9 @@ class AdminController extends Controller
 
     public function reportDelete($id){
         $post = Post::find($id);
-        $post->delete();
+        $post->report = "delete";
+        $post->save();
+
         $reports = Report::where("post_id",$id)->get();
         foreach($reports as $report){
             $report->delete();

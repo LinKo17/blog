@@ -146,113 +146,136 @@
 
                 {{-- blog section --}}
                 @foreach ($posts_data as $post_data)
+
                     @if ($post_data->post_action == 'approve')
-                        <div class="container my-3">
-                            <div class="border p-3" id="blog_style" style="background-color:#ffffff;">
-                                {{-- for main border --}}
 
-                                {{-- blog header section --}}
-                                <div class="row mb-4">
+                        @if ($post_data->report == 'none' || $post_data == 'report')
 
-                                    <div class="col-10 ">
+                            <div class="container my-3">
+                                <div class="border p-3" id="blog_style" style="background-color:#ffffff;">
+                                    {{-- for main border --}}
 
-                                        <img src="profile_pics/{{ $post_data->user->profile_pic }}" alt=""
-                                            id="blog_profile">
+                                    {{-- blog header section --}}
+                                    <div class="row mb-4">
 
-                                        {{-- ------blog name ------ --}}
-                                        <h1 id="blog_name" class="blog_name_max">
-                                            @if (strlen($post_data->user->name) > 39)
-                                            {{ substr($post_data->user->name, 0, 37) }}...
-                                            @else
-                                            {{ substr($post_data->user->name, 0, 40) }}
-                                            @endif
-                                        </h1>
+                                        <div class="col-10 ">
 
-                                        <h1 id="blog_name" class="blog_name_middle">
-                                            @if (strlen($post_data->user->name) > 29)
-                                            {{ substr($post_data->user->name, 0, 27) }}...
-                                            @else
-                                            {{ substr($post_data->user->name, 0, 30) }}
-                                            @endif
-                                        </h1>
+                                            <img src="profile_pics/{{ $post_data->user->profile_pic }}" alt=""
+                                                id="blog_profile">
 
-                                        <h1 id="blog_name" class="blog_name_min">
-                                            @if (strlen($post_data->user->name) > 17)
-                                            {{ substr($post_data->user->name, 0, 17) }}...
-                                            @else
-                                            {{ substr($post_data->user->name, 0, 20) }}
-                                            @endif
-                                        </h1>
-                                        {{-- ------blog name ------ --}}
+                                            {{-- ------blog name ------ --}}
+                                            <h1 id="blog_name" class="blog_name_max">
+                                                @if (strlen($post_data->user->name) > 39)
+                                                    {{ substr($post_data->user->name, 0, 37) }}...
+                                                @else
+                                                    {{ substr($post_data->user->name, 0, 40) }}
+                                                @endif
+                                            </h1>
 
-                                        <p class="text-muted" id="blog_time">
-                                            {{ $post_data->created_at->diffForHumans() }}
-                                        </p>
-                                        <span class="badge bg-dark"
-                                            id="blog_category">{{ $post_data->category->category }}</span>
-                                    </div>
+                                            <h1 id="blog_name" class="blog_name_middle">
+                                                @if (strlen($post_data->user->name) > 29)
+                                                    {{ substr($post_data->user->name, 0, 27) }}...
+                                                @else
+                                                    {{ substr($post_data->user->name, 0, 30) }}
+                                                @endif
+                                            </h1>
 
-                                    <div class="col-2 dropdown">
-                                        <i class="fa-solid fa-ellipsis float-end" data-bs-toggle="dropdown"></i>
-                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <h1 id="blog_name" class="blog_name_min">
+                                                @if (strlen($post_data->user->name) > 17)
+                                                    {{ substr($post_data->user->name, 0, 17) }}...
+                                                @else
+                                                    {{ substr($post_data->user->name, 0, 20) }}
+                                                @endif
+                                            </h1>
+                                            {{-- ------blog name ------ --}}
 
-                                            @if ($post_data->comments_action == 'on')
-                                                <a href='{{ url("/profile/commentOff/$post_data->id") }}'
-                                                    class="dropdown-item text-center">Comments <span
-                                                        class="badge bg-success">On</span></a>
-                                            @else
-                                                <a href='{{ url("/profile/commentOn/$post_data->id") }}'
-                                                    class="dropdown-item text-center">Comments <span
-                                                        class="badge bg-danger">Off</span></a>
-                                            @endif
-
-                                            @if ($post_data->print_action == 'on')
-                                                <a href='{{ url("/profile/printOff/$post_data->id") }}'
-                                                    class="dropdown-item text-center">Print <span
-                                                        class="badge bg-success">On</span></a>
-                                            @else
-                                                <a href='{{ url("/profile/printOn/$post_data->id") }}'
-                                                    class="dropdown-item text-center">Print <span
-                                                        class="badge bg-danger">Off</span></a>
-                                            @endif
-
-                                            <a href="#" class="dropdown-item text-center">Reupload</a>
-
-                                            <a href='{{ url("/profile/edit/$post_data->id") }}'
-                                                class="dropdown-item text-center">
-                                                Edit</a>
-
-                                            <a href='' class="dropdown-item text-center" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal{{ $post_data->id }}">
-                                                <span class="text-danger">Delete</span>
-                                            </a>
+                                            <p class="text-muted" id="blog_time">
+                                                {{ $post_data->created_at->diffForHumans() }}
+                                            </p>
+                                            <span class="badge bg-dark"
+                                                id="blog_category">{{ $post_data->category->category }}</span>
                                         </div>
-                                    </div>
 
+                                        <div class="col-2 dropdown">
+                                            <i class="fa-solid fa-ellipsis float-end" data-bs-toggle="dropdown"></i>
+                                            <div class="dropdown-menu dropdown-menu-end">
+
+                                                @if ($post_data->comments_action == 'on')
+                                                    <a href='{{ url("/profile/commentOff/$post_data->id") }}'
+                                                        class="dropdown-item text-center">Comments <span
+                                                            class="badge bg-success">On</span></a>
+                                                @else
+                                                    <a href='{{ url("/profile/commentOn/$post_data->id") }}'
+                                                        class="dropdown-item text-center">Comments <span
+                                                            class="badge bg-danger">Off</span></a>
+                                                @endif
+
+                                                @if ($post_data->print_action == 'on')
+                                                    <a href='{{ url("/profile/printOff/$post_data->id") }}'
+                                                        class="dropdown-item text-center">Print <span
+                                                            class="badge bg-success">On</span></a>
+                                                @else
+                                                    <a href='{{ url("/profile/printOn/$post_data->id") }}'
+                                                        class="dropdown-item text-center">Print <span
+                                                            class="badge bg-danger">Off</span></a>
+                                                @endif
+
+                                                <a href="#" class="dropdown-item text-center">Reupload</a>
+
+                                                <a href='{{ url("/profile/edit/$post_data->id") }}'
+                                                    class="dropdown-item text-center">
+                                                    Edit</a>
+
+                                                <a href='' class="dropdown-item text-center"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $post_data->id }}">
+                                                    <span class="text-danger">Delete</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    {{-- blog header section end --}}
+
+
+                                    {{-- blog main section --}}
+                                    @if ($post_data->images)
+                                        <?php $images = explode('|', $post_data->images); ?>
+
+                                        <div id="image_pf_container">
+                                            @foreach ($images as $image)
+                                                <img src="posts/{{ $image }}" alt="">
+                                                <?php break; ?>
+                                            @endforeach
+                                        </div>
+                                    @endif
+
+                                    <h1 id="blog_title" style="word-wrap: break-word">
+                                        {{ substr($post_data->title, 0, 70) }}</h1>
+
+                                    <p id="blog_desc" style="word-wrap: break-word">
+                                        {{ substr($post_data->description, 0, 120) }}
+                                        <a href="{{ url("/blog/detail/$post_data->id") }}">see more</a>
+                                    </p>
+                                    {{-- blog main section end --}}
                                 </div>
-                                {{-- blog header section end --}}
-
-
-                                {{-- blog main section --}}
-                                @if ($post_data->images)
-                                    <?php $images = explode('|', $post_data->images); ?>
-
-                                    <div id="image_pf_container">
-                                        @foreach ($images as $image)
-                                            <img src="posts/{{ $image }}" alt="">
-                                            <?php break; ?>
-                                        @endforeach
-                                    </div>
-                                @endif
-
-                                <h1 id="blog_title" style="word-wrap: break-word">{{ substr($post_data->title, 0, 70) }}</h1>
-
-                                <p id="blog_desc"  style="word-wrap: break-word">{{ substr($post_data->description, 0, 120) }}
-                                    <a href="{{url("/blog/detail/$post_data->id")}}">see more</a>
-                                </p>
-                                {{-- blog main section end --}}
                             </div>
-                        </div>
+
+                        @else
+
+                            <div class="bg-secondary p-3 text-light my-3">
+
+                                {{-- <span class="d-none d-md-inline">You have created a post.</span> --}}
+                                This post has been removed!!!
+
+                                <div class="float-end">
+                                    <a href="{{ url("posts/delete/$post_data->id") }}" class="btn btn-light">Delete</a>
+                                </div>
+
+                            </div>
+
+                        @endif
+
                     @endif
                 @endforeach
 

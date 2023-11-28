@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Hide;
 use App\Models\User;
 use App\Models\Post;
@@ -281,8 +282,10 @@ class UserController extends Controller
     public function blogDetail($id)
     {
         $post_detail = Post::find($id);
+        $comments_data = Comment::where("post_id",$id)->get();
         return view("users.parts.blogDetail", [
-            "post_detail" => $post_detail
+            "post_detail" => $post_detail,
+            "comments_data" => $comments_data
         ]);
     }
 
@@ -330,6 +333,22 @@ class UserController extends Controller
         $post->report = "report";
         $post->save();
 
+        return back();
+    }
+
+    //comments section
+    public function comments($id){
+        $validator = validator(request()->all(),[
+            "comments" => "required"
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+        $comments = new Comment();
+        $comments->user_id = auth()->user()->id;
+        $comments->post_id = $id;
+        $comments->content = request()->comments;
+        $comments->save();
         return back();
     }
 }

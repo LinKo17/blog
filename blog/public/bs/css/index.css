@@ -414,4 +414,37 @@ body{
     top:75px;
     left:110px;
 }
+
+#comments_pf_img{
+    width:50px;
+    height: 50px;
+    border-radius: 100px;
+}
+.pf_image_comment{
+    /* border:1px solid red; */
+}
+.pf_other{
+    border:1px solid gray;
+    border-radius: 10px;
+    padding:0px 10px 5px;
+    margin-left: 7px;
+}
+.main_comment{
+    /* border:1px solid purple; */
+    display: flex;
+
+}
+.pf_action .time{
+    font-size:15px;
+}
+.comment_reply_form{
+    margin-left:55px;
+    display: none;
+}
+.reply{
+    font-size:30px;
+    color: blue;
+    cursor: pointer;
+    font-size:20px;
+}
 /* detail section */

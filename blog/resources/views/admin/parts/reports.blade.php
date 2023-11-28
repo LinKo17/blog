@@ -51,7 +51,7 @@
                                     <a href="#" class="dropdown-item text-center">Email</a>
 
                                     <a href="{{ url("/reports/delete/$post_data->id") }}"
-                                        class="dropdown-item text-center"><span class="text-danger">Delete</span></a>
+                                        class="dropdown-item text-center"><span class="text-danger">Don't show</span></a>
 
                                     <a href="{{ url("/reports/cancel/$post_data->id") }}"
                                         class="dropdown-item text-center">Back</a>
