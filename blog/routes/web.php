@@ -77,6 +77,8 @@ Route::post("/report/{id}",[UserController::class,"reports"]);
 
 //comment section
 Route::post("/blog/detail/{id}",[UserController::class,"comments"]);
+Route::post("/replycomment/{id}",[UserController::class,"replyComments"]);
+Route::get("/comments/Detail/{id}",[UserController::class,"commentsDetail"]);
 
 // ---- admin
 

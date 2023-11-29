@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Advertisement;
 use App\Models\AdminSetting;
+use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Reply;
 use App\Models\RReason;
 use App\Models\User;
 
@@ -47,6 +49,8 @@ class RoleController extends Controller
         $posts = Post::all();
         $categories  = Category::all();
         $advertisements = Advertisement::all();
+        $comments       = Comment::all();
+        $replies        = Reply::all();
 
         // Get the current date
         $currentDate = Carbon::now()->toDateString();
@@ -58,7 +62,9 @@ class RoleController extends Controller
         $dailyPosts = Post::whereDate('created_at', $currentDate)->get();
 
         // Fetch daily data for comments (adjust this based on your comment model)
-        // $dailyComments = Comment::whereDate('created_at', $currentDate)->get();
+        $dailyComments = Comment::whereDate('created_at', $currentDate)->get();
+        $dailyReplies = Reply::whereDate('created_at', $currentDate)->get();
+
         return view("admin.dashboard", [
             "users" => $users,
             "posts" => $posts,
@@ -67,7 +73,10 @@ class RoleController extends Controller
 
             "dailyUsers" => $dailyUsers,
             "dailyPosts" => $dailyPosts,
-            // "dailyComments" => $dailyComments,
+            "dailyComments" => $dailyComments,
+            "dailyReplies" => $dailyReplies,
+            "comments" => $comments,
+            "replies" => $replies
 
         ]);
     }

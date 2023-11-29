@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('replies', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id");
             $table->integer("post_id");
+            $table->integer("user_id");
+            $table->integer("comment_id")->default(0);
             $table->text("content");
-            // $table->integer("replied_comment_id")->default(0);
+            $table->string("another_reply")->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('replies');
     }
 };

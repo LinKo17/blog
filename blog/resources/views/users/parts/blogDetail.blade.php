@@ -82,10 +82,10 @@
         {{ $post_detail->description }}
     </div>
 
-
+{{-- ----------------------------- comments section ----------------------------- --}}
 
     <div class="my-2 px-4 pt-2">
-        <span class="fs-3">Comments ({{ count($comments_data) }})</span>
+        <span class="fs-3">Comments ({{ count($comments_data) + count($replies)}})</span>
     </div>
 
     <div class="px-4">
@@ -105,42 +105,32 @@
                 </div>
 
                 <div class="pf_other">
-                    <div class="pf_name">{{ $comments->user->name }}</div>
+                    <div class="pf_name" style="word-break: break-all">{{ $comments->user->name }}</div>
                     <div class="pf_comment">{{ $comments->content }}</div>
                     <div class="pf_action">
                         <span class="text-muted time">{{ $comments->created_at->diffForHumans() }}</span>
                         <span class="reply">reply</span>
+
+                        <a href="{{url("comments/Detail/$comments->id")}}" class="badge bg-danger" style="text-decoration: none; color:white;"></a>
+
+                        <a href="{{url("/comments/Detail/$comments->id")}}" class="bg-dark badge" style="color:white; text-decoration:none;">{{count($comments->replies)}}</a>
+
                     </div>
 
                 </div>
-
             </div>
 
-            <form action="" class="comment_reply_form">
-                <input type="hidden" value="{{ $comments->id }}">
-                <textarea name="" class=""></textarea>
+
+            <form action="{{url("replycomment/$comments->post_id")}}" method="post" class="comment_reply_form">
+                @csrf
+                <input type="hidden" value="{{ $comments->id }}" name="replied_comment_id">{{-- post id --}}
+                <textarea name="replycomments"></textarea>
                 <br>
                 <button class="btn btn-primary">Submit</button>
             </form>
         @endforeach
     </div>
 
-    {{-- <script>
-        let replies = document.querySelectorAll(".reply");
-        let forms = document.querySelectorAll(".comment_reply_form");
-        replies.forEach((reply, index) => {
-            console.log(reply)
-            reply.onclick = function() {
-                forms[index].style.display = "inline-block";
-            };
-        });
-
-        document.querySelector("body").onclick = ()=>{
-            forms.forEach((form)=>{
-                form.style.display ="none"
-            })
-        }
-    </script> --}}
 
     <script>
         let replies = document.querySelectorAll(".reply");

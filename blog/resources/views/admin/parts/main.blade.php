@@ -16,7 +16,7 @@
 
     <div class="col-12 col-md-4 col-lg-3 p-2">
         <div class=" main_box_style text-center">
-            <h1>12</h1>
+            <h1>{{count($comments) + count($replies)}}</h1>
             <p class="text-muted">Total Comments</p>
         </div>
     </div>
@@ -69,7 +69,7 @@
 
     <div class="col-md-4 col-12 p-2">
         <div class=" main_box_style text-center">
-            <h1>12</h1>
+            <h1>{{count($dailyComments) + count($dailyReplies)}}</h1>
             <p class="text-muted">Total Daily Comments</p>
         </div>
     </div>

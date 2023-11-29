@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\Hide;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Reply;
 use App\Models\Report;
 use PhpParser\Node\Expr\AssignOp\Pow;
 
@@ -282,10 +283,12 @@ class UserController extends Controller
     public function blogDetail($id)
     {
         $post_detail = Post::find($id);
+        $replies = Reply::where("post_id",$id)->get();
         $comments_data = Comment::where("post_id",$id)->get();
         return view("users.parts.blogDetail", [
             "post_detail" => $post_detail,
-            "comments_data" => $comments_data
+            "comments_data" => $comments_data,
+            "replies" => $replies
         ]);
     }
 
@@ -351,4 +354,32 @@ class UserController extends Controller
         $comments->save();
         return back();
     }
+
+    public function replyComments($id){
+        $validator = validator(request()->all(),[
+            "replycomments" => "required",
+            "replied_comment_id" => "required",
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+        $comment = new Reply();
+        $comment->user_id  = auth()->user()->id;
+        $comment->post_id  = $id;
+        $comment->content = request()->replycomments;
+        $comment->comment_id = request()->replied_comment_id;
+        if(request()->replied_again_comment_id){
+            $comment->another_reply = request()->replied_again_comment_id;
+        }
+        $comment->save();
+        return back();
+    }
+
+    public function commentsDetail($id){
+        $comments = Comment::find($id);
+        return view("users.parts.commetsDetail",[
+            "comments" => $comments
+        ]);
+    }
+
 }
