@@ -164,13 +164,14 @@
                                                 id="blog_profile">
 
                                             {{-- ------blog name ------ --}}
-                                            <h1 id="blog_name" class="blog_name_max">
+                                            <?php $user_id = $post_data->user->id ?>
+                                            <a href="{{url("/profile/$user_id")}}" id="blog_name" class="blog_name_max">
                                                 @if (strlen($post_data->user->name) > 39)
                                                     {{ substr($post_data->user->name, 0, 37) }}...
                                                 @else
                                                     {{ substr($post_data->user->name, 0, 40) }}
                                                 @endif
-                                            </h1>
+                                            </a>
 
                                             <h1 id="blog_name" class="blog_name_middle">
                                                 @if (strlen($post_data->user->name) > 29)

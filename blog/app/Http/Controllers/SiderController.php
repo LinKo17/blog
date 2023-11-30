@@ -23,8 +23,10 @@ class SiderController extends Controller
 
     public function userside(){
         $usersData = User::latest()->paginate(10);
+        $postData  = Post::all();
         return view("admin.siders.user",[
-            "usersData" => $usersData
+            "usersData" => $usersData,
+            "postData" => $postData
         ]);
     }
 

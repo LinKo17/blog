@@ -50,9 +50,10 @@
 
         </div>
 
-        <h1 class="mt-2 fs-3">
+        <?php $user_id = $post_detail->user->id ?>
+        <a href="{{url("/profile/$user_id")}}" class="mt-2 fs-3" style="word-break: break-all;" id="nav_user_search_name">
             {{ $post_detail->user->name }}
-        </h1>
+        </a>
 
 
     </div>
@@ -82,10 +83,10 @@
         {{ $post_detail->description }}
     </div>
 
-{{-- ----------------------------- comments section ----------------------------- --}}
+    {{-- ----------------------------- comments section ----------------------------- --}}
 
     <div class="my-2 px-4 pt-2">
-        <span class="fs-3">Comments ({{ count($comments_data) + count($replies)}})</span>
+        <span class="fs-3">Comments ({{ count($comments_data) + count($replies) }})</span>
     </div>
 
     <div class="px-4">
@@ -105,23 +106,37 @@
                 </div>
 
                 <div class="pf_other">
-                    <div class="pf_name" style="word-break: break-all">{{ $comments->user->name }}</div>
+                    <?php $user_id = $comments->user->id ?>
+                    <a href="{{url("/profile/$user_id")}}" class="pf_name" style="word-break: break-all" style="word-break: break-all" id="nav_user_search_name">
+                        {{ $comments->user->name }}
+                    </a>
+
                     <div class="pf_comment">{{ $comments->content }}</div>
                     <div class="pf_action">
                         <span class="text-muted time">{{ $comments->created_at->diffForHumans() }}</span>
                         <span class="reply">reply</span>
 
-                        <a href="{{url("comments/Detail/$comments->id")}}" class="badge bg-danger" style="text-decoration: none; color:white;"></a>
+                        <a href="{{ url("comments/Detail/$comments->id") }}" class="badge bg-danger"
+                            style="text-decoration: none; color:white;"></a>
 
-                        <a href="{{url("/comments/Detail/$comments->id")}}" class="bg-dark badge" style="color:white; text-decoration:none;">{{count($comments->replies)}}</a>
+                        <a href="{{ url("/comments/Detail/$comments->id") }}" class="bg-dark badge"
+                            style="color:white; text-decoration:none;">{{ count($comments->replies) }}</a>
 
                     </div>
 
                 </div>
+
+                <div class="pf_trash mt-1 ms-1">
+                    <a href="" class="logo_category" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal{{ $comments->id }}">
+                        <i class="text-danger fa-solid fa-trash float-end"></i>
+                    </a>
+                </div>
+
             </div>
 
 
-            <form action="{{url("replycomment/$comments->post_id")}}" method="post" class="comment_reply_form">
+            <form action="{{ url("replycomment/$comments->post_id") }}" method="post" class="comment_reply_form">
                 @csrf
                 <input type="hidden" value="{{ $comments->id }}" name="replied_comment_id">{{-- post id --}}
                 <textarea name="replycomments"></textarea>
@@ -131,6 +146,30 @@
         @endforeach
     </div>
 
+    {{-- model section --}}
+    @foreach ($comments_data as $comments)
+        <div class="modal fade" id="exampleModal{{ $comments->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Comment</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you Sure to delete this comment?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="{{ url("/comments/delete/$comments->id") }}" type="button"
+                            class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    {{-- model section end --}}
 
     <script>
         let replies = document.querySelectorAll(".reply");

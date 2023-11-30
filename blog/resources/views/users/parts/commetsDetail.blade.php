@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{{ $comments->user->name }} 's comment</title>
 
     <base href="/public">
     {{-- bs css link --}}
@@ -31,7 +31,10 @@
             </div>
 
             <div class="pf_other">
-                <div class="pf_name" style="word-break: break-all">{{ $comments->user->name }}</div>
+
+                <?php $user_id = $comments->user->id ?>
+                <a href="{{url("/profile/$user_id")}}" class="pf_name" style="word-break: break-all"  id="nav_user_search_name">{{ $comments->user->name }}</a>
+
                 <div class="pf_comment">{{ $comments->content }}</div>
                 <div class="pf_action">
                     <span class="text-muted time">{{ $comments->created_at->diffForHumans() }}</span>
@@ -68,9 +71,14 @@
                 </div>
 
                 <div class="pf_other">
-                    <div class="pf_name" style="word-break: break-all">{{ $replies->user->name }}
-                    <span class="badge bg-dark">{{$replies->another_reply ?$replies->another_reply : $replies->comment->user->name}}</span>
-                </div>
+                    <div class="pf_name" style="word-break: break-all">
+                        <?php $user_id = $replies->user->id ?>
+                        <a href="{{url("/profile/$user_id")}}" id="nav_user_search_name">
+                            {{ $replies->user->name }}
+                        </a>
+                        <span
+                            class="badge bg-dark">{{ $replies->another_reply ? $replies->another_reply : $replies->comment->user->name }}</span>
+                    </div>
                     <div class="pf_comment">{{ $replies->content }}</div>
                     <div class="pf_action">
                         <span class="text-muted time">{{ $replies->created_at->diffForHumans() }}</span>
@@ -82,12 +90,20 @@
                     </div>
 
                 </div>
+
+                <div class="pf_trash ms-1">
+                    <a href="" class="logo_category" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal{{ $replies->id }}">
+                        <i class="text-danger fa-solid fa-trash float-end"></i>
+                    </a>
+                </div>
             </div>
 
             <form action="{{ url("replycomment/$replies->post_id") }}" method="post" class="comment_reply_form">
                 @csrf
                 <input type="hidden" value="{{ $comments->id }}" name="replied_comment_id">{{-- replies id --}}
-                <input type="hidden" value="{{ $replies->user->name }}" name="replied_again_comment_id">{{-- user name  --}}
+                <input type="hidden" value="{{ $replies->user->name }}"
+                    name="replied_again_comment_id">{{-- user name  --}}
                 <textarea name="replycomments"></textarea>
                 <br>
                 <button class="btn btn-primary">Submit</button>
@@ -95,6 +111,31 @@
         @endforeach
     </div>
     {{-- replies comments section end --}}
+
+    {{-- model section --}}
+    @foreach ($comments->replies as $replies)
+        <div class="modal fade" id="exampleModal{{ $replies->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Comment</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you Sure to delete this comment?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="{{ url("/reply/delete/$replies->id") }}" type="button"
+                            class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    {{-- model section end --}}
 
     <script>
         let replies = document.querySelectorAll(".reply");

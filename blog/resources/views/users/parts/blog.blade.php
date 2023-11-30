@@ -10,7 +10,7 @@
                 @php
                     $hidePost = false;
                     foreach ($post_data->hide as $hide_data) {
-                        if ($hide_data->user_id == (auth()->user()->id ?? "") && $hide_data->post_id == $post_data->id && $hide_data->action == "hide") {
+                        if ($hide_data->user_id == (auth()->user()->id ?? '') && $hide_data->post_id == $post_data->id && $hide_data->action == 'hide') {
                             $hidePost = true;
                             break;
                         }
@@ -18,7 +18,7 @@
                 @endphp
 
 
-                @if (!$hidePost && $post_data->report != "delete")
+                @if (!$hidePost && $post_data->report != 'delete')
                     <div class=" col-lg-4 col-md-6  col-12 p-2"> {{-- to seperate outer line --}}
 
                         <div class="border p-2" id="blog_style"> {{-- for main border --}}
@@ -31,13 +31,14 @@
                                     <img src="profile_pics/{{ $post_data->user->profile_pic }}" alt=""
                                         id="blog_profile">
 
-                                    <h1 id="blog_name">
+                                    <?php $user_id = $post_data->user->id; ?>
+                                    <a href="{{ url("/profile/$user_id") }}" id="blog_name">
                                         @if (strlen($post_data->user->name) > 20)
                                             {{ substr($post_data->user->name, 0, 20) }}...
                                         @else
                                             {{ substr($post_data->user->name, 0, 15) }}
                                         @endif
-                                    </h1>
+                                    </a>
 
                                     <p class="text-muted" id="blog_time">
                                         {{ $post_data->created_at->diffForHumans() }}
@@ -115,7 +116,8 @@
                                 aria-label="Close"></button>
                         </div>
 
-                        <form name="editForm" id="myEditForm" method="post" action="{{url("/report/$post_data->id")}}">
+                        <form name="editForm" id="myEditForm" method="post"
+                            action="{{ url("/report/$post_data->id") }}">
                             @csrf
                             <div class="modal-body">
 

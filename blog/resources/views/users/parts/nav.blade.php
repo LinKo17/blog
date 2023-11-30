@@ -40,7 +40,12 @@
                 </li>
 
                 <li class="nav-item nav-style">
-                    <a class="nav-link a-style" href=""><span class="span-style">User Search</span></a>
+                    <a class="nav-link a-style" href=""  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <span class="span-style">
+                            <i class="fa-solid fa-magnifying-glass d-none d-lg-inline"></i>
+                            <span class="d-inline d-lg-none">search</span>
+                        </span>
+                    </a>
                 </li>
 
                 <li class="nav-item nav-style">
@@ -90,10 +95,35 @@
 
             </ul>
 
-            {{-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> --}}
         </div>
     </div>
 </nav>
+
+{{-- model section --}}
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">User Search</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" action="{{url("user/search")}}">
+                    @csrf
+                    <div class="input-group">
+                        <input type="text" class="form-control" style="border:1px solid black;" name="search" placeholder="Enter user name">
+                        <button class="btn btn-outline-success">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{{-- model section end --}}

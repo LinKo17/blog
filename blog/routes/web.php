@@ -35,9 +35,11 @@ Route::get("/",[RoleController::class,"index"]);
 //users navbar route
 Route::get("/categoriesnav/{id}",[NavbarController::class,"categoriesnav"]);
 Route::get("/aboutnav",[NavbarController::class,"aboutnav"]);
+Route::post("/user/search",[NavbarController::class,"usernav"]);
+Route::get("/profile/{id}",[NavbarController::class,"profile"]);//another user check profile
 
 //profile
-Route::get("/profile",[UserController::class,"profile"]);
+Route::get("/profile",[UserController::class,"profile"]);// user original profile
 Route::get("/setting",[UserController::class,"setting"]);
 Route::get("/createPost",[UserController::class,"createPost"]);
 Route::post("/createPost",[UserController::class,"addPost"]);
@@ -122,13 +124,15 @@ Route::get("/userRole/{id}",[AdminController::class,"userRole"]);//
 Route::get("/adminRole/{id}",[AdminController::class,"adminRole"]);//
 Route::get("/user/ban/{id}",[AdminController::class,"userBan"]);
 Route::get("/user/unban/{id}",[AdminController::class,"userunBan"]);
+Route::post("/userside",[AdminController::class,"userSearch"]);
 
 //report management system
 Route::get("reports/cancel/{id}",[AdminController::class,"cancel"]);
 Route::get("reports/delete/{id}",[AdminController::class,"reportDelete"]);
 Route::get("reports/show/{id}",[AdminController::class,"reportShow"]);
 
-
-
-
+//comment check section
+Route::post("/commentside",[AdminController::class,"checkComment"]);
+Route::get("/comments/delete/{id}",[AdminController::class,"deleteComment"]);
+Route::get("/reply/delete/{id}",[AdminController::class,"deleteReply"]);
 

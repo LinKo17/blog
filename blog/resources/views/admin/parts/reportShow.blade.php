@@ -28,17 +28,16 @@
 
                 <img src="profile_pics/{{ $postReports->user->profile_pic }}" id="report_detail_image_style">
 
+                <?php $user_id = $reports->user->id; ?>
+                <a href="{{ url("/profile/$user_id") }}" id="report_detail_name_style">
 
-                <h1 id="report_detail_name_style">
-                    {{-- {{ $postReports->user->name }} --}}
-
-                    @if (strlen($postReports->user->name) > 39)
-                        {{ substr($postReports->user->name, 0, 37) }}...
+                    @if (strlen($reports->user->name) > 39)
+                        {{ substr($reports->user->name, 0, 37) }}...
                     @else
-                        {{ substr($postReports->user->name, 0, 40) }}
+                        {{ substr($reports->user->name, 0, 40) }}
                     @endif
 
-                </h1>
+                </a>
 
 
                 <p class="text-muted" id="report_detail_time_style">{{ $reports->created_at->diffForHumans() }}</p>

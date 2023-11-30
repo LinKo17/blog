@@ -25,4 +25,8 @@ class Post extends Model
         return $this->hasMany("App\Models\Hide");
     }
 
+    public function reports(){
+        return $this->hasMany("App\Models\Report");
+    }
+
 }

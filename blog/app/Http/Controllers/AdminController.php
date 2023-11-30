@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;
 use App\Models\Advertisement;
+use App\Models\Comment;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Reply;
 use App\Models\Report;
 
 class AdminController extends Controller
@@ -122,6 +124,22 @@ class AdminController extends Controller
         return back();
     }
 
+    public function userSearch(){
+        $validator = validator(request()->all(),[
+            "search" => "required"
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $request_data = request()->search;
+        $user = User::where("name","like","%$request_data%")->orWhere("email","like","%$request_data%")->latest()->paginate(10);
+        return view("admin.siders.user",[
+            "usersData" => $user
+        ]);
+    }
+
     //approve section
     public function approve($id){
         $approve = Post::find($id);
@@ -184,5 +202,36 @@ class AdminController extends Controller
         return view("admin.parts.reportShow",[
             "postReports" => $post
         ]);
+    }
+
+    //comments check syste
+    public function checkComment(){
+        $validator = validator(request()->all(),[
+            "search" => "required"
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $request_data = request()->search;
+        $comments_data = Comment::where("content","like","%$request_data%")->get();
+        $replies_data  = Reply::where("content","like","%$request_data%")->get();
+        return view("admin.siders.comments",compact("comments_data","replies_data"));
+    }
+
+    public function deleteComment($id){
+        $comments_data = Comment::find($id);
+        $comments_data->delete();
+
+        $replies_data = Reply::where("comment_id",$id)->get();
+        foreach($replies_data as $data){
+            $data->delete();
+        }
+        return back();
+    }
+    public function deleteReply($id){
+        $replies_data = Reply::find($id);
+        $replies_data->delete();
+        return back();
     }
 }

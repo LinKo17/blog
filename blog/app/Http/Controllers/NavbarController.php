@@ -10,6 +10,8 @@ use App\Models\Advertisement;
 use App\Models\AdminSetting;
 use App\Models\Post;
 use App\Models\RReason;
+use App\Models\User;
+
 class NavbarController extends Controller
 {
     public function categoriesnav($id){
@@ -33,6 +35,32 @@ class NavbarController extends Controller
         return view("users.navbars.aboutnav",[
             "category_datas" => $category_data,
             "adminSetting_datas" => $adminSetting_data
+        ]);
+    }
+
+    public function usernav(){
+        $validator = validator(request()->all(),[
+            "search" => "required"
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+        $request_data = request()->search;
+        $users = User::where("name","like","%$request_data%")->latest()->paginate(10);
+        return view("users.navbars.usernav",[
+            "users" => $users
+        ]);
+    }
+
+    public function profile($id){
+        $user_data = User::find($id);
+        $category_data = Category::all();
+        $post_data = Post::where("user_id", $id)->get()->reverse();
+        return view("users.parts.profile", [
+            "category_datas" => $category_data,
+            "user_data" => $user_data,
+            "posts_data" => $post_data
         ]);
     }
 }

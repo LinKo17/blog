@@ -24,13 +24,14 @@
 
                                 <img src="profile_pics/{{ $approve->user->profile_pic }}" id="blog_profile">
 
-                                <h1 id="blog_name">
+                                <?php $user_id = $approve->user->id ?>
+                                <a href="{{url("/profile/$user_id")}}" id="blog_name" id="nav_user_search_name">
                                     @if (strlen($approve->user->name) > 15)
                                         {{ substr($approve->user->name, 0, 15) }}...
                                     @else
                                         {{ substr($approve->user->name, 0, 15) }}
                                     @endif
-                                </h1>
+                                </a>
 
                                 <p class="text-muted" id="blog_time">{{ $approve->created_at->diffForHumans() }}</p>
 

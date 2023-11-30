@@ -131,8 +131,14 @@ body{
 #blog_name{
     font-size:21px;
     position: absolute;
-    top:14px;
+    top:10px;
     left:63px;
+    text-decoration:none;
+    color:black;
+}
+#blog_name:hover{
+    text-decoration: underline;
+    opacity: 0.8;
 }
 #blog_time{
     font-size:14px;
@@ -447,4 +453,31 @@ body{
     cursor: pointer;
     font-size:20px;
 }
-/* detail section */
+.pf_trash{
+    display: flex;
+    align-items: center;
+}
+/* detail section  end*/
+/* user navbar section */
+#search_user_img_box img{
+    width:70px;
+    height: 70px;
+    border-radius: 100px;
+}
+#search_user_name_box{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    word-break: break-all;
+    font-size:21px;
+}
+#nav_user_search_name {
+    text-decoration: none;
+    color: black;
+}
+
+#nav_user_search_name:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+/* user navbar section end */

@@ -1,3 +1,11 @@
+<div class="container  mt-3 comments_contaiener">
+    <form method="POST" class="input-group">
+        @csrf
+        <input type="text" class="form-control" name="search">
+        <button class="btn btn-outline-primary">Search</button>
+    </form>
+</div>
+
 <table class="table table-striped table-bordered table-hover mt-3 table_userm_style">
 
     <tr>
@@ -62,12 +70,15 @@
 
                     <div class="row my-1">
                         <div class="col-3">Name</div>
-                        <div class="col-9">: {{ $userData->name }}</div>
+                        <div class="col-9" style="word-break: break-all">: {{ $userData->name }}</div>
                     </div>
 
                     <div class="row my-1">
                         <div class="col-3">Email</div>
-                        <div class="col-9">: {{ $userData->email }}</div>
+                        <div class="col-9">:
+                            <a href="{{ url("/profile/$userData->id") }}" style="word-break: break-all"
+                                id="nav_user_search_name">{{ $userData->email }}</a>
+                        </div>
                     </div>
 
                     <div class="row my-1">
@@ -77,17 +88,17 @@
 
                     <div class="row my-1">
                         <div class="col-3">Bio</div>
-                        <div class="col-9">: {{ $userData->bio }}</div>
+                        <div class="col-9" style="word-break: break-all">: {{ $userData->bio }}</div>
                     </div>
 
                     <div class="row my-1">
                         <div class="col-3">Education</div>
-                        <div class="col-9">: {{ $userData->education }}</div>
+                        <div class="col-9" style="word-break: break-all">: {{ $userData->education }}</div>
                     </div>
 
                     <div class="row my-1">
                         <div class="col-3">Post</div>
-                        <div class="col-9">: {{ $userData->post_id }}</div>
+                         <div class="col-9">:  </div>
                     </div>
 
                     <div class="row my-1">

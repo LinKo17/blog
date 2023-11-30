@@ -23,13 +23,14 @@
                                 <img src="profile_pics/{{ $post_data->user->profile_pic }}" alt=""
                                     id="blog_profile">
 
-                                <h1 id="blog_name">
+                                <?php $user_id = $post_data->user->id; ?>
+                                <a href="{{ url("/profile/$user_id") }}" id="blog_name">
                                     @if (strlen($post_data->user->name) > 15)
                                         {{ substr($post_data->user->name, 0, 15) }}...
                                     @else
                                         {{ substr($post_data->user->name, 0, 15) }}
                                     @endif
-                                </h1>
+                                </a>
 
                                 <p class="text-muted" id="blog_time">{{ $post_data->created_at->diffForHumans() }}</p>
                             </div>
@@ -44,7 +45,8 @@
                                         class="dropdown-item text-center">
                                         Reports :
                                         <span class="badge bg-danger">
-                                            {{ count($post_data->reports) ?? '' }}
+                                            {{count($post_data->reports)}}
+
                                         </span>
                                     </a>
 
@@ -100,6 +102,7 @@
                 </div>
             @endforeach
         </div>
+
         {{-- blog section end --}}
 
 
