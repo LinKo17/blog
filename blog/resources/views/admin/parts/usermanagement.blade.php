@@ -14,7 +14,7 @@
         <th>Email</th>
         <th>Action</th>
     </tr>
-
+    {{count($postData)}}
     @foreach ($usersData as $userData)
         <tr>
             <td class="user_id_style">{{ $userData->id }}</td>
@@ -94,21 +94,6 @@
                     <div class="row my-1">
                         <div class="col-3">Education</div>
                         <div class="col-9" style="word-break: break-all">: {{ $userData->education }}</div>
-                    </div>
-
-                    <div class="row my-1">
-                        <div class="col-3">Post</div>
-                         <div class="col-9">:  </div>
-                    </div>
-
-                    <div class="row my-1">
-                        <div class="col-3">Comments</div>
-                        <div class="col-9">:</div>
-                    </div>
-
-                    <div class="row my-1">
-                        <div class="col-3">Reports </div>
-                        <div class="col-9">: {{ $userData->report_id }}</div>
                     </div>
 
                     {{-- button section --}}

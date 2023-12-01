@@ -50,8 +50,9 @@
 
         </div>
 
-        <?php $user_id = $post_detail->user->id ?>
-        <a href="{{url("/profile/$user_id")}}" class="mt-2 fs-3" style="word-break: break-all;" id="nav_user_search_name">
+        <?php $user_id = $post_detail->user->id; ?>
+        <a href="{{ url("/profile/$user_id") }}" class="mt-2 fs-3" style="word-break: break-all;"
+            id="nav_user_search_name">
             {{ $post_detail->user->name }}
         </a>
 
@@ -106,8 +107,9 @@
                 </div>
 
                 <div class="pf_other">
-                    <?php $user_id = $comments->user->id ?>
-                    <a href="{{url("/profile/$user_id")}}" class="pf_name" style="word-break: break-all" style="word-break: break-all" id="nav_user_search_name">
+                    <?php $user_id = $comments->user->id; ?>
+                    <a href="{{ url("/profile/$user_id") }}" class="pf_name" style="word-break: break-all"
+                        style="word-break: break-all" id="nav_user_search_name">
                         {{ $comments->user->name }}
                     </a>
 
@@ -126,12 +128,16 @@
 
                 </div>
 
-                <div class="pf_trash mt-1 ms-1">
-                    <a href="" class="logo_category" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal{{ $comments->id }}">
-                        <i class="text-danger fa-solid fa-trash float-end"></i>
-                    </a>
-                </div>
+                @auth
+                    @can('check-id', $comments->user_id)
+                        <div class="pf_trash mt-1 ms-1">
+                            <a href="" class="logo_category" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal{{ $comments->id }}">
+                                <i class="text-danger fa-solid fa-trash float-end"></i>
+                            </a>
+                        </div>
+                    @endcan
+                @endauth
 
             </div>
 
@@ -195,6 +201,17 @@
             forms.forEach((form, index) => {
                 form.style.display = "none";
             });
+        };
+
+        // ---------------------------------------------
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
         };
     </script>
 

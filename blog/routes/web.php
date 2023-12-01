@@ -88,8 +88,6 @@ Route::get("/comments/Detail/{id}",[UserController::class,"commentsDetail"]);
 Route::get("/dashboard",[RoleController::class,"dashboard"]);
 Route::get("/categoryside",[SiderController::class,"categoryside"]);
 Route::get("/userside",[SiderController::class,"userside"]);
-Route::get("/createpostside",[SiderController::class,"createside"]);
-Route::get("/showpostside",[SiderController::class,"showside"]);
 Route::get("/commentside",[SiderController::class,"commentside"]);
 Route::get("/approveside",[SiderController::class,"approveside"]);
 Route::get("/reportside",[SiderController::class,"reportside"]);

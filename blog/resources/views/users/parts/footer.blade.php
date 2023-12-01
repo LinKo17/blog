@@ -31,9 +31,6 @@
                     <a href='{{ url('/aboutnav') }}'>About</a>
                 </div>
 
-                <div class="footer_link_style">
-                    <a href="">User search</a>
-                </div>
             </div>
 
             <div class="col-12 col-md-6 col-lg-3 text-center mt-1">

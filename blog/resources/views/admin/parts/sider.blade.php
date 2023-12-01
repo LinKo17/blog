@@ -30,22 +30,6 @@
         </li>
 
 
-        <li class="list-group-item list_group_item_style text-center text-lg-start dropdown" id="posts">
-            <a href="" class="nav-link nav-menu" data-bs-toggle="dropdown">
-                <span class="logo">
-                    <i class="fa-solid fa-p"></i>
-                </span>
-                <span class="logo_title d-none d-lg-inline">Posts</span>
-            </a>
-            <ul class="dropdown-menu text-center">
-                <li class="list-group-itme">
-                    <a href='{{url("/createpostside")}}' class="nav-link">posts Create</a>
-                    <a href='{{url("/showpostside")}}' class="nav-link">Posts Show</a>
-                </li>
-            </ul>
-        </li>
-
-
         <li class="list-group-item list_group_item_style text-center text-lg-start" id="comments">
             <a href="/commentside" class="nav-link">
                 <span class="logo">

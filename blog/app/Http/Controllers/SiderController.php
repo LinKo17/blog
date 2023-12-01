@@ -14,6 +14,10 @@ use App\Models\RReason;
 
 class SiderController extends Controller
 {
+    public function __construct(){
+        $this->middleware("auth");
+    }
+
     public function categoryside(){
         $data = Category::all();
         return view("admin.siders.category",[
@@ -30,13 +34,6 @@ class SiderController extends Controller
         ]);
     }
 
-    public function createside(){
-        return view("admin.siders.create");
-    }
-
-    public function showside(){
-        return view("admin.siders.show");
-    }
 
     public function commentside(){
         return view("admin.siders.comments");

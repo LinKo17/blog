@@ -40,7 +40,7 @@
                 </li>
 
                 <li class="nav-item nav-style">
-                    <a class="nav-link a-style" href=""  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <a class="nav-link a-style" href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <span class="span-style">
                             <i class="fa-solid fa-magnifying-glass d-none d-lg-inline"></i>
                             <span class="d-inline d-lg-none">search</span>
@@ -48,9 +48,13 @@
                     </a>
                 </li>
 
-                <li class="nav-item nav-style">
-                    <a class="nav-link text-light btn btn-danger" href='{{ url('/dashboard') }}'>Dashboard</a>
-                </li>
+                @auth
+                    @can('dashborad-action', 'admin')
+                        <li class="nav-item nav-style">
+                            <a class="nav-link text-light btn btn-danger" href='{{ url('/dashboard') }}'>Dashboard</a>
+                        </li>
+                    @endcan
+                @endauth
 
                 {{-- login and register system --}}
                 <li class="nav-item mt-1">
@@ -111,10 +115,11 @@
             </div>
             <div class="modal-body">
 
-                <form method="post" action="{{url("user/search")}}">
+                <form method="post" action="{{ url('user/search') }}">
                     @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control" style="border:1px solid black;" name="search" placeholder="Enter user name">
+                        <input type="text" class="form-control" style="border:1px solid black;" name="search"
+                            placeholder="Enter user name">
                         <button class="btn btn-outline-success">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>

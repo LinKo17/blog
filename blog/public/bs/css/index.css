@@ -170,6 +170,14 @@ body{
     width:100%;
 }
 
+.container_index_blog_style{
+    width:500px;
+}
+@media(max-width:510px){
+    .container_index_blog_style{
+        width:auto;
+    }
+}
 /* -------- */
 #image_pf_container{
     width:100%;

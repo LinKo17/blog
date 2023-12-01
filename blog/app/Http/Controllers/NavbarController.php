@@ -14,6 +14,11 @@ use App\Models\User;
 
 class NavbarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth")->except("categoriesnav","aboutnav","usernav","profile");
+    }
+
     public function categoriesnav($id){
         $category_data = Category::all();
         $advertisement_data = Advertisement::all();

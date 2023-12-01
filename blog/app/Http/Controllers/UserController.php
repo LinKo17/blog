@@ -16,6 +16,11 @@ use PhpParser\Node\Expr\AssignOp\Pow;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth")->except("blogDetail","commentsDetail");
+    }
+
     //profile section
     public function profile()
     {

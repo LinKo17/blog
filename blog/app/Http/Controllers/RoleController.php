@@ -14,13 +14,18 @@ use App\Models\Reply;
 use App\Models\RReason;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Gate;
+
 // for daily data
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class RoleController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware("auth")->except("index");
+    }
 
     // user section
     public function index()
@@ -45,39 +50,49 @@ class RoleController extends Controller
     //admin  section
     public function dashboard()
     {
-        $users = User::all();
-        $posts = Post::all();
-        $categories  = Category::all();
-        $advertisements = Advertisement::all();
-        $comments       = Comment::all();
-        $replies        = Reply::all();
+        $action = "admin";
+        if (Gate::allows("dashborad-action", $action)) {
+            $users = User::all();
+            $posts = Post::where("post_action", "approve")->get();
+            $categories  = Category::all();
+            $advertisements = Advertisement::where("adver_image", "")->get();
+            $comments       = Comment::all();
+            $replies        = Reply::all();
+            $ban            = User::where("ban", 1)->get();
 
-        // Get the current date
-        $currentDate = Carbon::now()->toDateString();
+            // Get the current date
+            $currentDate = Carbon::now()->toDateString();
 
-        // Fetch daily data for users
-        $dailyUsers = User::whereDate('created_at', $currentDate)->get();
+            // Fetch daily data for users
+            $dailyUsers = User::whereDate('created_at', $currentDate)->get();
 
-        // Fetch daily data for posts
-        $dailyPosts = Post::whereDate('created_at', $currentDate)->get();
+            // Fetch daily data for posts
+            $dailyPosts = Post::whereDate('created_at', $currentDate)
+                ->where('post_action', 'approve')
+                ->get();
 
-        // Fetch daily data for comments (adjust this based on your comment model)
-        $dailyComments = Comment::whereDate('created_at', $currentDate)->get();
-        $dailyReplies = Reply::whereDate('created_at', $currentDate)->get();
 
-        return view("admin.dashboard", [
-            "users" => $users,
-            "posts" => $posts,
-            "categories" => $categories,
-            "advertisements" => $advertisements,
+            // Fetch daily data for comments (adjust this based on your comment model)
+            $dailyComments = Comment::whereDate('created_at', $currentDate)->get();
+            $dailyReplies = Reply::whereDate('created_at', $currentDate)->get();
 
-            "dailyUsers" => $dailyUsers,
-            "dailyPosts" => $dailyPosts,
-            "dailyComments" => $dailyComments,
-            "dailyReplies" => $dailyReplies,
-            "comments" => $comments,
-            "replies" => $replies
+            return view("admin.dashboard", [
+                "users" => $users,
+                "posts" => $posts,
+                "categories" => $categories,
+                "advertisements" => $advertisements,
 
-        ]);
+                "dailyUsers" => $dailyUsers,
+                "dailyPosts" => $dailyPosts,
+                "dailyComments" => $dailyComments,
+                "dailyReplies" => $dailyReplies,
+                "comments" => $comments,
+                "replies" => $replies,
+                "ban"     => $ban
+
+            ]);
+        } else {
+            return back();
+        }
     }
 }

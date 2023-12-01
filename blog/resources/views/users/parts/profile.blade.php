@@ -46,103 +46,121 @@
 
     {{-- profile body section --}}
     <div class="container">
-        {{-- {{ $user_data }} --}}
         <div class="row">
+
+            {{-- user bio section --}}
             <div class="col-12  col-lg-4 mt-2">
 
                 <div class="border py-2 px-3">
-                    <div class="mb-5">
-                        <a href='{{ url('/setting') }}'>
-                            <i class="fa-solid fa-gear float-end pf_setting text-dark"></i>
-                        </a>
-                    </div>
+                    @auth
+                        @can('check-id', $user_data->id)
+                            <div class="mb-5">
+                                <a href='{{ url('/setting') }}'>
+                                    <i class="fa-solid fa-gear float-end pf_setting text-dark"></i>
+                                </a>
+                            </div>
+                        @endcan
+                    @endauth
 
                     @if ($user_data->bio)
                         <p class="text-center mt-3" style="word-wrap:break-word"> {{ $user_data->bio }}
                         </p>
                     @endif
 
-
-                    @if ($user_data->date_of_birth)
-                        <div class="row ">
-                            <div class="col-5">Birth Date</div>
-                            <div class="col-7" style="word-wrap: break-word">:
-                                {{ $user_data->date_of_birth }}</div>
-                        </div>
-                    @endif
-
-                    @if ($user_data->education)
-                        <div class="row my-1">
-                            <div class="col-5">Education</div>
-                            <div class="col-7" style="word-wrap: break-word">: {{ $user_data->education }}</div>
-
-                        </div>
-                    @endif
-
-                    @if ($user_data->work)
-                        <div class="row my-1">
-                            <div class="col-5">work</div>
-                            <div class="col-7" style="word-wrap: break-word">: {{ $user_data->work }}</div>
-                        </div>
-                    @endif
-
-                    @if ($user_data->live)
-                        <div class="row my-1">
-                            <div class="col-5">live</div>
-                            <div class="col-7" style="word-wrap: break-word">: {{ $user_data->live }}
+                    @auth
+                        @if ($user_data->date_of_birth)
+                            <div class="row ">
+                                <div class="col-5">Birth Date</div>
+                                <div class="col-7" style="word-wrap: break-word">:
+                                    {{ $user_data->date_of_birth }}</div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
-                    @if ($user_data->email_action == 1)
-                        <div class="row my-1">
-                            <div class="col-5">Email</div>
-                            <div class="col-7" style="word-wrap:break-word">
-                                : {{ $user_data->email }}
+                        @if ($user_data->education)
+                            <div class="row my-1">
+                                <div class="col-5">Education</div>
+                                <div class="col-7" style="word-wrap: break-word">: {{ $user_data->education }}</div>
+
                             </div>
-                        </div>
-                    @endif
+                        @endif
+
+                        @if ($user_data->work)
+                            <div class="row my-1">
+                                <div class="col-5">work</div>
+                                <div class="col-7" style="word-wrap: break-word">: {{ $user_data->work }}</div>
+                            </div>
+                        @endif
+
+                        @if ($user_data->live)
+                            <div class="row my-1">
+                                <div class="col-5">live</div>
+                                <div class="col-7" style="word-wrap: break-word">: {{ $user_data->live }}
+                                </div>
+                            </div>
+                        @endif
+
+                        @if ($user_data->email_action == 1)
+                            <div class="row my-1">
+                                <div class="col-5">Email</div>
+                                <div class="col-7" style="word-wrap:break-word">
+                                    : {{ $user_data->email }}
+                                </div>
+                            </div>
+                        @endif
+                    @endauth
+
                 </div>
 
 
 
             </div>
+            {{-- user bio section end --}}
 
+            {{-- user post section --}}
             <div class="col-12 col-lg-8  pf_post_section mt-2">
-                <a href='{{ url('/createPost') }}' class="btn btn-primary">Create Post</a>
+
+                @auth
+                    @can('check-id', $user_data->id)
+                        <a href='{{ url('/createPost') }}' class="btn btn-primary">Create Post</a>
+                    @endcan
+                @endauth
 
                 {{-- post action --}}
-                @foreach ($posts_data as $post_data)
-                    @if ($post_data->post_action == 'waiting')
-                        <div class="bg-success p-3 text-light my-3">
+                @auth
+                    @can('check-id', $user_data->id)
+                        @foreach ($posts_data as $post_data)
+                            @if ($post_data->post_action == 'waiting')
+                                <div class="bg-success p-3 text-light my-3">
 
-                            <span class="d-none d-md-inline">You have created a post.</span>Please wait for approve!!!
+                                    <span class="d-none d-md-inline">You have created a post.</span>Please wait for approve!!!
 
-                            <div class="float-end">
-                                <a href='' class="btn btn-light" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal{{ $post_data->id }}">Delete</a>
-                            </div>
+                                    <div class="float-end">
+                                        <a href='' class="btn btn-light" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal{{ $post_data->id }}">Delete</a>
+                                    </div>
 
-                        </div>
-                    @endif
+                                </div>
+                            @endif
 
-                    @if ($post_data->post_action == 'reject')
-                        <div class="bg-danger p-3 text-light my-3">
+                            @if ($post_data->post_action == 'reject')
+                                <div class="bg-danger p-3 text-light my-3">
 
-                            Your's post do not fix out community guide line!!!
+                                    Your's post do not fix out community guide line!!!
 
-                            <div class="float-end">
-                                <a href="{{ url("posts/delete/$post_data->id") }}" class="btn btn-light">Delete</a>
-                            </div>
-                            <div class="float-end mx-2">
-                                <button class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#detail{{ $post_data->id }}">Detail</button>
-                            </div>
+                                    <div class="float-end">
+                                        <a href="{{ url("posts/delete/$post_data->id") }}" class="btn btn-light">Delete</a>
+                                    </div>
+                                    <div class="float-end mx-2">
+                                        <button class="btn btn-secondary" data-bs-toggle="modal"
+                                            data-bs-target="#detail{{ $post_data->id }}">Detail</button>
+                                    </div>
 
-                        </div>
-                    @endif
-                @endforeach
-                {{-- post action --}}
+                                </div>
+                            @endif
+                        @endforeach
+                    @endcan
+                @endauth
+                {{-- post action end --}}
 
                 {{-- blog section --}}
                 @foreach ($posts_data as $post_data)
@@ -150,7 +168,6 @@
                     @if ($post_data->post_action == 'approve')
 
                         @if ($post_data->report == 'none' || $post_data == 'report')
-
                             <div class="container my-3">
                                 <div class="border p-3" id="blog_style" style="background-color:#ffffff;">
                                     {{-- for main border --}}
@@ -164,8 +181,9 @@
                                                 id="blog_profile">
 
                                             {{-- ------blog name ------ --}}
-                                            <?php $user_id = $post_data->user->id ?>
-                                            <a href="{{url("/profile/$user_id")}}" id="blog_name" class="blog_name_max">
+                                            <?php $user_id = $post_data->user->id; ?>
+                                            <a href="{{ url("/profile/$user_id") }}" id="blog_name"
+                                                class="blog_name_max">
                                                 @if (strlen($post_data->user->name) > 39)
                                                     {{ substr($post_data->user->name, 0, 37) }}...
                                                 @else
@@ -197,43 +215,47 @@
                                                 id="blog_category">{{ $post_data->category->category }}</span>
                                         </div>
 
-                                        <div class="col-2 dropdown">
-                                            <i class="fa-solid fa-ellipsis float-end" data-bs-toggle="dropdown"></i>
-                                            <div class="dropdown-menu dropdown-menu-end">
+                                        @auth
+                                            @can('check-id', $user_data->id)
+                                                <div class="col-2 dropdown">
+                                                    <i class="fa-solid fa-ellipsis float-end" data-bs-toggle="dropdown"></i>
+                                                    <div class="dropdown-menu dropdown-menu-end">
 
-                                                @if ($post_data->comments_action == 'on')
-                                                    <a href='{{ url("/profile/commentOff/$post_data->id") }}'
-                                                        class="dropdown-item text-center">Comments <span
-                                                            class="badge bg-success">On</span></a>
-                                                @else
-                                                    <a href='{{ url("/profile/commentOn/$post_data->id") }}'
-                                                        class="dropdown-item text-center">Comments <span
-                                                            class="badge bg-danger">Off</span></a>
-                                                @endif
+                                                        @if ($post_data->comments_action == 'on')
+                                                            <a href='{{ url("/profile/commentOff/$post_data->id") }}'
+                                                                class="dropdown-item text-center">Comments <span
+                                                                    class="badge bg-success">On</span></a>
+                                                        @else
+                                                            <a href='{{ url("/profile/commentOn/$post_data->id") }}'
+                                                                class="dropdown-item text-center">Comments <span
+                                                                    class="badge bg-danger">Off</span></a>
+                                                        @endif
 
-                                                @if ($post_data->print_action == 'on')
-                                                    <a href='{{ url("/profile/printOff/$post_data->id") }}'
-                                                        class="dropdown-item text-center">Print <span
-                                                            class="badge bg-success">On</span></a>
-                                                @else
-                                                    <a href='{{ url("/profile/printOn/$post_data->id") }}'
-                                                        class="dropdown-item text-center">Print <span
-                                                            class="badge bg-danger">Off</span></a>
-                                                @endif
+                                                        @if ($post_data->print_action == 'on')
+                                                            <a href='{{ url("/profile/printOff/$post_data->id") }}'
+                                                                class="dropdown-item text-center">Print <span
+                                                                    class="badge bg-success">On</span></a>
+                                                        @else
+                                                            <a href='{{ url("/profile/printOn/$post_data->id") }}'
+                                                                class="dropdown-item text-center">Print <span
+                                                                    class="badge bg-danger">Off</span></a>
+                                                        @endif
 
-                                                <a href="#" class="dropdown-item text-center">Reupload</a>
+                                                        <a href="#" class="dropdown-item text-center">Reupload</a>
 
-                                                <a href='{{ url("/profile/edit/$post_data->id") }}'
-                                                    class="dropdown-item text-center">
-                                                    Edit</a>
+                                                        <a href='{{ url("/profile/edit/$post_data->id") }}'
+                                                            class="dropdown-item text-center">
+                                                            Edit</a>
 
-                                                <a href='' class="dropdown-item text-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal{{ $post_data->id }}">
-                                                    <span class="text-danger">Delete</span>
-                                                </a>
-                                            </div>
-                                        </div>
+                                                        <a href='' class="dropdown-item text-center"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal{{ $post_data->id }}">
+                                                            <span class="text-danger">Delete</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @endcan
+                                        @endauth
 
                                     </div>
                                     {{-- blog header section end --}}
@@ -261,20 +283,22 @@
                                     {{-- blog main section end --}}
                                 </div>
                             </div>
-
                         @else
+                            @auth
+                                @can('check-id', $$user_data->id)
+                                    <div class="bg-secondary p-3 text-light my-3">
 
-                            <div class="bg-secondary p-3 text-light my-3">
+                                        {{-- <span class="d-none d-md-inline">You have created a post.</span> --}}
+                                        This post has been removed!!!
 
-                                {{-- <span class="d-none d-md-inline">You have created a post.</span> --}}
-                                This post has been removed!!!
+                                        <div class="float-end">
+                                            <a href="{{ url("posts/delete/$post_data->id") }}"
+                                                class="btn btn-light">Delete</a>
+                                        </div>
 
-                                <div class="float-end">
-                                    <a href="{{ url("posts/delete/$post_data->id") }}" class="btn btn-light">Delete</a>
-                                </div>
-
-                            </div>
-
+                                    </div>
+                                @endcan
+                            @endauth
                         @endif
 
                     @endif
@@ -283,6 +307,7 @@
                 {{-- blog section end --}}
 
             </div>
+            {{-- user post section end --}}
         </div>
 
     </div>

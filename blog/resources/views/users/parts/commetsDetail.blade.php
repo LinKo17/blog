@@ -32,8 +32,9 @@
 
             <div class="pf_other">
 
-                <?php $user_id = $comments->user->id ?>
-                <a href="{{url("/profile/$user_id")}}" class="pf_name" style="word-break: break-all"  id="nav_user_search_name">{{ $comments->user->name }}</a>
+                <?php $user_id = $comments->user->id; ?>
+                <a href="{{ url("/profile/$user_id") }}" class="pf_name" style="word-break: break-all"
+                    id="nav_user_search_name">{{ $comments->user->name }}</a>
 
                 <div class="pf_comment">{{ $comments->content }}</div>
                 <div class="pf_action">
@@ -72,8 +73,8 @@
 
                 <div class="pf_other">
                     <div class="pf_name" style="word-break: break-all">
-                        <?php $user_id = $replies->user->id ?>
-                        <a href="{{url("/profile/$user_id")}}" id="nav_user_search_name">
+                        <?php $user_id = $replies->user->id; ?>
+                        <a href="{{ url("/profile/$user_id") }}" id="nav_user_search_name">
                             {{ $replies->user->name }}
                         </a>
                         <span
@@ -91,12 +92,16 @@
 
                 </div>
 
-                <div class="pf_trash ms-1">
-                    <a href="" class="logo_category" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal{{ $replies->id }}">
-                        <i class="text-danger fa-solid fa-trash float-end"></i>
-                    </a>
-                </div>
+                @auth
+                @can("check-id",$replies->user_id)
+                    <div class="pf_trash ms-1">
+                        <a href="" class="logo_category" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal{{ $replies->id }}">
+                            <i class="text-danger fa-solid fa-trash float-end"></i>
+                        </a>
+                    </div>
+                @endcan
+                @endauth
             </div>
 
             <form action="{{ url("replycomment/$replies->post_id") }}" method="post" class="comment_reply_form">
@@ -161,6 +166,15 @@
             forms.forEach((form, index) => {
                 form.style.display = "none";
             });
+        };
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
         };
     </script>
 </body>
