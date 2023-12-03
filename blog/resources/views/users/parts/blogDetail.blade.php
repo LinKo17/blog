@@ -44,9 +44,11 @@
                 {{ $post_detail->category->category }}
             </span>
 
-            <span class="my-1 px-4 py-2" id="blog_detail_print">
-                <a class="bg-danger text-light fs-4 p-2 text-decoration-none rounded post_print">Print</a>
-            </span>
+            @if ($post_detail->print_action == 'on')
+                <span class="my-1 px-4 py-2" id="blog_detail_print">
+                    <a class="bg-danger text-light fs-4 p-2 text-decoration-none rounded post_print">Print</a>
+                </span>
+            @endif
 
         </div>
 
@@ -90,13 +92,15 @@
         <span class="fs-3">Comments ({{ count($comments_data) + count($replies) }})</span>
     </div>
 
-    <div class="px-4">
-        <form method="post">
-            @csrf
-            <textarea type="text" class="form-control" placeholder="Comments" name="comments"></textarea>
-            <button class="btn btn-primary mt-1">Add Comment</button>
-        </form>
-    </div>
+    @if ($post_detail->comments_action == 'on')
+        <div class="px-4">
+            <form method="post">
+                @csrf
+                <textarea type="text" class="form-control" placeholder="Comments" name="comments"></textarea>
+                <button class="btn btn-primary mt-1">Add Comment</button>
+            </form>
+        </div>
+    @endif
 
     <div class="mx-4 mt-3 border p-3 rounded-3">
         @foreach ($comments_data as $comments)
@@ -130,12 +134,14 @@
 
                 @auth
                     @can('check-id', $comments->user_id)
-                        <div class="pf_trash mt-1 ms-1">
-                            <a href="" class="logo_category" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal{{ $comments->id }}">
-                                <i class="text-danger fa-solid fa-trash float-end"></i>
-                            </a>
-                        </div>
+                        @if ($post_detail->comments_action == 'on')
+                            <div class="pf_trash mt-1 ms-1">
+                                <a href="" class="logo_category" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal{{ $comments->id }}">
+                                    <i class="text-danger fa-solid fa-trash float-end"></i>
+                                </a>
+                            </div>
+                        @endif
                     @endcan
                 @endauth
 

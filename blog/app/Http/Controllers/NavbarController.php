@@ -20,13 +20,13 @@ class NavbarController extends Controller
     }
 
     public function categoriesnav($id){
-        $category_data = Category::all();
+        $categories_data = Category::all();
         $advertisement_data = Advertisement::all();
         $adminSetting_data = AdminSetting::all();
         $reports_data = RReason::all();
         $posts_data = Post::where("category_id",$id)->latest()->paginate(6);
         return view("users.navbars.categoriesnav",[
-            "category_datas" => $category_data,
+            "categories_data" => $categories_data,
             "advertisement_datas" => $advertisement_data,
             "adminSetting_datas" => $adminSetting_data,
             "posts_data" => $posts_data,
@@ -35,10 +35,10 @@ class NavbarController extends Controller
     }
 
     public function aboutnav(){
-        $category_data = Category::all();
+        $categories_data = Category::all();
         $adminSetting_data = AdminSetting::all();
         return view("users.navbars.aboutnav",[
-            "category_datas" => $category_data,
+            "categories_data" => $categories_data,
             "adminSetting_datas" => $adminSetting_data
         ]);
     }
@@ -60,10 +60,10 @@ class NavbarController extends Controller
 
     public function profile($id){
         $user_data = User::find($id);
-        $category_data = Category::all();
+        $categories_data = Category::all();
         $post_data = Post::where("user_id", $id)->get()->reverse();
         return view("users.parts.profile", [
-            "category_datas" => $category_data,
+            "categories_data" => $categories_data,
             "user_data" => $user_data,
             "posts_data" => $post_data
         ]);

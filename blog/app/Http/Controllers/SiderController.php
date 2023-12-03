@@ -11,6 +11,7 @@ use App\Models\AdminSetting;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\RReason;
+use App\Models\MessagesToAdmin;
 
 class SiderController extends Controller
 {
@@ -40,7 +41,7 @@ class SiderController extends Controller
     }
 
     public function approveside(){
-        $approve_request = Post::where("post_action","waiting")->get();
+        $approve_request = Post::where("post_action","waiting")->latest()->paginate(6);
         $reasons = RReason::all();
         return view("admin.siders.approve",[
             "approve_requests" => $approve_request,
@@ -49,7 +50,7 @@ class SiderController extends Controller
     }
 
     public function reportside(){
-        $post_data = Post::where("report","report")->get();
+        $post_data = Post::where("report","report")->latest()->paginate(6);
         return view("admin.siders.report",[
             "posts_data" => $post_data
         ]);
@@ -73,6 +74,13 @@ class SiderController extends Controller
         $admin_setting = AdminSetting::find(1);
         return view("admin.siders.setting",[
             "admin_setting" => $admin_setting
+        ]);
+    }
+
+    public function messagesider(){
+        $message = MessagesToAdmin::latest()->paginate(10);
+        return view("admin.siders.message",[
+            "messages" =>$message
         ]);
     }
 

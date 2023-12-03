@@ -10,12 +10,16 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Advertisement;
 use App\Models\Comment;
+use App\Models\MessagesToAdmin;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Reply;
 use App\Models\Report;
 
 use Illuminate\Support\Facades\Gate;
+
+//for sweet alert
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -110,6 +114,7 @@ class AdminController extends Controller
         $user = User::find($id);
         $user->user_roll = "user";
         $user->save();
+        Alert::success("$user->name has been successfully converted into a user");
         return back();
     }
 
@@ -118,6 +123,7 @@ class AdminController extends Controller
         $user = User::find($id);
         $user->user_roll = "admin";
         $user->save();
+        Alert::success("$user->name has been successfully converted into a user");
         return back();
     }
 
@@ -127,6 +133,7 @@ class AdminController extends Controller
         $user = User::find($id);
         $user->ban = 1;
         $user->save();
+        Alert::info("$user->name  has been banned");
         return back();
     }
 
@@ -135,6 +142,7 @@ class AdminController extends Controller
         $user = User::find($id);
         $user->ban = 0;
         $user->save();
+        Alert::info("$user->name  has been removed on ban");
         return back();
     }
 
@@ -149,7 +157,7 @@ class AdminController extends Controller
         }
 
         $request_data = request()->search;
-        $user = User::where("name", "like", "%$request_data%")->orWhere("email", "like", "%$request_data%")->latest()->paginate(10);
+        $user = User::where("name", "like", "%$request_data%")->orWhere("email", "like", "%$request_data%")->latest()->paginate(15);
         return view("admin.siders.user", [
             "usersData" => $user
         ]);
@@ -271,4 +279,43 @@ class AdminController extends Controller
             return back();
         }
     }
+
+    // message detial section
+    public function msgdetail($id){
+        $message = MessagesToAdmin::find($id);
+        return view("admin.parts.msgDetail",compact("message"));
+    }
+
+    public function msgdelete($id){
+        $message = MessagesToAdmin::find($id);
+        $message->delete();
+        return back();
+    }
+
+    public function msgSearch(){
+        $validator = validator(request()->all(),[
+            "search" => "required"
+        ]);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+        $data = request()->search;
+        $message = MessagesToAdmin::where("reason","like","%$data%")->latest()->paginate(10);
+        return view("admin.siders.message",[
+            "messages" =>$message
+        ]);
+    }
+
+    public function msgManydelete(){
+        $plural_id = request()->data;
+        $array = json_decode($plural_id, true);
+
+        foreach($array as $id){
+            $msg = MessagesToAdmin::find($id);
+            $msg->delete();
+        }
+        return back();
+    }
+
+
 }

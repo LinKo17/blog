@@ -5,9 +5,10 @@
 
         <ul class="nav-menu dropdown mt-2">
             <li class="list-group-item dropdown">
-                <a id="navbarDropdown" class="nav-link text-light btn btn-dark" href="#" role="button"
+                <a id="navbarDropdown" class="nav-link text-light" href="#" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->name }}
+
+                    <img src="profile_pics/{{Auth::user()->profile_pic}}" id="index_pf_style">
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

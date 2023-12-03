@@ -25,7 +25,7 @@
                         <span class="span-style dropdown">Category</span>
                     </a>
                     <ul class="dropdown-menu">
-                        @foreach ($category_datas as $category)
+                        @foreach ($categories_data as $category)
                             <li class="list-group-item category_list_navbar_style">
                                 <a href="/categoriesnav/{{ $category->id }}"
                                     class="nav-link text-center active">{{ $category->category }}</a>
@@ -57,15 +57,20 @@
                 @endauth
 
                 {{-- login and register system --}}
-                <li class="nav-item mt-1">
+                <li class="nav-item  nav-style dropdown">
                     @if (Route::has('login'))
 
                         @auth
                             {{-- after login /register --}}
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link text-light btn btn-dark" href="#" role="button"
+
+                        <a id="navbarDropdown" class="nav-link text-light btn btn-dark index_pf_name_style" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            <span style="word-break:break-all">{{ Auth::user()->name }}</span>
+                        </a>
+
+                        <a id="navbarDropdown" class="nav-link text-light" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <img src="profile_pics/{{Auth::user()->profile_pic}}" id="index_pf_style">
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -81,7 +86,6 @@
                                 @csrf
                             </form>
                         </div>
-                    </li>
                     {{-- after login /register --}}
                 @else
                     <a href="{{ route('login') }}" class="login_btn_style btn btn-primary">Log

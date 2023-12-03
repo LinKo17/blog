@@ -22,33 +22,33 @@
 <body>
 
     {{-- navbar section --}}
-        @include("users.parts.nav")
+    @include('users.parts.nav')
     {{-- navbar section end --}}
 
     {{-- annou section --}}
-        @include("users.parts.annou")
+    @include('users.parts.annou')
     {{-- annou section end --}}
 
     {{-- Advertisement --}}
-        @include("users.parts.adver")
+    @include('users.parts.adver')
     {{-- Advertisement end --}}
 
     {{-- about us section --}}
-        @include("users.parts.about")
+    @include('users.parts.about')
     {{-- about us section end --}}
 
 
     {{-- blog section --}}
-        @include("users.parts.blog")
+    @include('users.parts.blog')
     {{-- blog section end --}}
 
     {{-- footer section --}}
-        @include("users.parts.footer")
+    @include('users.parts.footer')
     {{-- footer section end --}}
 
 
     {{-- end section --}}
-        @include("users.parts.end")
+    @include('users.parts.end')
     {{-- end section end --}}
 
 
@@ -58,6 +58,16 @@
 
     <script>
         document.getElementById("home").style.color = "#0066cc"
+
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
     </script>
 </body>
 

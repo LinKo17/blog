@@ -25,6 +25,10 @@
     @include('admin.parts.navbar')
     {{-- navbar section end --}}
 
+    {{-- alert section --}}
+    @include('sweetalert::alert')
+    {{-- alert section end --}}
+
     <div class="container-fluid">
 
         <div class="row">

@@ -5,9 +5,6 @@ body{
 }
 
 /* navigation section */
-.nav-style{
-    margin:0px 10px;
-}
 .category_list_navbar_style{
     font-size:20px;
 }
@@ -27,6 +24,28 @@ body{
     text-decoration: none;
     color: #FFFFFF;
     font-size: 18px;
+}
+#index_pf_style{
+    width:50px;
+    height:50px;
+    border-radius:100px;
+    margin-top:-8px;
+}
+.index_pf_name_style{
+    display: none;
+}
+@media(max-width:990px){
+    .register_btn_style,.login_btn_style{
+        width:100%;
+        margin-top:5px;
+    }
+    #index_pf_style{
+        display: none;
+    }
+    .index_pf_name_style{
+        display: block;
+        margin-top:4px;
+    }
 }
 /* navigation section end */
 
@@ -87,6 +106,7 @@ body{
     height: 50px;
     border-radius: 100px;
 }
+
 /* advertisment section end */
 
 /* about us section */
@@ -467,6 +487,10 @@ body{
 }
 /* detail section  end*/
 /* user navbar section */
+.nav-style{
+    margin-right: 10px;
+    margin-left:10px;
+}
 #search_user_img_box img{
     width:70px;
     height: 70px;

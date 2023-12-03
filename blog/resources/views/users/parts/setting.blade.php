@@ -146,11 +146,18 @@
 
         </div>
 
+        <div class="my-4 profile_email_hide">
+            <span class="comments_email_style">Connect To Admin</span>
+
+
+            <a href="setting/connectAd/{{ $user_setting_data->id }}" class="btn btn-secondary float-end">Connect</a>
+
+        </div>
+
         <div class="hide_post_list">
             <span>Hide List Post</span>
 
             @foreach ($users_hide_data as $user_hide)
-
                 <div class="hide_style_post border rounded-3 my-2 p-3">
 
                     <a href="{{ url("/blog/detail/$user_hide->post_id") }}">view post</a>
@@ -159,11 +166,11 @@
 
                     <div class="float-end">
                         @if ($user_hide->action == 'hide')
-                            <a href='{{url("postShow/$user_hide->id")}}' class="btn btn-dark">hide</a>
+                            <a href='{{ url("postShow/$user_hide->id") }}' class="btn btn-dark">hide</a>
                         @else
-                            <a href='{{url("postHide/$user_hide->id")}}' class="btn btn-primary">show</a>
+                            <a href='{{ url("postHide/$user_hide->id") }}' class="btn btn-primary">show</a>
                         @endif
-                            <a href="{{url("postDelete/$user_hide->id")}}" class="btn btn-danger">Delete</a>
+                        <a href="{{ url("postDelete/$user_hide->id") }}" class="btn btn-danger">Delete</a>
 
                     </div>
                 </div>

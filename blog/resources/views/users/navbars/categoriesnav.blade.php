@@ -23,25 +23,25 @@
 <body>
 
     {{-- navbar section --}}
-        @include("users.parts.nav")
+    @include('users.parts.nav')
     {{-- navbar section end --}}
 
     {{-- navbar section --}}
-        @include("users.parts.adver")
+    @include('users.parts.adver')
     {{-- navbar section end --}}
 
 
     {{-- blog section --}}
-        @include("users.parts.blog")
+    @include('users.parts.blog')
     {{-- blog section end --}}
 
     {{-- footer section --}}
-        @include("users.parts.footer")
+    @include('users.parts.footer')
     {{-- footer section end --}}
 
 
     {{-- end section --}}
-        @include("users.parts.end")
+    @include('users.parts.end')
     {{-- end section end --}}
 
 
@@ -50,6 +50,15 @@
     <script src="bs/js/index.js"></script>
     <script>
         document.getElementById("category").style.color = "#0066cc"
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
     </script>
 </body>
 

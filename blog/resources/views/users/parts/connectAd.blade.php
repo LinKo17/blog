@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <base href="/public">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>edit post</title>
+    <title>Blog</title>
+    <base href="/public">
     {{-- bs css link --}}
     <link rel="stylesheet" href="bs/css/bootstrap.min.css">
 
@@ -22,19 +22,13 @@
 
 <body>
 
-    {{-- navbar section --}}
-        @include('users.parts.nav')
-    {{-- navbar section --}}
-
-
-
-    {{-- edit post section --}}
+    {{-- create post section --}}
 
     <div class="container user_create_style mt-3">
         <div class="card">
 
             <div class="card-header fs-4 text-light bg-primary">
-                Edit Posts
+                Connect To Admin
             </div>
 
             {{-- ------error section ------ --}}
@@ -62,25 +56,19 @@
             @endif()
             {{-- ------error section ------ --}}
 
-            <form action="" method="post" enctype="multipart/form-data">
+
+            {{-- message section --}}
+            @if(session("info"))
+            <span class="text-success">{{"* " . session("info")}}</span>
+            @endif
+            {{-- message section end --}}
+
+            <form method="post" enctype="multipart/form-data">
                 @csrf
+
+
                 <div class="card-body">
 
-                    <div class="row my-3">
-
-                        <div class="col-12 col-md-3 create_post_title">
-                            Title
-                        </div>
-
-                        <div class="col-12 col-md-9">
-                            <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                value="{{ $post_data->title }}" name="title">
-                            @error('title')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                    </div>
 
                     <div class="row my-3">
 
@@ -89,25 +77,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="file" class="form-control" multiple name="images[]">
-                        </div>
-
-                    </div>
-
-                    <div class="row my-3">
-
-                        <div class="col-12 col-md-3 create_post_title">
-                            Category
-                        </div>
-
-                        <div class="col-12 col-md-9">
-                            <select name="category_id" class="form-control">
-                                @foreach ($categories_data as $category_data)
-                                    <option value="{{ $category_data->id }}"
-                                        {{ $category_data->id == $post_data->category_id ? 'selected' : '' }}>
-                                        {{ $category_data->category }}</option>
-                                @endforeach
-                            </select>
+                            <input type="file" class="form-control" name="images[]" multiple>
                         </div>
 
                     </div>
@@ -119,7 +89,7 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <textarea cols="30" class="form-control @error('description') is-valid @enderror" name="description">{{ $post_data->description }}</textarea>
+                            <textarea cols="30" class="form-control @error('description') is-invalid @enderror" name="description" required></textarea>
                             @error('description')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -130,9 +100,9 @@
 
                 <div class="card-footer">
                     <div class="text-center">
-                        <button class="btn_create_post_style btn btn-outline-danger">Reset</button>
+                        <button type="reset" class="btn_create_post_style btn btn-outline-danger">Reset</button>
 
-                        <button class="btn_create_post_style btn btn-outline-primary">Create</button>
+                        <button type="submit" class="btn_create_post_style btn btn-outline-primary">Create</button>
 
                     </div>
                 </div>
@@ -143,13 +113,23 @@
 
     </div>
 
-    {{-- edit post section end --}}
-
-
-
+    {{-- create post section end --}}
 
     {{-- js link --}}
-    <script src="bs/js/index.js"></script>
+
+    <script>
+        document.getElementById("home").style.color = "#0066cc"
+
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
 </body>
 
 </html>

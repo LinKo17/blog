@@ -4,6 +4,7 @@
         <?php
         $approves = count($approve_requests);
         ?>
+
         <div class="report_bar_style text-center">
             <span class="report_title">Approve Request</span>
             <a href="" data-bs-toggle="modal" data-bs-target="#confirm"
@@ -24,8 +25,8 @@
 
                                 <img src="profile_pics/{{ $approve->user->profile_pic }}" id="blog_profile">
 
-                                <?php $user_id = $approve->user->id ?>
-                                <a href="{{url("/profile/$user_id")}}" id="blog_name" id="nav_user_search_name">
+                                <?php $user_id = $approve->user->id; ?>
+                                <a href="{{ url("/profile/$user_id") }}" id="blog_name" id="nav_user_search_name">
                                     @if (strlen($approve->user->name) > 15)
                                         {{ substr($approve->user->name, 0, 15) }}...
                                     @else
@@ -89,13 +90,14 @@
                         </h1>
 
                         <p id="blog_desc" style="word-wrap:break-word">{{ substr($approve->description, 0, 120) }}
-                            <a href="{{url("/blog/detail/$approve->id")}}">see more</a>
+                            <a href="{{ url("/blog/detail/$approve->id") }}">see more</a>
                         </p>
                         {{-- blog main section end --}}
                     </div>
 
                 </div>
             @endforeach
+            {!! $approve_requests->withQueryString()->links('pagination::bootstrap-5') !!}
         </div>
         {{-- blog section end --}}
 

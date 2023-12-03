@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Setting</title>
+    <title>Message</title>
     {{-- bs css link --}}
     <link rel="stylesheet" href="bs/css/bootstrap.min.css">
 
@@ -40,7 +40,7 @@
             <div class="col-10">
 
                 {{-- main section --}}
-                    @include("admin.parts.setting")
+                @include('admin.parts.message')
                 {{-- main section --}}
 
             </div>
@@ -53,9 +53,11 @@
 
     {{-- js link --}}
     <script src="bs/js/dashboard.js"></script>
-
     <script>
-        document.getElementById("setting").style.backgroundColor = "#000000"
+        document.getElementById("message").style.backgroundColor = "#000000"
+
+        document.getElementById("home").style.color = "#0066cc"
+
 
         document.addEventListener("DOMContentLoaded", function(event) {
             var scrollpos = localStorage.getItem('scrollpos');

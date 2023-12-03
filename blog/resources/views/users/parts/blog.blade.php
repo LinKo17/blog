@@ -1,4 +1,9 @@
 <div id="blog">
+
+    {{-- alert section --}}
+        @include('sweetalert::alert')
+    {{-- alert section end --}}
+
     <div class="container">
         <h5 class="h1 text-center mt-5">Blogs</h5>
         <div class="container about_line"></div>
@@ -158,19 +163,5 @@
             </div>
         @endforeach
         {{-- report list end --}}
-
-
-        {{-- script section --}}
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                var scrollpos = localStorage.getItem('scrollpos');
-                if (scrollpos) window.scrollTo(0, scrollpos);
-            });
-
-            window.onbeforeunload = function(e) {
-                localStorage.setItem('scrollpos', window.scrollY);
-            };
-        </script>
-        {{-- script section end --}}
     </div>
 </div>

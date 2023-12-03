@@ -18,6 +18,8 @@
 
     {{-- css link --}}
     <link rel="stylesheet" href="bs/css/index.css">
+
+
 </head>
 
 <body>
@@ -25,6 +27,10 @@
     {{-- navbar section --}}
     @include('users.parts.nav')
     {{-- navbar section end --}}
+
+    {{-- alert section --}}
+    @include('sweetalert::alert')
+    {{-- alert section end --}}
 
     {{-- profile section --}}
 
@@ -241,8 +247,6 @@
                                                                     class="badge bg-danger">Off</span></a>
                                                         @endif
 
-                                                        <a href="#" class="dropdown-item text-center">Reupload</a>
-
                                                         <a href='{{ url("/profile/edit/$post_data->id") }}'
                                                             class="dropdown-item text-center">
                                                             Edit</a>
@@ -285,7 +289,7 @@
                             </div>
                         @else
                             @auth
-                                @can('check-id', $$user_data->id)
+                                @can('check-id', $user_data->id)
                                     <div class="bg-secondary p-3 text-light my-3">
 
                                         {{-- <span class="d-none d-md-inline">You have created a post.</span> --}}

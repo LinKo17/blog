@@ -30,14 +30,14 @@ class RoleController extends Controller
     // user section
     public function index()
     {
-        $category_data = Category::all();
+        $categories_data = Category::all();
         $advertisement_data = Advertisement::all();
         $adminSetting_data = AdminSetting::all();
         $reports_data = RReason::all();
         $admin_setting_data = AdminSetting::all();
-        $posts_data = Post::where("post_action", "approve")->latest()->paginate(6);
+        $posts_data = Post::where("post_action", "approve")->latest()->paginate(10);
         return view("users.index", [
-            "category_datas" => $category_data,
+            "categories_data" => $categories_data,
             "advertisement_datas" => $advertisement_data,
             "adminSetting_datas" => $adminSetting_data,
             "posts_data" => $posts_data,

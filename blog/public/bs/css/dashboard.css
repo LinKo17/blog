@@ -14,7 +14,11 @@ body {
 .logo_style {
     font-size: 30px;
 }
-
+#index_pf_style{
+    width:50px;
+    height:50px;
+    border-radius:100px;
+}
 /* navbar section end*/
 
 
@@ -445,3 +449,19 @@ body {
 }
 
 /* report detail end */
+/* message */
+.message_user_email a{
+    text-decoration-color: none;
+    color:black;
+    font-size:20px;
+    text-decoration: none;
+}
+.message_user_email a span:hover{
+    text-decoration: underline;
+}
+.message_trash{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* message end */

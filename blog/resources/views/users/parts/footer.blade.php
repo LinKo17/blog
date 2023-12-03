@@ -37,7 +37,7 @@
 
                 <h4 class="footer_title_style">Categories</h4>
 
-                @foreach ($category_datas as $category)
+                @foreach ($categories_data as $category)
                     <div class="footer_link_style">
                         <a href='{{ url("/categoriesnav/$category->id") }}'>{{ $category->category }}</a>
                     </div>

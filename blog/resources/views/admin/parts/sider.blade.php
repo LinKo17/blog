@@ -77,6 +77,15 @@
             </a>
         </li>
 
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="message">
+            <a href='{{url("/messagesider")}}' class="nav-link">
+                <span class="logo">
+                    <i class="fa-solid fa-message"></i>
+                </span>
+                <span class="logo_title d-none d-lg-inline">Message</span>
+            </a>
+        </li>
+
         <li class="list-group-item list_group_item_style text-center text-lg-start" id="setting">
             <a href='{{url("/settingside")}}' class="nav-link">
                 <span class="logo">
@@ -85,6 +94,8 @@
                 <span class="logo_title d-none d-lg-inline">Setting</span>
             </a>
         </li>
+
+
 
     </ul>
 </div>

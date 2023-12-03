@@ -55,6 +55,8 @@ Route::post("setting/workAt",[UserController::class,"settingWorkAt"]);
 Route::post("setting/live",[UserController::class,"settinglive"]);
 Route::get("setting/emailClose/{id}",[UserController::class,"settingClose"]);
 Route::get("setting/emailOpen/{id}",[UserController::class,"settingOpen"]);
+Route::get("setting/connectAd/{id}",[UserController::class,"connectAd"]);
+Route::post("setting/connectAd/{id}",[UserController::class,"sendAd"]);
 
 //profile post three dot
 Route::get("posts/delete/{id}",[UserController::class,"postDel"]);
@@ -94,6 +96,7 @@ Route::get("/reportside",[SiderController::class,"reportside"]);
 Route::get("/advertiside",[SiderController::class,"advertiside"]);
 Route::get("/annouside",[SiderController::class,"annouside"]);
 Route::get("/settingside",[SiderController::class,"settingside"]);
+Route::get("/messagesider",[SiderController::class,"messagesider"]);
 
 //admin management section
 
@@ -134,3 +137,9 @@ Route::post("/commentside",[AdminController::class,"checkComment"]);
 Route::get("/comments/delete/{id}",[AdminController::class,"deleteComment"]);
 Route::get("/reply/delete/{id}",[AdminController::class,"deleteReply"]);
 
+
+//message sectino
+Route::get("message/detail/{id}",[AdminController::class,"msgdetail"]);
+Route::get("message/delete/{id}",[AdminController::class,"msgdelete"]);
+Route::post("/messagesider",[AdminController::class,"msgSearch"]);
+Route::post("/message/delete",[AdminController::class,"msgManydelete"]);

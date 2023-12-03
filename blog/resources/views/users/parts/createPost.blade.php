@@ -35,8 +35,36 @@
                 Create Posts
             </div>
 
+            {{-- ------error section ------ --}}
+            @if ($errors->any())
+
+
+                @foreach ($errors->all() as $err)
+                    @php
+                        $string = $err;
+
+                        // Use regular expression to extract the numeric part
+                        preg_match('/(\d+)/', $string, $matches);
+
+                        // Check if a match is found and get the value
+                        $number = isset($matches[1]) ? $matches[1] : null;
+
+                        // Output the result
+
+
+                    @endphp
+                    <div class=" text-danger" style="font-size:20px">
+                        {{"* " .  str_replace($number,"",$err)}}
+                    </div>
+                @endforeach
+
+            @endif()
+            {{-- ------error section ------ --}}
+
             <form method="post" enctype="multipart/form-data">
                 @csrf
+
+
                 <div class="card-body">
 
                     <div class="row my-3">
@@ -46,7 +74,11 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <input type="text" class="form-control" name="title" required>
+                            <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                name="title" required>
+                            @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                     </div>
@@ -86,7 +118,10 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <textarea cols="30" class="form-control" name="description" required></textarea>
+                            <textarea cols="30" class="form-control @error('description') is-invalid @enderror" name="description" required></textarea>
+                            @error('description')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
 
                     </div>

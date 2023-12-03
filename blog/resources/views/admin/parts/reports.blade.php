@@ -101,6 +101,7 @@
 
                 </div>
             @endforeach
+            {!! $posts_data->withQueryString()->links('pagination::bootstrap-5') !!}
         </div>
 
         {{-- blog section end --}}
