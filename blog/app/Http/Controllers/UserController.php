@@ -349,7 +349,18 @@ class UserController extends Controller
     }
 
     public function print($id){
-        return "fine $id";
+        ini_set('max_execution_time', 180);
+
+        $post = Post::find($id);
+        if($post){
+            $pdf = app("dompdf.wrapper");
+            $pdf->loadView("users.parts.print",[
+                "post_detail" => $post
+            ]);
+            return $pdf->download("post_print.pdf");
+        }else{
+            return back();
+        }
     }
 
     //profile index three dot
