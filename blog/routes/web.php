@@ -70,6 +70,7 @@ Route::get("/profile/printOn/{id}",[UserController::class,"printOn"]);
 
 //blog detail info
 Route::get("/blog/detail/{id}",[UserController::class,"blogDetail"]);
+Route::get("/print/{id}",[UserController::class,"print"]);
 
 //index blog three dot
 Route::get("/postAction/{id}",[UserController::class,"postAction"]);

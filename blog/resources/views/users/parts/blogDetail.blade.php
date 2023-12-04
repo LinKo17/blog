@@ -46,7 +46,7 @@
 
             @if ($post_detail->print_action == 'on')
                 <span class="my-1 px-4 py-2" id="blog_detail_print">
-                    <a class="bg-danger text-light fs-4 p-2 text-decoration-none rounded post_print">Print</a>
+                    <a href="{{url("print/$post_detail->id")}}" class="bg-danger text-light fs-4 p-2 text-decoration-none rounded post_print">print</a>
                 </span>
             @endif
 

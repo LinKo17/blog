@@ -15,6 +15,8 @@ use App\Models\Report;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use App\Models\MessagesToAdmin;
 
+use Illuminate\Support\Facades\Gate;
+
 //for sweet alert
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -28,7 +30,6 @@ class UserController extends Controller
     //profile section
     public function profile()
     {
-
         $user_data = User::find(auth()->user()->id);
         $categories_data = Category::all();
         $post_data = Post::where("user_id", auth()->user()->id)->get()->reverse();
@@ -41,20 +42,30 @@ class UserController extends Controller
 
     public function setting()
     {
-        $user_setting_data = User::find(request()->user()->id);
-        $users_hide_data = Hide::where("user_id", request()->user()->id)->latest()->get();
-        return view("users.parts.setting", [
-            "user_setting_data" => $user_setting_data,
-            "users_hide_data"    => $users_hide_data
-        ]);
+        $ban = 0;
+        if (Gate::allows("check-ban", $ban)) {
+            $user_setting_data = User::find(request()->user()->id);
+            $users_hide_data = Hide::where("user_id", request()->user()->id)->latest()->get();
+            return view("users.parts.setting", [
+                "user_setting_data" => $user_setting_data,
+                "users_hide_data"    => $users_hide_data
+            ]);
+        } else {
+            return back();
+        }
     }
 
     public function createPost()
     {
-        $categories_data = Category::all();
-        return view("users.parts.createPost", [
-            "categories_data" => $categories_data
-        ]);
+        $ban = 0;
+        if (Gate::allows("check-ban", $ban)) {
+            $categories_data = Category::all();
+            return view("users.parts.createPost", [
+                "categories_data" => $categories_data
+            ]);
+        } else {
+            return back();
+        }
     }
 
     public function editPostForm($id)
@@ -246,7 +257,7 @@ class UserController extends Controller
             $MessagesToAdmin->images = implode("|", $images);
         }
         $MessagesToAdmin->save();
-        return back()->with("info","You have successfully sent a message to admin");
+        return back()->with("info", "You have successfully sent a message to admin");
     }
 
     //profile post three dot
@@ -337,6 +348,10 @@ class UserController extends Controller
         ]);
     }
 
+    public function print($id){
+        return "fine $id";
+    }
+
     //profile index three dot
     public function postAction($id)
     {
@@ -395,39 +410,49 @@ class UserController extends Controller
     //comments section
     public function comments($id)
     {
-        $validator = validator(request()->all(), [
-            "comments" => "required"
-        ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
+        $ban = 0;
+        if (Gate::allows("check-ban", $ban)) {
+            $validator = validator(request()->all(), [
+                "comments" => "required"
+            ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+            $comments = new Comment();
+            $comments->user_id = auth()->user()->id;
+            $comments->post_id = $id;
+            $comments->content = request()->comments;
+            $comments->save();
+            return back();
+        } else {
+            return back();
         }
-        $comments = new Comment();
-        $comments->user_id = auth()->user()->id;
-        $comments->post_id = $id;
-        $comments->content = request()->comments;
-        $comments->save();
-        return back();
     }
 
     public function replyComments($id)
     {
-        $validator = validator(request()->all(), [
-            "replycomments" => "required",
-            "replied_comment_id" => "required",
-        ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
+        $ban = 0;
+        if (Gate::allows("check-ban", $ban)) {
+            $validator = validator(request()->all(), [
+                "replycomments" => "required",
+                "replied_comment_id" => "required",
+            ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+            $comment = new Reply();
+            $comment->user_id  = auth()->user()->id;
+            $comment->post_id  = $id;
+            $comment->content = request()->replycomments;
+            $comment->comment_id = request()->replied_comment_id;
+            if (request()->replied_again_comment_id) {
+                $comment->another_reply = request()->replied_again_comment_id;
+            }
+            $comment->save();
+            return back();
+        } else {
+            return back();
         }
-        $comment = new Reply();
-        $comment->user_id  = auth()->user()->id;
-        $comment->post_id  = $id;
-        $comment->content = request()->replycomments;
-        $comment->comment_id = request()->replied_comment_id;
-        if (request()->replied_again_comment_id) {
-            $comment->another_reply = request()->replied_again_comment_id;
-        }
-        $comment->save();
-        return back();
     }
 
     public function commentsDetail($id)

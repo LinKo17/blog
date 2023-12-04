@@ -55,6 +55,7 @@
                                             id="blog_category">{{ $post_data->category->category }}</span>
                                     </div>
 
+                                    @can("check-ban",0)
                                     <div class="col-1 dropdown">
                                         <i class="fa-solid fa-ellipsis float-end" data-bs-toggle="dropdown"></i>
                                         <div class="dropdown-menu dropdown-menu-end">
@@ -66,6 +67,7 @@
                                                 class="dropdown-item text-center">Hide</a>
                                         </div>
                                     </div>
+                                    @endcan
 
                                 </div>
                                 {{-- blog header section end --}}

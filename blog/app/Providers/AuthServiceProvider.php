@@ -29,5 +29,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define("check-id",function($user,$id){
             return $user->id  == $id;
         });
+
+        Gate::define("check-ban",function($user,$ban){
+            return $user->ban == $ban;
+        });
     }
 }

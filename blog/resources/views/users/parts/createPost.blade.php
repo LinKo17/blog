@@ -103,7 +103,7 @@
 
                         <div class="col-12 col-md-9">
                             <select name="category_id" class="form-control" required>
-                                @foreach ($category_datas as $category)
+                                @foreach ($categories_data as $category)
                                     <option value="{{ $category->id }}">{{ $category->category }}</option>
                                 @endforeach
                             </select>
