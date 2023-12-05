@@ -18,11 +18,18 @@ class NavbarController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth")->except("categoriesnav", "aboutnav", "usernav", "profile");
+        // $this->middleware(['auth', 'verified'])->except("categoriesnav", "aboutnav", "usernav", "profile");
+        $this->middleware('auth')->except("categoriesnav", "aboutnav", "usernav", "profile");
+        $this->middleware('verified')->except("categoriesnav", "aboutnav", "usernav", "profile");
     }
 
     public function categoriesnav($id)
     {
+        if(isset(auth()->user()->id)){
+            if(!auth()->user()->email_verified_at){
+                return back();
+            }
+        }
         $categories_data = Category::all();
         $advertisement_data = Advertisement::all();
         $adminSetting_data = AdminSetting::all();
@@ -39,6 +46,12 @@ class NavbarController extends Controller
 
     public function aboutnav()
     {
+        if(isset(auth()->user()->id)){
+            if(!auth()->user()->email_verified_at){
+                return back();
+            }
+        }
+
         $categories_data = Category::all();
         $adminSetting_data = AdminSetting::all();
         return view("users.navbars.aboutnav", [
@@ -49,6 +62,11 @@ class NavbarController extends Controller
 
     public function usernav()
     {
+        if(isset(auth()->user()->id)){
+            if(!auth()->user()->email_verified_at){
+                return back();
+            }
+        }
 
         $ban = 0;
         if (Gate::allows("check-ban", $ban)) {
@@ -71,6 +89,12 @@ class NavbarController extends Controller
 
     public function profile($id)
     {
+        if(isset(auth()->user()->id)){
+            if(!auth()->user()->email_verified_at){
+                return back();
+            }
+        }
+
         $user_data = User::find($id);
         $categories_data = Category::all();
         $post_data = Post::where("user_id", $id)->get()->reverse();

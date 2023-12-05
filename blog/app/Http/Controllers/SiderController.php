@@ -16,7 +16,9 @@ use App\Models\MessagesToAdmin;
 class SiderController extends Controller
 {
     public function __construct(){
-        $this->middleware("auth");
+        // $this->middleware(["auth","verified"]);
+        $this->middleware('auth');
+        $this->middleware('verified');
     }
 
     public function categoryside(){

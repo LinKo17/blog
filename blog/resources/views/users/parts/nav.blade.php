@@ -16,7 +16,7 @@
             <ul class="navbar-nav me-auto  mb-lg-0">
 
                 <li class="nav-item nav-style">
-                    <a class="nav-link a-style" href='{{ url('/index') }}' id="home"><span
+                    <a class="nav-link a-style" href='{{ url('/') }}' id="home"><span
                             class="home-style">Home</span></a>
                 </li>
 
@@ -62,6 +62,8 @@
 
                         @auth
                             {{-- after login /register --}}
+                        @if(isset(auth()->user()->id))
+                            @if(auth()->user()->email_verified_at)
 
                         <a id="navbarDropdown" class="nav-link text-light btn btn-dark index_pf_name_style" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -86,6 +88,8 @@
                                 @csrf
                             </form>
                         </div>
+                        @endif
+                        @endif
                     {{-- after login /register --}}
                 @else
                     <a href="{{ route('login') }}" class="login_btn_style btn btn-primary">Log

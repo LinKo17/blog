@@ -23,13 +23,16 @@ use App\Models\AdminSetting;
 
 
 Auth::routes();
+Auth::routes(['verify' => true]);
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // ---- users
 
 //home
-Route::get("/index",[RoleController::class,"index"]);
+Route::get("/index",[RoleController::class,"index"])->middleware("auth","verified");
 Route::get("/",[RoleController::class,"index"]);
 
 //users navbar route

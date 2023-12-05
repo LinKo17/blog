@@ -24,7 +24,9 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth")->except("blogDetail", "commentsDetail");
+        // $this->middleware("auth")->except("blogDetail", "commentsDetail");
+        $this->middleware('auth')->except("blogDetail", "commentsDetail");
+        $this->middleware('verified')->except("blogDetail", "commentsDetail");
     }
 
     //profile section
@@ -338,6 +340,12 @@ class UserController extends Controller
     //blog detail
     public function blogDetail($id)
     {
+        if(isset(auth()->user()->id)){
+            if(!auth()->user()->email_verified_at){
+                return back();
+            }
+        }
+
         $post_detail = Post::find($id);
         $replies = Reply::where("post_id", $id)->get();
         $comments_data = Comment::where("post_id", $id)->get();
@@ -468,6 +476,12 @@ class UserController extends Controller
 
     public function commentsDetail($id)
     {
+        if(isset(auth()->user()->id)){
+            if(!auth()->user()->email_verified_at){
+                return back();
+            }
+        }
+
         $comments = Comment::find($id);
         return view("users.parts.commetsDetail", [
             "comments" => $comments

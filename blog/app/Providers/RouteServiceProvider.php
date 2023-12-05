@@ -37,4 +37,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
+
+    protected $middlewareGroups = [
+        'web' => [
+            // ...
+            \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        ],
+    ];
+
 }

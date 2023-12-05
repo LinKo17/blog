@@ -24,7 +24,7 @@
                 <h4 class="footer_title_style">Menu</h4>
 
                 <div class="footer_link_style">
-                    <a href='{{ url('/index') }}'>Home</a>
+                    <a href='{{ url('/') }}'>Home</a>
                 </div>
 
                 <div class="footer_link_style">

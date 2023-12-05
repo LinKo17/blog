@@ -24,18 +24,32 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth")->except("index");
+        // $this->middleware(['auth', 'verified'])->except('index');
+        $this->middleware('auth')->except("index");
+        $this->middleware('verified')->except("index");
+
     }
 
     // user section
     public function index()
     {
+        if(isset(auth()->user()->id)){
+            if(!auth()->user()->email_verified_at){
+                $users = User::where("email_verified_at",null)->get();
+                    foreach($users as $user){
+                        $user->delete();
+                    }
+            }
+        }
+
         $categories_data = Category::all();
         $advertisement_data = Advertisement::all();
         $adminSetting_data = AdminSetting::all();
         $reports_data = RReason::all();
         $admin_setting_data = AdminSetting::all();
         $posts_data = Post::where("post_action", "approve")->latest()->paginate(10);
+
+
         return view("users.index", [
             "categories_data" => $categories_data,
             "advertisement_datas" => $advertisement_data,
