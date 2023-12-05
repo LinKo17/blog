@@ -50,7 +50,7 @@
                                         </span>
                                     </a>
 
-                                    <a href="#" class="dropdown-item text-center">Email</a>
+                                    <a href="{{url("/emailsider")}}" class="dropdown-item text-center">Email</a>
 
                                     <a href="{{ url("/reports/delete/$post_data->id") }}"
                                         class="dropdown-item text-center"><span class="text-danger">Don't show</span></a>

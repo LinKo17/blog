@@ -98,6 +98,9 @@
             </div>
         </div>
     </div>
+    <div class="container text-center">
+        <a href="{{url("/")}}">Go to home page</a>
+    </div>
     {{-- @endsection --}}
 
 

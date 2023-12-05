@@ -53,7 +53,7 @@
                                         data-bs-target="#exampleModal{{ $approve->id }}"><span
                                             class="text-danger">Reject</span></a>
 
-                                    <a href="#" class="dropdown-item text-center">
+                                    <a href="{{url("/emailsider")}}" class="dropdown-item text-center">
                                         Email
                                     </a>
 

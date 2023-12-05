@@ -176,6 +176,26 @@ class AdminController extends Controller
         $approve->post_action = "approve";
         $approve->created_at  = Now();
         $approve->save();
+
+        // ----------------------------------------------------
+            $approveUserEmail = $approve->user->email;
+            $approveUserName  = $approve->user->name;
+            $approveTime      = now();
+            $sendEmail =User::where("email",$approveUserEmail)->get();
+
+
+
+            $details =[
+                "email_greeting" => "Hi $approveUserName",
+                "email_first_line" => "Post Approve",
+                "email_body" => "Your post is approve at $approveTime",
+                "email_button_name"  => "Thanks for joining our community!!",
+                "email_url"=>"",
+                "email_last_line" => ""
+            ];
+
+            Notification::send($sendEmail,new ForSendEmail($details));
+        // ----------------------------------------------------
         return back();
     }
 
