@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Gate;
 //for sweet alert
 use RealRashid\SweetAlert\Facades\Alert;
 
+//for email sending
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ForSendEmail;
+
 class AdminController extends Controller
 {
     public function __construct()
@@ -319,5 +323,27 @@ class AdminController extends Controller
         return back();
     }
 
+    // email section
+    public function email(){
+        $email = request()->email_address;
+        $sendEmail = User::where("email",$email)->get();
+        if($sendEmail->isNotEmpty()){
+
+            $details =[
+                "email_greeting" => request()->email_greeting,
+                "email_first_line" => request()->email_first_line,
+                "email_body" => request()->email_body,
+                "email_button_name"  => request()->email_button_name,
+                "email_url"=> request()->email_url,
+                "email_last_line" => request()->email_last_line
+            ];
+
+            Notification::send($sendEmail,new ForSendEmail($details));
+            return back()->with("info-success","Email is successfully send");
+
+        }else{
+            return back()->with("info-wrong","Email is wrong");
+        }
+    }
 
 }

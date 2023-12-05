@@ -101,6 +101,7 @@ Route::get("/advertiside",[SiderController::class,"advertiside"]);
 Route::get("/annouside",[SiderController::class,"annouside"]);
 Route::get("/settingside",[SiderController::class,"settingside"]);
 Route::get("/messagesider",[SiderController::class,"messagesider"]);
+Route::get("/emailsider",[SiderController::class,"emailsider"]);
 
 //admin management section
 
@@ -142,8 +143,12 @@ Route::get("/comments/delete/{id}",[AdminController::class,"deleteComment"]);
 Route::get("/reply/delete/{id}",[AdminController::class,"deleteReply"]);
 
 
-//message sectino
+//message section
 Route::get("message/detail/{id}",[AdminController::class,"msgdetail"]);
 Route::get("message/delete/{id}",[AdminController::class,"msgdelete"]);
 Route::post("/messagesider",[AdminController::class,"msgSearch"]);
 Route::post("/message/delete",[AdminController::class,"msgManydelete"]);
+
+
+//email section
+Route::post("/email",[AdminController::class,"email"]);

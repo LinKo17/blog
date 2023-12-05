@@ -86,6 +86,15 @@
             </a>
         </li>
 
+        <li class="list-group-item list_group_item_style text-center text-lg-start" id="email">
+            <a href='{{url("/emailsider")}}' class="nav-link">
+                <span class="logo">
+                    <i class="fa-solid fa-envelope"></i>
+                </span>
+                <span class="logo_title d-none d-lg-inline">Email</span>
+            </a>
+        </li>
+
         <li class="list-group-item list_group_item_style text-center text-lg-start" id="setting">
             <a href='{{url("/settingside")}}' class="nav-link">
                 <span class="logo">

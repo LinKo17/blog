@@ -86,4 +86,8 @@ class SiderController extends Controller
         ]);
     }
 
+    public function emailsider(){
+        return view("admin.siders.email");
+    }
+
 }
