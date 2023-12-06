@@ -79,7 +79,46 @@ body {
     font-size: 20px;
     margin-top: -10px;
 }
+/* dashboard chart section */
+.dashboard_daily_chart{
+    width:700px;
+}
+#dashboard_dayByDay_chart div{
+    user-select: none;
+    cursor: pointer;
+    color:orange;
+}
+#dashboard_monthly_chart{
+    border-radius: 10px;
+    display: none;
+}
+#dashboard_monthly_chart div{
+    user-select: none;
+    cursor: pointer;
+    color:orange;
+}
+@media(max-width:875px){
+    .dashboard_daily_chart{
+        width:500px;
+    }
+}
 
+@media(max-width:662px){
+    .dashboard_daily_chart{
+        width:400px;
+    }
+}
+@media(max-width:484px){
+    .dashboard_daily_chart{
+        width:300px;
+    }
+}
+@media(max-width:382px){
+    .dashboard_daily_chart{
+        width:290px;
+    }
+}
+/* dashboard chart section */
 /* main section end */
 
 /* category section */

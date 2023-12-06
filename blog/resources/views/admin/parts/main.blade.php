@@ -1,4 +1,10 @@
+<div class="container mt-3 dashboard_daily_chart">
+    <div class="text-center fs-4 text-light">Daily Activity</div>
+    <canvas id="daily"></canvas>
+</div>
+
 <div class="row mt-5">
+    <div class="text-center fs-4 text-light">Details Section</div>
 
     <div class="col-12 col-md-4 col-lg-3 p-2">
         <div class=" main_box_style text-center">
@@ -45,26 +51,17 @@
 
 </div>
 
-<div class="row mt-3">
-
-    <div class="col-md-4 col-12 p-2">
-        <div class=" main_box_style text-center">
-            <h1>{{ count($dailyUsers) }}</h1>
-            <p class="text-muted">Daily Users</p>
-        </div>
-    </div>
-
-    <div class="col-md-4 col-12 p-2">
-        <div class=" main_box_style text-center">
-            <h1>{{ count($dailyPosts) }}</h1>
-            <p class="text-muted">Daily Posts</p>
-        </div>
-    </div>
-
-    <div class="col-md-4 col-12 p-2">
-        <div class=" main_box_style text-center">
-            <h1>{{count($dailyComments) + count($dailyReplies)}}</h1>
-            <p class="text-muted">Total Daily Comments</p>
-        </div>
-    </div>
+<div class="container mt-3" id="dashboard_dayByDay_chart">
+    <div class="text-center fs-4">WEEKLY USERS</div>
+    <canvas id="dayByDay"></canvas>
 </div>
+
+<div class="container  mt-3" id="dashboard_monthly_chart">
+    <div class="text-center fs-4">MONTHLY USERS</div>
+    <canvas id="monthly"></canvas>
+</div>
+
+
+
+
+

@@ -27,18 +27,17 @@ class RoleController extends Controller
         // $this->middleware(['auth', 'verified'])->except('index');
         $this->middleware('auth')->except("index");
         $this->middleware('verified')->except("index");
-
     }
 
     // user section
     public function index()
     {
-        if(isset(auth()->user()->id)){
-            if(!auth()->user()->email_verified_at){
-                $users = User::where("email_verified_at",null)->get();
-                    foreach($users as $user){
-                        $user->delete();
-                    }
+        if (isset(auth()->user()->id)) {
+            if (!auth()->user()->email_verified_at) {
+                $users = User::where("email_verified_at", null)->get();
+                foreach ($users as $user) {
+                    $user->delete();
+                }
             }
         }
 
@@ -74,22 +73,108 @@ class RoleController extends Controller
             $replies        = Reply::all();
             $ban            = User::where("ban", 1)->get();
 
+
             // Get the current date
             $currentDate = Carbon::now()->toDateString();
 
+            // -------------------------------------------------  data section
             // Fetch daily data for users
-            $dailyUsers = User::whereDate('created_at', $currentDate)->get();
+            // $dailyUsers = User::whereDate('created_at', $currentDate)->get();
 
-            // Fetch daily data for posts
+            // // Fetch daily data for posts
+            // $dailyPosts = Post::whereDate('created_at', $currentDate)
+            //     ->where('post_action', 'approve')
+            //     ->get();
+
+
+            // // Fetch daily data for comments (adjust this based on your comment model)
+            // $dailyComments = Comment::whereDate('created_at', $currentDate)->get();
+            // $dailyReplies = Reply::whereDate('created_at', $currentDate)->get();
+
+            // -------------------------------------------------
+
+            // ---------------------------------------------------- (count() section) daily
+            $dailyUsers = User::whereDate('created_at', $currentDate)->count();
             $dailyPosts = Post::whereDate('created_at', $currentDate)
                 ->where('post_action', 'approve')
+                ->count();
+            $dailyComments = Comment::whereDate('created_at', $currentDate)->count();
+            $dailyReplies = Reply::whereDate('created_at', $currentDate)->count();
+            // ----------------------------------------------------
+
+            // -------------------------------------------------------- month
+
+            $usersMonth = User::selectRaw("MONTH(created_at) as month,COUNT(*) as count")
+                ->whereYear("created_at", date("Y"))
+                ->groupBy("month")
+                ->orderBy("month")
                 ->get();
 
+            $labels = [];
+            $data = [];
+            $colors = ["red", "green", "blue", "purple", "yellow", "light", "pink", "orange", "brown", "red", "green", "blue"];
 
-            // Fetch daily data for comments (adjust this based on your comment model)
-            $dailyComments = Comment::whereDate('created_at', $currentDate)->get();
-            $dailyReplies = Reply::whereDate('created_at', $currentDate)->get();
+            for ($i = 1; $i <= 12; $i++) {
+                $month = date("F", mktime(0, 0, 0, $i, 1));
+                $count = 0;
 
+                foreach ($usersMonth as $user) {
+                    if ($user->month == $i) {
+                        $count = $user->count;
+                        break;
+                    }
+                }
+
+                array_push($labels, $month);
+                array_push($data, $count);
+            }
+
+            $datasets = [
+                [
+                    "label" => "Users",
+                    "data" => $data,
+                    "backgroundColor" => $colors
+                ]
+            ];
+
+            // --------------------------------------------------------
+
+            //--------------------------------------------------------- day by day
+            $usersByDay = User::selectRaw("DAYOFWEEK(created_at) as dayOfWeek, COUNT(*) as count")
+                ->whereYear("created_at", date("Y"))
+                ->groupBy("dayOfWeek")
+                ->orderBy("dayOfWeek")
+                ->get();
+
+            $labelsBydaily = [];
+            $dataBydaily = [];
+            $colorsBydaily = ["#70d6ff", "#ef233c", "#ff9770", "#ffd670", "#e9ff70", "#fcbf49", "#e5e5e5"];
+
+            // 1 corresponds to Sunday, 2 to Monday, and so on
+            for ($i = 1; $i <= 7; $i++) {
+                $dayOfWeek = date("D", strtotime("Sunday +{$i} days"));
+                $count = 0;
+
+                foreach ($usersByDay as $user) {
+                    if ($user->dayOfWeek == $i) {
+                        $count = $user->count;
+                        break;
+                    }
+                }
+
+                array_push($labelsBydaily, $dayOfWeek);
+                array_push( $dataBydaily, $count);
+            }
+
+            $datasetsByDaily = [
+                [
+                    "labelsBydaily" => "Users",
+                    "dataBydaily" => $dataBydaily,
+                    "colorsBydaily" => $colorsBydaily
+                ]
+            ];
+
+            //---------------------------------------------------------
             return view("admin.dashboard", [
                 "users" => $users,
                 "posts" => $posts,
@@ -102,8 +187,15 @@ class RoleController extends Controller
                 "dailyReplies" => $dailyReplies,
                 "comments" => $comments,
                 "replies" => $replies,
-                "ban"     => $ban
+                "ban"     => $ban,
 
+                //month user
+                "datasets" => $datasets,
+                "labels" => $labels,
+
+                //day by day user
+                "datasetsByDaily" => $datasetsByDaily,
+                "labelsBydaily" => $labelsBydaily
             ]);
         } else {
             return back();
