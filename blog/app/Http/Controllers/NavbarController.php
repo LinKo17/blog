@@ -34,7 +34,7 @@ class NavbarController extends Controller
         $advertisement_data = Advertisement::all();
         $adminSetting_data = AdminSetting::all();
         $reports_data = RReason::all();
-        $posts_data = Post::where("category_id", $id)->latest()->paginate(6);
+        $posts_data = Post::where("category_id", $id)->latest()->paginate(10);
         return view("users.navbars.categoriesnav", [
             "categories_data" => $categories_data,
             "advertisement_datas" => $advertisement_data,

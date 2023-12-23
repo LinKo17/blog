@@ -8,8 +8,13 @@
         <h5 class="h1 text-center mt-5">Blogs</h5>
         <div class="container about_line"></div>
 
+
+
         {{-- blog section --}}
         <div class="container container_index_blog_style">
+
+            {{$posts_data->links()}}
+
             <div class="row">
                 @foreach ($posts_data as $post_data)
 
@@ -105,10 +110,9 @@
                     @endif
 
                 @endforeach
-                {!! $posts_data->withQueryString()->links('pagination::bootstrap-5') !!}
+                {{$posts_data->links()}}
             </div>
         </div>
-
         {{-- blog section end --}}
 
 

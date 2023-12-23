@@ -24,7 +24,6 @@
             color:white;
         }
         .user_title{
-            border:1px dashed black;
             font-size:25px;
             padding: 5px;
             border-radius: 10px;

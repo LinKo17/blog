@@ -142,6 +142,8 @@ Route::post("/commentside",[AdminController::class,"checkComment"]);
 Route::get("/comments/delete/{id}",[AdminController::class,"deleteComment"]);
 Route::get("/reply/delete/{id}",[AdminController::class,"deleteReply"]);
 
+Route::get("/commentsAdmin/delete/{id}",[AdminController::class,"deleteAdminComments"]);
+Route::get("/replyAdmin/delete/{id}",[AdminController::class,"deleteAdminRelyComments"]);
 
 //message section
 Route::get("message/detail/{id}",[AdminController::class,"msgdetail"]);

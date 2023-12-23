@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="pf_trash mt-1 ms-1">
-                    <a href="{{ url("/comments/delete/$comments->id") }}" class="logo_category">
+                    <a href="{{ url("/commentsAdmin/delete/$comments->id") }}" class="logo_category">
                         <i class="text-danger fa-solid fa-trash float-end"></i>
                     </a>
                 </div>
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="pf_trash ms-1">
-                    <a href="{{ url("/reply/delete/$replies->id") }}" class="logo_category">
+                    <a href="{{ url("/replyAdmin/delete/$replies->id") }}" class="logo_category">
                         <i class="text-danger fa-solid fa-trash float-end"></i>
                     </a>
                 </div>

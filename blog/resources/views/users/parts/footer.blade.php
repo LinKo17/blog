@@ -8,14 +8,14 @@
 
                 @foreach ($adminSetting_datas as $ad_setting)
                     <h4 class="footer_title_style">Office Address</h4>
-                    <p class="footer_des_style">{{$ad_setting->address}}</p>
+                    <p class="footer_des_style">{{ $ad_setting->address }}</p>
 
                     <h4 class="footer_title_style">Phone</h4>
-                    <p class="footer_des_style">{{$ad_setting->phone}}</p>
+                    <p class="footer_des_style">{{ $ad_setting->phone }}</p>
 
                     <h4 class="footer_title_style">Email</h4>
-                    <p class="footer_des_style">{{$ad_setting->email_1}}</p>
-                    <p class="footer_des_style">{{$ad_setting->email_2}}</p>
+                    <p class="footer_des_style">{{ $ad_setting->email_1 }}</p>
+                    <p class="footer_des_style">{{ $ad_setting->email_2 }}</p>
                 @endforeach
 
             </div>
@@ -51,25 +51,31 @@
 
                 <div class="footer_social_link">
                     <span>
-                        <a href="{{$ad_setting->facebook}}">
-                            <i class="fa-brands fa-facebook"></i>
-                        </a>
+                        @if (isset($ad_setting->facebook))
+                            <a href="{{ $ad_setting->facebook }}">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+                        @endif
                     </span>
                 </div>
 
                 <div class="footer_social_link">
                     <span>
-                        <a href="{{$ad_setting->twitter}}">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
+                        @if (isset($ad_setting->twitter))
+                            <a href="{{ $ad_setting->twitter }}">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        @endif
                     </span>
                 </div>
 
                 <div class="footer_social_link">
                     <span>
-                        <a href="{{$ad_setting->instagram}}">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
+                        @if (isset($ad_setting->instagram))
+                            <a href="{{ $ad_setting->instagram }}">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        @endif
                     </span>
                 </div>
             </div>

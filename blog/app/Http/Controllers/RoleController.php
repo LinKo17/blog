@@ -46,7 +46,7 @@ class RoleController extends Controller
         $adminSetting_data = AdminSetting::all();
         $reports_data = RReason::all();
         $admin_setting_data = AdminSetting::all();
-        $posts_data = Post::where("post_action", "approve")->latest()->paginate(10);
+        $posts_data = Post::where("post_action", "approve")->latest()->paginate(20);
 
 
         return view("users.index", [

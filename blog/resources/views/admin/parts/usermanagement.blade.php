@@ -14,7 +14,7 @@
         <th>Email</th>
         <th>Action</th>
     </tr>
-    {{count($postData)}}
+    {{-- {{count($postData)}} --}}
     @foreach ($usersData as $userData)
         <tr>
             <td class="user_id_style">{{ $userData->id }}</td>

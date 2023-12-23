@@ -366,4 +366,16 @@ class AdminController extends Controller
         }
     }
 
+    //comments
+    public function deleteAdminComments($id){
+        $data = Comment::find($id);
+        $data->delete();
+        return back();
+    }
+
+    public function deleteAdminRelyComments($id){
+        $data = Reply::find($id);
+        $data->delete();
+        return back();
+    }
 }
