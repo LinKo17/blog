@@ -10,7 +10,7 @@ user from the website and also can do a lot of other things either.
 I built authentication system ,authorization system , email validation system and sending
 email from website system for this website .
 
-To run this project run this commend in terminal => php artisan migrate
+To run this project, you have to run this commend first in terminal => php artisan migrate
 
 Admin account for this project =>
 name : admin ,
