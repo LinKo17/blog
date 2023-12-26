@@ -9,6 +9,7 @@ Admins can approve user's post , check the post , delete the post , ban the user
 user from the website and also can do a lot of other things either.
 I built authentication system ,authorization system , email validation system and sending
 email from website system for this website .
+
 Admin account for this project =>
 name : admin ,
 password : 12345678 ,
