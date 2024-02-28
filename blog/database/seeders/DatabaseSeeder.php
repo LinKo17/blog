@@ -64,18 +64,18 @@ class DatabaseSeeder extends Seeder
                 "live" => "Yangon",
                 "picture" => "d.jpg"
             ],
-            [
-                "name" => "David",
-                "email" => "david@gmail.com",
-                "password" => "12345678",
-                "role" => "user",
-                "bio" => "Don't live in past",
-                "birth" => 2004,
-                "education" => "Business management",
-                "work" => "Andriod Developer",
-                "live" => "Yangon",
-                "picture" => 'e.jpg'
-            ],
+            // [
+            //     "name" => "David",
+            //     "email" => "david@gmail.com",
+            //     "password" => "12345678",
+            //     "role" => "user",
+            //     "bio" => "Don't live in past",
+            //     "birth" => 2004,
+            //     "education" => "Business management",
+            //     "work" => "Andriod Developer",
+            //     "live" => "Yangon",
+            //     "picture" => 'e.jpg'
+            // ],
 
         ];
 
@@ -95,14 +95,6 @@ class DatabaseSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
         }
-
-        // \App\Models\User::factory(10)->create();
-        // \App\Models\Advertisement::factory(5)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
 
         //admin setting
         \App\Models\AdminSetting::create([
@@ -135,16 +127,16 @@ class DatabaseSeeder extends Seeder
         }
 
         //user
-        \App\Models\User::factory(40)->create();
+        \App\Models\User::factory(6)->create();
 
         //post
-        \App\Models\Post::factory(100)->create();
+        \App\Models\Post::factory(20)->create();
 
         //comment
-        \App\Models\Comment::factory(200)->create();
+        \App\Models\Comment::factory(50)->create();
 
         //replies
-        \App\Models\Reply::factory(100)->create();
+        \App\Models\Reply::factory(50)->create();
 
 
         //main purpose is for use
@@ -181,28 +173,12 @@ class DatabaseSeeder extends Seeder
                 "post_action" => "approve",
                 "photo" => "d.jpg"
             ],
-            [
-                "title" =>  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, doloribus.',
-                "category_id" => 5,
-                "description" => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam architecto similique quod, temporibus nihil numquam doloremque. Veniam harum sint laborum eligendi provident incidunt. Sapiente odit nisi repellat recusandae quo! Totam.',
-                "user_id" => 5,
-                "post_action" => "approve",
-                "photo" => "e.jpg"
-            ],
-            [
-                "title" =>  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, doloribus.',
-                "category_id" => 6,
-                "description" => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam architecto similique quod, temporibus nihil numquam doloremque. Veniam harum sint laborum eligendi provident incidunt. Sapiente odit nisi repellat recusandae quo! Totam.',
-                "user_id" => 3,
-                "post_action" => "approve",
-                "photo" => "c1.jpg"
-            ],
-            // ----------------------------------------------
+            // ---------------------------------------------- wait
             [
                 "title" =>  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, doloribus.',
                 "category_id" => 7,
                 "description" => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam architecto similique quod, temporibus nihil numquam doloremque. Veniam harum sint laborum eligendi provident incidunt. Sapiente odit nisi repellat recusandae quo! Totam.',
-                "user_id" => 4,
+                "user_id" => 3,
                 "post_action" => "waiting",
                 "photo" => "c1.jpg"
             ],
@@ -211,14 +187,6 @@ class DatabaseSeeder extends Seeder
                 "category_id" => 8,
                 "description" => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam architecto similique quod, temporibus nihil numquam doloremque. Veniam harum sint laborum eligendi provident incidunt. Sapiente odit nisi repellat recusandae quo! Totam.',
                 "user_id" => 4,
-                "post_action" => "waiting",
-                "photo" => null
-            ],
-            [
-                "title" =>  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, doloribus.',
-                "category_id" => 1,
-                "description" => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam architecto similique quod, temporibus nihil numquam doloremque. Veniam harum sint laborum eligendi provident incidunt. Sapiente odit nisi repellat recusandae quo! Totam.',
-                "user_id" => 5,
                 "post_action" => "waiting",
                 "photo" => null
             ],

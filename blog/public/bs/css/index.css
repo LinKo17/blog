@@ -321,7 +321,7 @@ body{
 .pf_img{
     width:250px;
     height: 250px;
-    border:1px solid red;
+    border:1px solid black;
     border-radius: 250px;
 }
 .pf_img img{

@@ -20,7 +20,7 @@ class PostFactory extends Factory
             "title" => $this->faker->sentence(),
             "category_id"=> rand(1,8),
             "description" => $this->faker->paragraph(),
-            "user_id" => rand(1,40),
+            "user_id" => rand(1,10),
             "post_action" => "approve"
         ];
     }
