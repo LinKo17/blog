@@ -18,14 +18,14 @@ In Admin section,admin has got admin dashboard  to manage users.Admin Dashboard 
 
 In .env file,change this part for mail system.
 
-MAIL_MAILER=smtp
-MAIL_HOST=mailpit
-MAIL_PORT=1025
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS="hello@example.com"
-MAIL_FROM_NAME="${APP_NAME}"
+- MAIL_MAILER=smtp
+- MAIL_HOST=mailpit
+- MAIL_PORT=1025
+- MAIL_USERNAME=null
+- MAIL_PASSWORD=null
+- MAIL_ENCRYPTION=null
+- MAIL_FROM_ADDRESS="hello@example.com"
+- MAIL_FROM_NAME="${APP_NAME}"
 
 - put your own mail part. If you don't know how to do that watch this video => https://youtu.be/WI5dHACiOjQ?list=PLm8sgxwSZofdIdWQxDhg3HUplNJIZRjqb
 
@@ -66,8 +66,8 @@ password : 12345678
 
 
 
-##### Errors #####
-if you got any error while running my project.Please run these commends.
+### Errors
+If you got any error while running my project.Please run these commends.
 
 - php artisan migrate:fresh --seed
 - php artisan serve
